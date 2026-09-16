@@ -14,7 +14,7 @@
       map: ["enum.StorageVisualLayers.Base"]
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
-  - type: RatKingRummageable
+  - type: Rummageable
     table: !type:NestedSelector
       tableId: RatKingLoot
   - type: Fixtures
