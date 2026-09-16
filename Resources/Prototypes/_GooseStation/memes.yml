@@ -1,0 +1,352 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingJumpsuitHelloNeighboor
+  name: neighborly garbs
+  description: Makes you feel incredibly territorial. Has a built in music box that loops the same track.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/hello-jumpsuit.rsi
+  - type: Clothing
+    sprite: _GooseStation/hello-jumpsuit.rsi
+  # - type: EmitSoundOnActivate
+  #   handle: true
+  #   sound:
+  #     path: /Audio/_GooseStation/hello-neighboor-beat.ogg 
+  #     # maxDistance: 15
+  #     params:
+  #           volume: -10
+  - type: UseDelay
+    delay: 1.0
+  - type: ItemToggle
+    onActivate: true
+    wieldToggle: false
+    # soundActivate:
+    #   path: /Audio/Weapons/telescopicon.ogg
+    # soundDeactivate:
+    #   path: /Audio/Weapons/telescopicoff.ogg
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/_GooseStation/hello-neighboor-beat.ogg 
+      # maxDistance: 15
+      params:
+            volume: -7
+
+
+
+
+
+#region TRUTH (also epstein)
+- type: explosion
+  id: Truth
+  damagePerIntensity:
+    types:
+      Heat: 5
+      # Blunt: 5
+      # Slash: 5 # Goob edit
+  tileBreakChance: [0]
+  tileBreakIntensity: [0]
+  lightColor: White
+  texturePath: /Textures/_GooseStation/truthbomb.rsi
+  fireStates: 3
+
+- type: entity
+  id: PaperHappeningsReportTruth
+  name: HAPPENINGS REPORT
+#  categories: [ HideSpawnMenu ]
+#  suffix: "power tool ad, formatted"
+  parent: Paper
+  components:
+  - type: Tag
+    tags:
+      - TruthNukeTriggerer
+  - type: NukeDisk
+    override: true
+  - type: Paper
+    editingDisabled: true #TRUTHETHHREJRFASMLKSNFKHASVBFCSZGVHJNMJKL:3
+    content: |2
+      Station report:
+
+      [head=1]Something happened.[/head]
+
+- type: entity
+  parent: [BaseStructure, StructureWheeled, BaseMajorContraband]
+  id: TruthNuke
+  name: truth explosive
+  description: "True..."
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Objects/Devices/nuke.rsi
+    noRot: true
+    layers:
+    - state: nuclearbomb_base
+      map: ["enum.NukeVisualLayers.Base"]
+    - state: nuclearbomb_deployed_unlit
+      map: ["enum.NukeVisualLayers.Unlit"]
+      shader: unshaded
+      visible: false
+    - state: nuke
+      sprite: _GooseStation/truth.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.NukeVisuals.Deployed:
+        enum.NukeVisualLayers.Base:
+          False: { state: nuclearbomb_base }
+          True:  { state: nuclearbomb_deployed }
+        enum.NukeVisualLayers.Unlit:
+          True:  { visible: true }
+          False: { visible: false }
+      enum.NukeVisuals.State:
+        enum.NukeVisualLayers.Unlit:
+          Idle:        { state: nuclearbomb_deployed_unlit }
+          Armed:       { state: nuclearbomb_timing }
+          YoureFucked: { state: nuclearbomb_exploding }
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 255
+        mask:
+        - MachineMask
+        layer:
+        - HalfWallLayer
+  - type: PointLight
+    enabled: false
+    radius: 6
+    energy: 2.0
+    color: "#FFFFFF"
+    mask: /Textures/Effects/LightMasks/double_cone.png
+  - type: RotatingLight
+    speed: 240
+  # - type: NukeLabel #*shrugs in ymlwarrior
+  - type: Nuke
+    timer: 69
+    explosionType: Truth
+    maxIntensity: 50
+    intensitySlope: 5
+    totalIntensity: 50000
+    diskSlot:
+      name: nuke-slot-component-slot-name-disk
+      insertSound:
+        path: /Audio/Machines/terminal_insert_disc.ogg
+      ejectSound:
+        path: /Audio/Machines/terminal_insert_disc.ogg
+      whitelist:
+        tags:
+        - TruthNukeTriggerer #replace with happenings report
+    alertLevelOnActivate: delta #check maybe remove
+    alertLevelOnDeactivate: green
+    alertLevelOnOverride: omicron
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.NukeUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.NukeUiKey.Key:
+        type: NukeBoundUserInterface
+  - type: StaticPrice
+    price: 42069 #just a bit cheaper
+  # - type: CargoSellBlacklist #sellable
+  # - type: ArrivalsBlacklist #not even necessary
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      Nuke: !type:ContainerSlot
+  # - type: SupermatterImmune #because this one matters
+
+
+- type: entity
+  id: PaperSpacesteinFiles
+  name: Spacestein files
+  description: Incriminating papers with most of the text blacked out.
+#  categories: [ HideSpawnMenu ]
+#  suffix: "power tool ad, formatted"
+  parent: Paper
+  components:
+  - type: Paper
+    # editingDisabled: true
+    content: |2
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■SA■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■n■■■■■■■■■■■■■
+      ■■■■■■■■s■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■under■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■
+
+      ■■■■■■■■■■■■■tail■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■l■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■ol■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■
+
+- type: entity
+  id: PaperSpacesteinFiles1
+  name: Spacestein files
+  description: Incriminating papers with most of the text blacked out.
+#  categories: [ HideSpawnMenu ]
+#  suffix: "power tool ad, formatted"
+  parent: Paper
+  components:
+  - type: Paper
+    # editingDisabled: true
+    content: |2
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■ba■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■z■■■■■■■■■■■■■■■■■■■■■■in■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■
+
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■g■■■■■■■■■■■■■■a■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+      ■■■■■■■■■■■■■■■balls■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■
+
+- type: entity
+  id: PaperSpacesteinFiles2
+  name: Spacestein files
+  description: Incriminating papers with most of the text blacked out.
+#  categories: [ HideSpawnMenu ]
+#  suffix: "power tool ad, formatted"
+  parent: Paper
+  components:
+  - type: Paper
+    # editingDisabled: true
+    content: |2
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■"Babygirl."■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■"Daddy's home."■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■"Hello princess."■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■
+
+- type: entity
+  id: PaperSpacesteinFiles3
+  name: Spacestein files
+  description: Incriminating papers with most of the text blacked out.
+#  categories: [ HideSpawnMenu ]
+#  suffix: "power tool ad, formatted"
+  parent: Paper
+  components:
+  - type: Paper
+    # editingDisabled: true
+    content: |2
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■ht■■■■■■■■■■■■■■■■■■■t■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■
+      
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■ps■■■■■■■■■■■■■://www.■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+      ■■■■■youtube.com/■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■watch■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■
+
+      ■■■■■■■?■■■■■■■■■■■■■■■■v■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■79■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■
+
+      ■■■■■■■■■■■-■■■■■■■■■■■■■■■■■■■■■■■■■A■■■■■■■■■■■■■■■■■■■
+      ■■■■■w■■■■■■■■■■■■■■■■■■■■■■F■■■■■■■■■■■■■■■■Z■■■■■■■■■■
+      ■■■■■CK■■■■■■■■■■■■■■■■■■■■■■■■■■p■■■■■■■■■■■■■■■■■■■
+      ■■■■■A■■■■■■■
+
+- type: entity
+  id: PaperSpacesteinFlightLogs
+  name: Spacestein planet flight logs
+  description: Incriminating papers with most of the text blacked out.
+#  categories: [ HideSpawnMenu ]
+#  suffix: "power tool ad, formatted"
+  parent: Paper
+  components:
+  - type: Paper
+    # editingDisabled: true
+    content: |2
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■
+
+      ■■■■■■■■■■■■■■"ben_stevens"■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■
+
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+      ■■■■■■■■■■■■■■■■■■■■■"frufru_01"■■■■■■■■■■■■
+      ■■■■■■■■■■■■
+
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+      ■■■■■■■■■team■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      ■■■■■■■■■■■■■■■■■■■■■■fortress■■■■■■■■■■■■■■
+      ■■■■2■■■■■■■
+
+- type: entity
+  id: BoxFolderSpacesteinFiles
+  parent: BoxBase
+  name: Spacestein files
+  description: A folder filled with top secret paperwork.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/folders.rsi
+    layers:
+    - state: folder-colormap
+      color: "#b38e3c"
+    - state: folder-base
+    - state: folder-stamp-inverse
+      color: red
+  - type: Item
+    sprite: Objects/Misc/folders.rsi
+    size: Small
+    shape: null
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,4,3
+    whitelist:
+      tags:
+      - Document
+  - type: ItemMapper
+    mapLayers:
+      folder-overlay-paper:
+        whitelist:
+          tags:
+          - Document
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Folder
+  - type: StorageFill
+    contents:
+      - id: PaperSpacesteinFiles
+      - id: PaperSpacesteinFiles1
+      - id: PaperSpacesteinFiles2
+      - id: PaperSpacesteinFiles3
+      - id: PaperSpacesteinFlightLogs

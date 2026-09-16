@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by FruFru01 (discord)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "card"
+        },
+        {
+            "name": "shuttle_civ"
+        },
+        {
+            "name": "shuttle_indust"
+        },
+        {
+            "name": "shuttle_armed"
+        },
+        {
+            "name": "shuttle_funny"
+        },
+        {
+            "name": "shuttle_forged"
+        },
+        {
+            "name": "permit_weapon"
+        },
+        {
+            "name": "permit_forged"
+        }
+    ]
+}

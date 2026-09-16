@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "license": "i dont care, nobody's getting my project files anyway",
+  "copyright": "Made by thegoose3375 (Discord) for GooseStation",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon",
+      "directions": 4
+    },
+    {
+      "name": "box-0",
+      "directions": 4
+    },
+    {
+      "name": "box-1",
+      "directions": 4
+    },
+    {
+      "name": "box-2",
+      "directions": 4
+    },
+    {
+      "name": "box-3",
+      "directions": 4
+    },
+    {
+      "name": "box-4",
+      "directions": 4
+    },
+    {
+      "name": "box-5",
+      "directions": 4
+    },
+    {
+      "name": "box-6",
+      "directions": 4
+    }
+  ]
+}

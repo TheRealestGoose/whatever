@@ -1,0 +1,174 @@
+- type: entity
+  id: InvisWallEvent
+  name: invisible wall perm
+  description: You're not meant to see this.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  #- type: Sprite
+  #  sprite: _GooseStation/adminbarrier.rsi
+  #  state: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: Clickable
+
+- type: entity
+  id: fogOverlay
+  name: fog overlay
+  description: wallmounted layer
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Sprite
+    drawdepth: Overdoors
+    sprite: _GooseStation/fogoverlay.rsi
+    state: fog
+    snapCardinals: false
+    noRot: true
+
+- type: entity
+  id: PortalInvis
+  name: INVISIBLE portal
+  description: How are you even reading this??
+  components:
+  - type: Transform
+    anchored: True
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        hard: false
+  - type: Portal
+
+- type: entity
+  id: HandTeleporterAdmemeEvent
+  suffix: Admeme
+  parent: BaseItem
+  name: interdimensional teleporter EVENT
+  description: Allows you to open stable portal gates that are not limited by distance. These ones are invisible.
+  components:
+  - type: Sprite
+    sprite: /Textures/Objects/Devices/hand_teleporter.rsi
+    layers:
+    - state: icon
+      color: green
+  - type: HandTeleporter
+    allowPortalsOnDifferentGrids: true
+    allowPortalsOnDifferentMaps: true
+    firstPortalPrototype: PortalInvis
+    secondPortalPrototype: PortalInvis
+
+- type: entity
+  id: FloorChasmAdmemeEventBase
+  name: invisPit
+  suffix: Admeme
+  abstract: true
+  description: You can't even see the bottom.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Chasm
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.4
+    blacklist:
+      tags:
+      - Catwalk
+    triggerGroups: # Goobstation
+      types:
+      - Chasm
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Icon
+    sprite: Tiles/Planet/Chasms/basalt_chasm.rsi
+    state: full
+    base: chasm
+  - type: Physics
+    bodyType: Static
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: FloorChasmAdmemeEventFull
+  parent: FloorChasmAdmemeEventBase
+  suffix: Full
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - WallLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+
+- type: entity
+  id: FloorChasmAdmemeEventHalf
+  parent: FloorChasmAdmemeEventBase
+  suffix: Half
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,0,0.5,0.5"
+        layer:
+        - WallLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+
+# - type: entity
+#   id: FloorChasmAdmemeEventQuarter
+#   parent: FloorChasmAdmemeEventBase
+#   suffix: Quarter
+#   components:
+#   - type: Fixtures
+#     fixtures:
+#       fix1:
+#         shape:
+#           !type:PhysShapeAabb
+#           bounds: "-0.5,-0.25,0.5,0,25"
+#         layer:
+#         - WallLayer
+#         mask:
+#         - ItemMask
+#         density: 1000
+#         hard: false

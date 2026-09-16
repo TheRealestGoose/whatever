@@ -1,0 +1,440 @@
+# ideas:
+# shadow blob planet?
+# ^ shadowing watchers in this prototype right here.
+# ^ alternatively just shadow stuff? shadow kudzu? idk. think about it.
+# also just change up generation as a whole. make a separate preset. i want it to look better.
+
+# - type: entity
+#   id: VGRoidAsteroidBeltCacheRoomMarker
+#   parent: BaseRoomMarker
+#   name: VGRoid interior marker
+#   components:
+#   - type: RoomFill
+#     roomWhitelist:
+#       tags:
+#       - Haunted
+
+- type: entity
+  name: nightwing watcher bolt
+  id: WatcherBoltNightwing
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  # - type: Aura
+  #   auraFarm: 1
+  #   auraColor: "#FFFFFFFF"
+  #   distortion: 0.01
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: omnilaser_greyscale
+      shader: unshaded
+      color: "#793a80dd"
+  - type: Ammo
+    muzzleFlash: null
+  - type: Projectile
+    #   soundHit:  Waiting on serv3
+    impactEffect: BulletImpactEffectDisabler
+    damage:
+      types:
+        Cold: 5
+  - type: TimedDespawn
+    lifetime: 2
+  - type: ChangeTemperatureOnCollide
+    heat: -10000 # Lavaland Change
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: -100
+  - type: StaminaDamageOnCollide
+    damage: 40
+
+- type: entity
+  name: nightwing watcher bolt
+  id: WatcherBoltNightwingSpread
+  parent: WatcherBoltNightwing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: WatcherBoltNightwing
+    count: 3
+    spread: 15
+
+# - type: entity
+#   name: nightwing watcher bolt
+#   id: WatcherBoltNightwingShoots
+#   parent: WatcherBoltNightwing
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: NpcFactionMember
+#     factions:
+#     - Lavafauna
+#   - type: HTN
+#     rootTask:
+#       task: SimpleRangedHostileCompound
+#   - type: MovementSpeedModifier
+#     baseSprintSpeed: 0
+#     baseWalkSpeed: 0
+#   - type: BasicEntityAmmoProvider
+#     proto: WatcherBoltNightwing
+#   - type: Gun
+#     projectileSpeed: 5
+#     useKey: false
+#     burstFireRate: 5
+#     shotsPerBurst: 2
+#     burstCooldown: 3
+#     selectedMode: Burst
+#     availableModes:
+#     - Burst
+#     soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+#   - type: CombatMode
+#   - type: TimedDespawn
+#     lifetime: 1
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageSpawnerMobShadow
+  name: Shadow Mob Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Aliens/Lavaland/watcher.rsi
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: base
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      sprite: Mobs/Aliens/Lavaland/watcher.rsi
+      state: unshaded
+      shader: unshaded
+      color: "#793a80dd"
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: MobWatcherShadowNightwing
+        weight: 45
+      - id: MobWatcherShadowNightwing
+        weight: 35
+      - id: MobWatcherShadowNightwing
+        weight: 20
+
+- type: entity
+  id: MobWatcherShadowNightwing
+  name: nightwing watcher
+  description: Huge fan of bullethell shooters.
+  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  components:
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Slash: 10
+        Structural: 20
+  #watcher
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: base
+        BaseUnshaded: unshaded
+      Dead:
+        Base: dead
+        BaseUnshaded: dead-unshaded
+  - type: NpcFactionMember
+    factions:
+    - Lavafauna
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+    blackboard:
+      NavSmash: !type:Bool
+        true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 80
+        mask:
+          - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3.5
+    baseWalkSpeed: 2.5
+  - type: MovementIgnoreGravity
+  - type: BasicEntityAmmoProvider
+    proto: WatcherBoltNightwingSpread
+  - type: Gun
+    projectileSpeed: 5
+    fireRate: 0.4
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+  - type: CombatMode
+  - type: Fauna # Lavaland Change
+  #watcher
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Lavaland/watcher.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: base
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: unshaded
+      shader: unshaded
+      color: "#793a80dd"
+  - type: PointLight
+    radius: 1.5
+    energy: 0.5
+    color: "#793a80dd"
+  - type: Butcherable
+    spawned:
+    - id: PlasmaOre1
+      amount: 1
+      maxAmount: 5
+    - id: DiamondOre1
+      amount: 1
+      maxAmount: 1
+
+- type: dungeonConfig
+  id: VGRoidShadowChasms
+  layers:
+    - !type:PrototypeDunGen
+      proto: VGRoidBlobSmallShadow
+    - !type:PrototypeDunGen
+      proto: VGRoidShadowReverseCaveSystem
+    - !type:PrototypeDunGen
+      proto: VGRoidBlobSmallShadowPit # maybe an island in the middle with stuff? maybe thin cave PATHS into the middle? hard choice.
+    - !type:PrototypeDunGen
+      proto: VGRoidBlobSmallShadowIslandSmall
+    - !type:PrototypeDunGen
+      proto: VGRoidShadowReverseCaveSystemSmall
+    # Fill
+    - !type:PrototypeDunGen
+      proto: VGRoidFillWallRockChromite
+      inheritDungeons: All
+    # - !type:PrototypeDunGen
+    #   proto: VGRoidFillShadowPit
+    #   inheritDungeons: All
+    # Ores
+    - !type:OreDunGen
+      replacement: WallRockChromite
+      entity: WallRockChromiteQuartz
+      count: 4
+      minGroupSize: 1
+      maxGroupSize: 2
+    - !type:OreDunGen
+      replacement: WallRockChromite
+      entity: WallRockChromiteGold
+      count: 5
+      minGroupSize: 1
+      maxGroupSize: 2
+    - !type:OreDunGen
+      replacement: WallRockChromite
+      entity: WallRockChromiteSilver
+      count: 5
+      minGroupSize: 1
+      maxGroupSize: 2
+    - !type:OreDunGen
+      replacement: WallRockChromite
+      entity: WallRockChromitePlasma
+      count: 4
+      minGroupSize: 1
+      maxGroupSize: 2
+    - !type:OreDunGen
+      replacement: WallRockChromite
+      entity: WallRockChromiteUranium
+      count: 1
+      minGroupSize: 1
+      maxGroupSize: 2
+    - !type:OreDunGen
+      replacement: WallRockChromite
+      entity: WallRockChromiteArtifactFragment
+      count: 5
+      minGroupSize: 1
+      maxGroupSize: 2
+    - !type:OreDunGen
+      replacement: WallRockChromite
+      entity: WallRockChromiteDiamond
+      count: 3
+      minGroupSize: 1
+      maxGroupSize: 1
+    # Bug out so no split if want
+    # - !type:PrototypeDunGen
+
+- type: entityTable
+  id: SalvageSpawnerMobShadowMobs
+  table: !type:GroupSelector
+    children:
+    - id: SalvageSpawnerMobShadow
+      amount: 1
+
+# Configs
+# Fill with rocks.
+- type: dungeonConfig
+  id: VGRoidFillWallRockChromite
+  layers:
+  - !type:FillGridDunGen
+    entity: WallRockChromite
+    allowedTiles:
+    - FloorChromite
+
+# - type: dungeonConfig
+#   id: VGRoidFillShadowPit
+#   layers:
+#   - !type:FillGridDunGen
+#     entity: FloorChromiteChasm
+#     allowedTiles:
+#     - FloorPlanetDirt
+
+- type: dungeonConfig
+  id: VGRoidBlobSmallShadow
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 100, 100 #169, 169
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: FloorChromite
+      threshold: 0.50
+      noise:
+        frequency: 0.010
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: VGRoidBlobSmallShadowPit
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 70, 70 #169, 169
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: Space
+      threshold: 0.50
+      noise:
+        frequency: 0.010
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: VGRoidBlobSmallShadowIslandSmall
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 40, 40 #169, 169
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: FloorChromite
+      threshold: 0.50
+      noise:
+        frequency: 0.010
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: VGRoidShadowReverseCaveSystem
+  # minOffset: 40
+  # maxOffset: 60
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 135, 135
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+    layers:
+    - tile: FloorChromite
+      threshold: 0.6
+      invert: true
+      noise:
+        seed: 0
+        noiseType: Perlin
+        fractalType: Ridged
+        octaves: 1
+        frequency: 0.1
+        gain: 0.5
+  - !type:MobsDunGen
+    minCount: 15
+    maxCount: 20
+    contents: SalvageSpawnerMobShadowMobs
+
+- type: dungeonConfig
+  id: VGRoidShadowReverseCaveSystemSmall
+  # minOffset: 40
+  # maxOffset: 60
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 80, 80
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+    layers:
+    - tile: FloorChromite
+      threshold: 0.7
+      invert: true
+      noise:
+        seed: 0
+        noiseType: Perlin
+        fractalType: Ridged
+        octaves: 1
+        frequency: 0.1
+        gain: 0.5
+
+# - type: dungeonConfig
+#   id: VGRoidExteriorNone
+#   reserveTiles: true
+#   layers:
+#   - !type:PrototypeDunGen
+#     proto: VGRoidExteriorNoDungeon
+#   - !type:SplineDungeonConnectorDunGen
+#     tile: PlatingAsteroid
+#     widenTile: FloorAsteroidSand
+
+# - type: dungeonConfig
+#   id: VGRoidExteriorNoDungeon
+#   reserveTiles: true
+#   minCount: 0
+#   maxCount: 0
+#   layers:
+#   - !type:ExteriorDunGen
+#     proto: Experiment
+#   - !type:EntityTableDunGen
+#     minCount: 0
+#     maxCount: 0
+#     table: !type:NestedSelector
+#       tableId: SalvageScrapSpawnerCommon
+#   - !type:EntityTableDunGen
+#     minCount: 0
+#     maxCount: 0
+#     table: !type:NestedSelector
+#       tableId: SalvageScrapSpawnerValuable
+#   - !type:EntityTableDunGen
+#     minCount: 0
+#     maxCount: 0
+#     table: !type:NestedSelector
+#       tableId: SalvageTreasureSpawnerCommon
+#   - !type:EntityTableDunGen
+#     minCount: 0
+#     maxCount: 0
+#     table: !type:NestedSelector
+#       tableId: SalvageTreasureSpawnerValuable
+#   - !type:MobsDunGen
+#     minCount: 0
+#     maxCount: 0
+#     contents: VGRoidExteriorDungeonsMobs

@@ -1,0 +1,202 @@
+- type: entity
+  parent: [ClothingOuterBase]
+  id: ClothingOuterBoozeJacket
+  name: booze jacket
+  description: A jacket that acts like liquid storage. Fits 200 units of liquid. Comes with a tap that switches between pour and refill.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/beercoat.rsi
+    layers:
+    - state: icon-tap-pour
+      map: [ "enum.ItemToggleVisuals.Layer" ]
+    - state: fill-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: ItemToggleVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemToggleVisuals.State:
+        enum.ItemToggleVisuals.Layer:
+          True: { state: icon-tap-refill }
+          False: { state: icon-tap-pour }
+  - type: Clothing
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+        map: ["enum.SolutionContainerLayers.Base"]
+      - state: equipped-outerClothing-fill-1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+    slots:
+    - outerClothing
+  - type: Appearance
+  - type: Item
+    size: Ginormous
+  - type: Tag
+    tags:
+      - DrinkCup #?
+  # - type: Openable
+  #   sound:
+  #     collection: bottleOpenSounds
+  #   closeable: true
+  #   closeSound:
+  #     collection: bottleCloseSounds
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 200
+  # - type: DnaSubstanceTrace #???
+  - type: Shakeable #shake your body
+  # - type: RefillableSolution #needed to make it refillable at a dispenser, but makes it so you cant use it
+  #   solution: drink          #off cuz toggled
+  - type: DrainableSolution #to make it drain with a glass #on here due to modes
+    solution: drink
+  # - type: SolutionTransfer #cant make it so you cant recieve solution from being poured into
+  #   canChangeTransferAmount: false #cuz fuck you
+  #   canSend: true
+  #   canReceive: true
+  # - type: FitsInDispenser #self-explanatory
+  #   solution: drink       #off because toggled
+  - type: Spillable #open tap and spill on ground
+    solution: drink
+    spillWhenThrown: false #but since its robust, wont spill when thrown
+  # - type: MixableSolution #for stirring with a spoon, impossible.
+  #   solution: drink
+  - type: ExaminableSolution
+    solution: drink
+  - type: ReagentTank #on cuz modes
+    transferAmount: 5
+  - type: ReactionMixer
+    mixOnInteract: false
+    reactionTypes:
+    - Shake
+
+  - type: ItemToggle
+    onActivate: true
+    wieldToggle: false
+    soundActivate:
+      path: /Audio/Weapons/telescopicon.ogg
+    soundDeactivate:
+      path: /Audio/Weapons/telescopicoff.ogg
+  - type: ComponentToggler
+    components:
+      - type: FitsInDispenser
+        solution: drink
+      - type: RefillableSolution
+        solution: drink
+
+    #itemswitch HAS to change the sprite, which breaks the clothing one. FML.
+  # - type: ItemSwitch #so you can both pour into and out of
+  #   showLabel: true
+  #   state: refill
+  #   states:
+  #     refill: !type:ItemSwitchState
+  #       verb: refill
+  #       # sprite:
+  #       #   sprite: _GooseStation/beercoat.rsi
+  #       #   state: icon
+  #       components:
+  #         - type: FitsInDispenser
+  #           solution: drink
+  #         - type: RefillableSolution
+  #           solution: drink
+  #       soundStateActivate:
+  #         collection: valveSqueak
+  #         params:
+  #           variation: 0.125
+
+  #     pour: !type:ItemSwitchState
+  #       verb: pour
+  #       # sprite:
+  #       #   sprite: _GooseStation/beercoat.rsi
+  #       #   state: icon
+  #       components:
+  #         - type: DrainableSolution
+  #           solution: drink
+  #         - type: ReagentTank
+  #           transferAmount: 5
+  #       soundStateActivate:
+  #         collection: valveSqueak
+  #         params:
+  #           variation: 0.125
+
+  - type: SolutionContainerVisuals
+    solutionName: drink
+    maxFillLevels: 5
+    fillBaseName: fill-
+    equippedFillBaseName: -fill-
+    equippedMaxFillLevels: 5
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible #maybe make it not fully break first, just spill everything, then it can be repaired
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+       - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+       - !type:SpillBehavior { }
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 500
+      Steel: 50
+
+# - type: entity
+#   id: BeerCoatNozzle
+#   parent: BaseItem
+#   name: booze coat nozzle
+#   description: A specialized nozzle intended for pouring a cold one.
+#   components:
+#   - type: Sprite
+#     sprite: Objects/Weapons/Guns/Basic/extinguishernozzle.rsi
+#     state: icon
+#   - type: Item
+#     sprite: Objects/Weapons/Guns/Basic/extinguishernozzle.rsi
+#     size: Normal
+#   - type: FirefighterTankRefillable
+#     externalContainer: true
+#     targetSlot: OUTERCLOTHING
+#     providerWhitelist:
+#       tags:
+#       - DrinkCup
+#   - type: Tag
+#     tags:
+#     - Nozzle
+
+#   - type: Spray
+#     transferAmount: 15
+#     pushbackAmount: 60
+#     spraySound:
+#       path: /Audio/Effects/extinguish.ogg
+#     sprayedPrototype: ExtinguisherSpray
+#     vaporAmount: 5
+#     vaporSpread: 120
+#     sprayDistance: 5
+#     sprayVelocity: 2.0
+#     externalContainer: true
+#     targetSlot: BACK
+#     providerWhitelist:
+#       tags:
+#       - NozzleBackTank
+#       - AtmosBackTank
+
+#   - type: PacifismAllowedGun
+#   - type: Gun
+#     fireRate: 1
+#     selectedMode: SemiAuto
+#     availableModes:
+#     - SemiAuto
+#     - FullAuto
+#     soundGunshot:
+#       path: /Audio/Effects/thunk.ogg
+#     soundEmpty:
+#       path: /Audio/Items/hiss.ogg
+#     clumsyProof: true
+#   - type: ClothingSlotAmmoProvider
+#     targetSlot: BACK
+#     providerWhitelist:
+#       tags:
+#       - AtmosBackTank
+#   - type: UseDelay
+#     delay: 0.5

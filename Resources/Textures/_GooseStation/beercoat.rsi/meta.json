@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by TheGoose3375 (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "equipped-outerClothing-fill-1",
+      "directions": 4
+    },
+    {
+      "name": "equipped-outerClothing-fill-2",
+      "directions": 4
+    },
+    {
+      "name": "equipped-outerClothing-fill-3",
+      "directions": 4
+    },
+    {
+      "name": "equipped-outerClothing-fill-4",
+      "directions": 4
+    },
+    {
+      "name": "equipped-outerClothing-fill-5",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-tap-pour"
+    },
+    {
+      "name": "icon-tap-refill"
+    },
+    {
+      "name": "tap-pour"
+    },
+    {
+      "name": "tap-refill"
+    },
+    {
+      "name": "fill-1"
+    },
+    {
+      "name": "fill-2"
+    },
+    {
+      "name": "fill-3"
+    },
+    {
+      "name": "fill-4"
+    },
+    {
+      "name": "fill-5"
+    }
+  ]
+}

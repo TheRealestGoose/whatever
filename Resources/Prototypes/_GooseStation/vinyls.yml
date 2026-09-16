@@ -1,0 +1,268 @@
+- type: vendingMachineInventory
+  id: VinyldomatInventory
+  startingInventory:
+    VinylDiskAI: 2
+    VinylDiskDevil: 2
+    VinylDiskPizza: 2
+    VinylDiskGlossy: 2
+    VinylDiskRed: 2
+    VinylDiskLightBlue: 2
+    VinylDiskBanana: 2
+    VinylDiskCarrot: 2
+    VinylDiskCyan: 2
+    VinylDiskBlue: 2
+    VinylDiskYellow: 2
+    VinylDiskGreen: 2
+    VinylDiskPurple: 2
+    VinylDiskOrange: 2
+    VinylDiskWhite: 2
+    VinylDiskLightRed: 2
+    VinylDiskDarkBlue: 2
+    VinylDiskPink: 2
+    VinylDiskBurnTheWorld: 2
+    VinylDiskFeralAngel: 2
+    VinylDiskAlsoSprach: 2
+    VinylDiskValkyries: 2
+    VinylDiskRomeoJuliet: 2
+    VinylDiskRussian: 2
+    VinylDiskFlowerDuet: 2
+    VinylDiskWinterVivaldi: 2
+    VinylDiskBachCello: 2
+    VinylDiskFloaty: 2
+    VinylDiskLime: 2
+    VinylDiskGetThatAntag: 2
+    VinylDiskLaw2: 2
+    VinylDiskEphedrine: 2
+    VinylDiskRunningOut: 2
+    VinylDiskJourney: 2
+    VinylDiskTraitorousIntent: 2
+    VinylDiskViolet: 2
+    VinylDiskWantYouGone: 2
+    VinylDiskEgg: 2
+    VinylDiskWeAreNumberTwo: 2 # GOOSESTATION VINYLS:
+    VinylDiskMyAdressIsSovietUnion: 1
+    VinylDiskPizzaSpiderman: 1
+  contrabandInventory:
+    VinylDiskForgotten: 1 #except for this one
+    VinylDiskStaleTortilla: 1
+  emaggedInventory:
+    VinylDiskBalls: 1
+    VinylDiskLarp: 1
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineVinyldomat
+  name: Vinyldomat
+  description: An old vendomat born anew. Now featuring only the finest tunes in space.
+  components:
+  - type: VendingMachine #vendor > uplink?
+    pack: VinyldomatInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+  - type: AccessReader
+    access: [["Service"]]
+  - type: DatasetVocalizer
+    dataset: VendomatAds #!!!
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/vinyldomat.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 2
+    energy: 1.6
+    color: "#9dc5c9"
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+    rotateWhilePulling: true
+
+- type: entity
+  id: VinylPlayerPhonograph #Open
+  name: phonograph
+  parent: BaseItem
+  description: An old school vinyl record player sat on a set of drawers.
+  components:
+  # - type: Storage
+  #   whitelist:
+  #     components:
+  #     - ItemSlots
+  #   grid:
+  #   - 0,0,6,1
+  # - type: UserInterface
+  #   interfaces:
+  #     enum.StorageUiKey.Key:
+  #       type: StorageBoundUserInterface
+  # - type: DisassembleOnAltVerb
+  #   prototypeToSpawn: PhonographClosed
+  #   disassembleTime: 1
+  # - type: Icon #figure this part out: inhands icon should be closed, if you can.
+  #   sprite: _GooseStation/phonograph.rsi
+  #   state: closed
+  - type: Item
+    sprite: _GooseStation/phonograph.rsi
+    state: closed
+    size: Large
+  - type: Sprite
+    sprite: _GooseStation/phonograph.rsi
+    state: open
+    snapCardinals: true
+    granularLayersRendering: true #?
+    drawdepth: SmallObjects
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        density: 500
+        mask:
+        - TabletopMachineMask
+        layer:
+        - BulletImpassable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Appearance
+  - type: VinylPlayer
+  - type: ContainerContainer
+    containers:
+      # storagebase: !type:Container
+      vinyl: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      vinyl:
+        name: vinyl
+        whitelist:
+          components:
+          - Vinyl
+  - type: ItemMapper
+    containerWhitelist: [vinyl]
+    mapLayers:
+      disk_installed:
+        whitelist:
+          components:
+          - Vinyl
+
+# - type: entity
+#   id: VinylPlayerPhonographClosed
+#   name: phonograph
+#   parent: BaseItem
+#   description: An old school vinyl record player sat on a set of drawers.
+#   components:
+#   # - type: SpawnAfterInteract
+#   #   prototype: PhonographOpen
+#   #   doAfter: 1
+#   #   removeOnInteract: true
+#   - type: Sprite
+#     sprite: _GooseStation/phonograph.rsi
+#     state: closed
+#     snapCardinals: true
+#     drawdepth: SmallObjects
+#   - type: Fixtures
+#     fixtures:
+#       fix1:
+#         shape:
+#           !type:PhysShapeAabb
+#           bounds: "-0.3,-0.3,0.3,0.3"
+#         density: 500
+#         mask:
+#         - TabletopMachineMask
+#         layer:
+#         - BulletImpassable
+#   - type: Destructible
+#     thresholds:
+#     - trigger:
+#         !type:DamageTrigger
+#         damage: 200
+#       behaviors:
+#       - !type:PlaySoundBehavior
+#         sound:
+#           collection: MetalGlassBreak
+#       - !type:DoActsBehavior
+#         acts: [ "Destruction" ]
+#   - type: Appearance
+
+- type: entity
+  name: "vinyl disk: pizza time"
+  id: VinylDiskPizzaSpiderman
+  description: A vinyl disk containing music, perfect for pizza delivery.
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: pizza-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/_GooseStation/Vinyl/pizza-time.ogg
+
+- type: entity
+  name: "stale tortilla"
+  id: VinylDiskStaleTortilla
+  description: A hardened tortilla, with a long winding line carved into it. Maybe you could put it in a vinyl player?
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    sprite: _GooseStation/vinyls.rsi
+    state: hatdance-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/_GooseStation/Vinyl/hat-dance.ogg
+
+- type: entity
+  name: "vinyl disk: my adress is soviet union"
+  id: VinylDiskMyAdressIsSovietUnion
+  description: A vinyl disk containing music. Looks pretty old, but still playable.
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: lightishred-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/_GooseStation/Vinyl/my-adress-is-soviet-union.ogg
+
+- type: entity
+  name: "vinyl disk: Larpstation Inferno"
+  id: VinylDiskLarp
+  description: "0 comics read, 0 episodes watched, I am the true larper."
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    sprite: _GooseStation/vinyls.rsi
+    state: larp-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/_GooseStation/Vinyl/larpstation-inferno.ogg
+
+- type: entity
+  name: "vinyl disk: Balls"
+  id: VinylDiskBalls
+  description: "Can I? Can I? Can I? Can I?"
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: lightblue-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/_GooseStation/Vinyl/balls-in-yo-jaw.ogg

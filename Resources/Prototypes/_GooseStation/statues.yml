@@ -1,0 +1,2919 @@
+#ideas:
+#infested variant (eyes), done, check at the bottom, add functionality (spawn rats/spiders?)
+#cursed variant (no eyes, emit quiet scary music?) (on break: play scary roar, spawn scary golem that despawns (sprite it later))
+#make all variations rarely drop something?
+
+
+#region Base
+- type: entity
+  id: ScrapStatueBase
+  parent: BaseStructure
+  name: scrap effigy
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure.
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: Clickable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50 #(50*4=200)
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: ScrapStatueInfested
+  parent: ScrapStatueBase
+  name: scrap effigy
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure.
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_bananium_clown
+      - state: scrap_bananium_clown_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim4
+        map: [ "anim-4" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_bananium_clown_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_bananium_clown_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_bananium_clown_anim3: ""
+      - anim-4:
+          gone: ""
+          scrap_bananium_clown_anim4: ""
+  - type: Clickable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50 #(50*4=200)
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+      - SpawnMobMouse
+      - MobCockroach
+      # MobLootbug
+      # MobAdultSlimesYellowAngry
+      # MobAdultSlimesBlueAngry
+      # MobAdultSlimesGreenAngry
+    # round ~90m
+    # one spawner should only spawn ~5 mice for sanity reasons
+    # therefore 18m
+    # use 50% chance for randomness and balance with halved interval
+    chance: 0.5
+    intervalSeconds: 540
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+
+#region Mobs
+
+- type: entity
+  id: MobScrapGolemBase
+  parent: [ BaseMob, MobCombat ]
+  abstract: true
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Dead
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: MeleeWeapon
+    altDisarm: false
+    animation: WeaponArcClaw
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 15
+  - type: Pullable
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      # NavClimb: !type:Bool
+      #   true
+      NavSmash: !type:Bool
+        true
+      # NavInteract: !type:Bool
+      #   true
+      # NavPry: !type:Bool
+      #   true
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: MetalScrape
+      params:
+        volume: -3
+        maxDistance: 10
+        variation: 0.01
+        pitch: 1.25
+  # - type: Prying
+  #   pryPowered: false
+  - type: ComplexInteraction
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 50
+        behaviors:
+          - !type:SpawnEntitiesBehavior
+            offset: 0
+            spawn:
+              ScrapMetalPile:
+                min: 1
+                max: 1
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+  - type: PassiveDamage #slowly die
+    allowedStates:
+     - Alive
+    damage:
+      types:
+        Blunt: 1.25
+  - type: AmbientSound
+    volume: 10
+    range: 10
+    enabled: true
+    sound:
+      path: /Audio/_Goobstation/Wraith/Mobs/brullbar/brullbar_scream.ogg
+      params:
+        volume: 2
+        maxDistance: 10
+        pitch: 0.4
+        variation: 0.05
+  # - type: SpamEmitSound
+  #   minInterval: 5
+  #   maxInterval: 25
+  #   sound:
+  #     collection: MetalScrape
+  #     params:
+  #       volume: -1
+  #       maxDistance: 12
+  #       variation: 0.01
+
+- type: entity
+  name: crawling scrap amalgam
+  id: MobScrapGolemCrawler
+  parent: MobScrapGolemBase
+  description: A grotesque amalgamation of fused scrap held together by a precarious tension that suggests it might fall to pieces any moment. It drags itself across the floor on an assembly of rusted pipes and serrated metal.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _GooseStation/scrap-golems.rsi
+    layers:
+      - state: crawler
+        map: [ "movement" ]
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: crawler-moving
+    noMovementLayers:
+      movement:
+        state: crawler
+  - type: MeleeWeapon
+    altDisarm: false
+    animation: WeaponArcClaw
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 15
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+- type: entity
+  id: MobScrapGolemMonstrosity
+  parent: MobScrapGolemBase
+  name: limping scrap amalgam
+  description: A grotesque amalgamation of fused scrap held together by a precarious tension that suggests it might fall to pieces any moment. It's central mass has been hoisted atop eight uneven appendages fashioned from discarded conduits and sharpened rebar. Attached to it is a single jagged limb, crudely sharpened into a sickeningly rigid blade.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _GooseStation/scrap-golems.rsi
+    layers:
+      - state: monstrosity
+        map: [ "movement" ]
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: monstrosity-moving
+    noMovementLayers:
+      movement:
+        state: monstrosity
+  - type: MeleeWeapon
+    altDisarm: false
+    animation: WeaponArcThrust
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 15
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+- type: entity
+  name: random scrap amalgam spawner
+  id: SpawnerMobScrapGolemRandom
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: _GooseStation/scrap-golems.rsi
+          state: monstrosity-moving
+    - type: RandomSpawner
+      prototypes:
+        - MobScrapGolemCrawler
+        - MobScrapGolemMonstrosity
+      chance: 1
+      offset: 0
+
+#region Venus Red
+- type: entity
+  id: ScrapStatueVenusRed
+  parent: ScrapStatueBase
+  suffix: Red
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_red
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusRed1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusRed1
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Red
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_red_break1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusRed2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusRed2
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Red
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_red_break2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusRed3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusRed3
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Red
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_red_break3
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ToolboxEmergency:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+#region INFESTED Venus Red
+- type: entity
+  id: ScrapStatueVenusRedInfested
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  suffix: Infested, Red
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_venus_red
+      - state: scrap_venus_red_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_venus_red_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_venus_red_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+      - state: scrap_venus_red_anim4
+        map: [ "anim-4" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_venus_red_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_venus_red_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_venus_red_anim3: ""
+      - anim-4:
+          gone: ""
+          scrap_venus_red_anim4: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusRedInfested1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusRedInfested1
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  suffix: Infested, Red
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_venus_red
+      - state: scrap_venus_red_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_venus_red_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_venus_red_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+      - state: scrap_venus_red_anim4
+        map: [ "anim-4" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_venus_red_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_venus_red_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_venus_red_anim3: ""
+      - anim-4:
+          gone: ""
+          scrap_venus_red_anim4: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusRedInfested2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusRedInfested2
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  suffix: Infested, Red
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_venus_red
+      - state: scrap_venus_red_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_venus_red_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-2:
+          gone: ""
+          scrap_venus_red_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_venus_red_anim3: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusRedInfested3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusRedInfested3
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  suffix: Infested, Red
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_venus_red
+      - state: scrap_venus_red_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-3:
+          gone: ""
+          scrap_venus_red_anim3: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ToolboxMechanical:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+#region HAUNTED Venus Red
+- type: entity
+  id: ScrapStatueHauntedVenusRed
+  parent: ScrapStatueBase
+  suffix: Haunted, Red
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_red
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedVenusRed1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedVenusRed1
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Haunted, Red
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_red_break1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedVenusRed2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedVenusRed2
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Haunted, Red
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_red_break2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedVenusRed3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedVenusRed3
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Red
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_red_break3
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SpawnerMobScrapGolemRandom:
+            min: 1
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ToolboxEmergency:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+
+#region Venus Blue
+- type: entity
+  id: ScrapStatueVenusBlue
+  parent: ScrapStatueBase
+  suffix: Blue
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_blue
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusBlue1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusBlue1
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Blue
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_blue_break1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusBlue2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusBlue2
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Blue
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_blue_break2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusBlue3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusBlue3
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Blue
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_blue_break3
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ToolboxMechanical:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+#region INFESTED Venus Blue
+- type: entity
+  id: ScrapStatueVenusBlueInfested
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  suffix: Infested, Blue
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_venus_blue
+      - state: scrap_venus_blue_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_venus_blue_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_venus_blue_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+      - state: scrap_venus_blue_anim4
+        map: [ "anim-4" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_venus_blue_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_venus_blue_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_venus_blue_anim3: ""
+      - anim-4:
+          gone: ""
+          scrap_venus_blue_anim4: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusBlueInfested1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusBlueInfested1
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  suffix: Infested, Blue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_venus_blue
+      - state: scrap_venus_blue_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_venus_blue_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_venus_blue_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+      - state: scrap_venus_blue_anim4
+        map: [ "anim-4" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_venus_blue_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_venus_blue_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_venus_blue_anim3: ""
+      - anim-4:
+          gone: ""
+          scrap_venus_blue_anim4: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusBlueInfested2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusBlueInfested2
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  suffix: Infested, Blue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_venus_blue
+      - state: scrap_venus_blue_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_venus_blue_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-2:
+          gone: ""
+          scrap_venus_blue_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_venus_blue_anim3: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueVenusBlueInfested3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueVenusBlueInfested3
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  suffix: Infested, Blue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_venus_blue
+      - state: scrap_venus_blue_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-3:
+          gone: ""
+          scrap_venus_blue_anim3: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ToolboxMechanical:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+#region Venus Blue
+- type: entity
+  id: ScrapStatueHauntedVenusBlue
+  parent: ScrapStatueBase
+  suffix: Haunted, Blue
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_blue
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedVenusBlue1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedVenusBlue1
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Haunted, Blue
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_blue_break1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedVenusBlue2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedVenusBlue2
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Haunted, Blue
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_blue_break2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedVenusBlue3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedVenusBlue3
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  suffix: Haunted, Blue
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's single mangled arm is locked around a toolbox, gripping it with a robust clutch.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_venus_blue_break3
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SpawnerMobScrapGolemRandom:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ToolboxMechanical:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+
+#region Clown
+- type: entity
+  id: ScrapStatueClown
+  parent: ScrapStatueBase
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueClown1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueClown1
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown_break1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueClown2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueClown2
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown_break2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueClown3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueClown3
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown_break3
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BananiumOre1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+#region INFESTED Clown
+- type: entity
+  id: ScrapStatueClownInfested
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  suffix: Infested
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_bananium_clown
+      - state: scrap_bananium_clown_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim4
+        map: [ "anim-4" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_bananium_clown_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_bananium_clown_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_bananium_clown_anim3: ""
+      - anim-4:
+          gone: ""
+          scrap_bananium_clown_anim4: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueClownInfested1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueClownInfested1
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_bananium_clown_break1
+      - state: scrap_bananium_clown_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_bananium_clown_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_bananium_clown_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_bananium_clown_anim3: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueClownInfested2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueClownInfested2
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_bananium_clown_break2
+      - state: scrap_bananium_clown_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim3
+        map: [ "anim-3" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_bananium_clown_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_bananium_clown_anim2: ""
+      - anim-3:
+          gone: ""
+          scrap_bananium_clown_anim3: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueClownInfested3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueClownInfested3
+  parent: ScrapStatueInfested
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    layers:
+      - state: scrap_bananium_clown_break3
+      - state: scrap_bananium_clown_anim1
+        map: [ "anim-1" ]
+        shader: unshaded
+      - state: scrap_bananium_clown_anim2
+        map: [ "anim-2" ]
+        shader: unshaded
+    drawdepth: Mobs
+    offset: "0.0,0.3"
+  - type: RandomSprite
+    available:
+      - anim-1:
+          gone: ""
+          scrap_bananium_clown_anim1: ""
+      - anim-2:
+          gone: ""
+          scrap_bananium_clown_anim2: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+          #infested
+          SpawnMobMouse:
+            min: -1
+            max: 1
+          MobCockroach:
+            min: -1
+            max: 1
+          MobLootbug:
+            min: -6
+            max: 1
+          MobAdultSlimesYellowAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesBlueAngry:
+            min: -10
+            max: 1
+          MobAdultSlimesGreenAngry:
+            min: -10
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BananiumOre1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+#region Haunted Clown
+- type: entity
+  id: ScrapStatueHauntedClown
+  parent: ScrapStatueBase
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  suffix: Haunted
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedClown1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedClown1
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  suffix: Haunted
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown_break1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedClown2:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedClown2
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  suffix: Haunted
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown_break2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          ScrapStatueHauntedClown3:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: ScrapStatueHauntedClown3
+  parent: ScrapStatueBase
+  categories: [ HideSpawnMenu ]
+  description: A towering, jagged silhouette fashioned from industrial debris and discarded machine parts, forming an unsettling mimicry of a humanoid figure. It's slumped into what looks like a sitting or kneeling posture.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/scrap-statues.rsi
+    state: scrap_bananium_clown_break3
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SpawnerMobScrapGolemRandom:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BananiumOre1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+
+
+
+#region Spawner
+
+- type: entity
+  name: random scrap statue spawner
+  id: SpawnerScrapStatueRandom
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: _GooseStation/scrap-statues.rsi
+          state: scrap_bananium_clown
+    - type: RandomSpawner
+      rarePrototypes:
+        - ScrapStatueHauntedClown
+        - ScrapStatueHauntedVenusRed
+        - ScrapStatueHauntedVenusBlue
+      rareChance: 0.1
+      prototypes:
+        - ScrapStatueClown
+        - ScrapStatueVenusRed
+        - ScrapStatueVenusBlue
+        # - ScrapStatueClown     #
+        # - ScrapStatueVenusRed  # ^ 2x chance ^
+        # - ScrapStatueVenusBlue #
+        - ScrapStatueClownInfested
+        - ScrapStatueVenusRedInfested
+        - ScrapStatueVenusBlueInfested
+      chance: 1
+      offset: 0

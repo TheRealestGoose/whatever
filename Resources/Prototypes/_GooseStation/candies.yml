@@ -1,0 +1,615 @@
+#region Base
+- type: entity
+  parent: FoodBase
+  id: FoodSnackCandyWrappedBase
+  name: wrapped candy
+  description: A candy, still in its wrapper.
+  abstract: true
+  components:
+  - type: Food
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: wrapper_middle
+      color: "#FFFFFF"
+    - state: wrapper_outer
+      color: "#FFFFFF"
+  - type: Item
+    sprite: _GooseStation/candy.rsi
+    size: Tiny
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandyBase
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: FoodBase
+  id: FoodSnackCandyBase
+  abstract: true
+  name: candy
+  description: A sugar flavoured candy.
+  components:
+  # - type: FlavorProfile
+  #   flavors:
+  #   - cherry
+  - type: Food
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: candy
+      color: "#FFFFFF"
+  - type: Item
+    sprite: _GooseStation/candy.rsi
+    size: Tiny
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 7
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: Extractable
+    grindableSolutionName: food
+    juiceSolution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+
+#region Candies
+
+- type: entity
+  parent: FoodSnackCandyWrappedBase
+  id: FoodSnackCandyWrapped
+  name: wrapped candy
+  description: A candy, still in its wrapper.
+  suffix: Bland
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: wrapper_middle
+      color: "#FFFFFF"
+    - state: wrapper_outer
+      color: "#FFFFFF"
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandy
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: FoodSnackCandyBase
+  id: FoodSnackCandy
+  name: candy
+  description: A sugar flavoured candy. Lame.
+  suffix: Bland
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  # - type: FlavorProfile
+  #   flavors:
+  #   - cherry
+
+
+- type: entity
+  parent: FoodSnackCandyWrappedBase
+  id: FoodSnackCandyWrappedStrawberry
+  name: wrapped candy
+  description: A candy, still in its wrapper.
+  suffix: Strawberry
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: strawberry_wrapped
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandyStrawberry
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: FoodSnackCandyBase
+  id: FoodSnackCandyStrawberry
+  name: strawberry candy
+  description: A strawberry flavoured candy.
+  suffix: Strawberry
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: strawberry
+  - type: FlavorProfile
+    flavors:
+    - strawberry
+
+- type: flavor
+  id: strawberry
+  flavorType: Complex
+  description: "like strawberry"
+
+
+- type: entity
+  parent: FoodSnackCandyWrappedBase
+  id: FoodSnackCandyWrappedBanana
+  name: wrapped candy
+  description: A candy, still in its wrapper.
+  suffix: Banana
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: banana_wrapped
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandyBanana
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: FoodSnackCandyBase
+  id: FoodSnackCandyBanana
+  name: banana candy
+  description: A banana flavoured candy.
+  suffix: Banana
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: banana
+  - type: FlavorProfile
+    flavors:
+    - banana
+
+
+- type: entity
+  parent: FoodSnackCandyWrappedBase
+  id: FoodSnackCandyWrappedLemon
+  name: wrapped candy
+  description: A candy, still in its wrapper.
+  suffix: Lemon
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: lemon_wrapped
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandyLemon
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: FoodSnackCandyBase
+  id: FoodSnackCandyLemon
+  name: lemon candy
+  description: A lemon flavoured candy.
+  suffix: Lemon
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: lemon
+  - type: FlavorProfile
+    flavors:
+    - sour
+
+
+- type: entity
+  parent: FoodSnackCandyWrappedBase
+  id: FoodSnackCandyWrappedMint
+  name: wrapped candy
+  description: A candy, still in its wrapper.
+  suffix: Mint
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: mint_wrapped
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandyMint
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: FoodSnackCandyBase
+  id: FoodSnackCandyMint
+  name: mint candy
+  description: A mint flavoured candy.
+  suffix: Mint
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: mint
+  - type: FlavorProfile
+    flavors:
+    - minty
+
+
+- type: entity
+  parent: FoodSnackCandyWrappedBase
+  id: FoodSnackCandyWrappedOrange
+  name: wrapped candy
+  description: A candy, still in its wrapper.
+  suffix: Orange
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: orange_wrapped
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandyOrange
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: FoodSnackCandyBase
+  id: FoodSnackCandyOrange
+  name: orange candy
+  description: A orange flavoured candy.
+  suffix: Orange
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: orange
+  - type: FlavorProfile
+    flavors:
+    - orange
+
+
+- type: entity
+  parent: FoodSnackCandyWrappedBase
+  id: FoodSnackCandyWrappedRainbow
+  name: wrapped rainbow candy
+  description: A candy, still in its wrapper. This one's rainbow, how fancy!
+  suffix: Rainbox
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: wrapper_middle
+      color: "#FFFFFF"
+    - state: wrapper_outer
+      color: "#FFFFFF"
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandyRainbow
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: RgbLightController
+    layers: [ 0, 1 ]
+  - type: PointLight
+    radius: 1.5
+    energy: 2
+
+- type: entity
+  parent: FoodSnackCandyBase
+  id: FoodSnackCandyRainbow
+  name: rainbow candy
+  description: A rainbow flavoured candy.
+  suffix: Rainbox
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: FlavorProfile
+    flavors:
+    - unicorntears
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: candy
+      color: "#FFFFFF"
+  - type: RgbLightController
+    layers: [ 0 ]
+  - type: PointLight
+    radius: 1.5
+    energy: 2
+
+
+- type: entity
+  name: random candy
+  id: FoodSnackCandyWrappedSpawner
+  suffix: Strawberry, Banana, Lemon, Mint, Orange
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+      - state: wrapper
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+      - FoodSnackCandyWrappedStrawberry
+      - FoodSnackCandyWrappedBanana
+      - FoodSnackCandyWrappedLemon
+      - FoodSnackCandyWrappedMint
+      - FoodSnackCandyWrappedOrange
+
+#region Random
+- type: entity
+  parent: FoodSnackCandyWrappedBase
+  id: FoodSnackCandyWrappedMystery
+  name: wrapped candy
+  description: A candy, still in its wrapper.
+  suffix: Mystery
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: wrapper_middle
+      color: "#FFFFFF"
+      map: [ "wrapper_middle" ]
+    - state: wrapper_outer
+      color: "#EDEDED"
+  - type: SpawnItemsOnUse
+    items:
+    - id: FoodSnackCandyMystery
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+  - type: RandomSprite
+    getAllGroups: true
+    available:
+      - wrapper_middle:
+          wrapper_middle: Rainbow
+
+- type: entity
+  parent: FoodSnackCandyBase
+  id: FoodSnackCandyMystery
+  name: mystery candy
+  description: A mystery flavoured candy. There's no telling what it contains.
+  suffix: Mystery
+  components:
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: Sprite
+    sprite: _GooseStation/candy.rsi
+    layers:
+    - state: candy
+      color: "#FFFFFF"
+      map: [ "candy" ]
+  - type: RandomFillSolution
+    solution: food
+    weightedRandomId: RandomFillFoodSnackCandyMystery
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: RandomSprite
+    available:
+      - candy:
+          candy: Rainbow
+
+- type: weightedRandomFillSolution
+  id: RandomFillFoodSnackCandyMystery
+  fills:
+  # 5 groups for a total weight of 100
+  # Very Good - weight: 15
+    - quantity: 5
+      weight: 5
+      reagents:
+      - Stimulants
+    - quantity: 5
+      weight: 5
+      reagents:
+      - Ichor
+      - Necrosol
+    - quantity: 5
+      weight: 4
+      reagents:
+      - Cognizine
+    - quantity: 5
+      weight: 1
+      reagents:
+      - Vestine
+  # Good - weight: 25
+    - quantity: 5
+      weight: 25
+      reagents:
+      - Desoxyephedrine
+      - Ephedrine
+      - Omnizine
+      - Tricordrazine
+      - Vitamin
+      - PolypyryliumOligomers
+      - Charcoal
+  # Neutral - weight: 20
+    - quantity: 5
+      weight: 17.5
+      reagents:
+      - Ipecac
+      - SodiumPolyacrylate
+      - SpaceDrugs
+      - SpaceGlue
+      - Laughter
+      - JuiceThatMakesYouWeh
+      - Lipozine
+      - Carpetium
+      - Bananadine
+      - THC
+      - MindbreakerToxin
+      - Mustard
+      - HorseradishSauce
+    - quantity: 5
+      weight: 2.5
+      reagents:
+      - Honk
+  # Bad - weight: 25
+    - quantity: 5
+      weight: 10.5
+      reagents:
+      - MuteToxin
+      - Pax
+      - Fresium
+      - Cryptobiolin
+    - quantity: 5
+      weight: 10.5
+      reagents:
+      - Uranium
+      - Licoxide
+      - Razorium
+      - Potassium
+      - Phlogiston
+    - quantity: 5
+      weight: 4
+      reagents:
+      - Toxin
+  # Very Bad - weight: 15
+    - quantity: 5
+      weight: 2.5
+      reagents:
+      - Nocturine
+    - quantity: 5
+      weight: 10
+      reagents:
+      - Bleach
+      - CarpoToxin
+      - BuzzochloricBees
+      - Amatoxin
+      - Tazinide
+    - quantity: 5
+      weight: 2.5
+      reagents:
+      - Lexorin
+      - Lead
+
+
+#region Bowl
+- type: entity
+  parent: CandyBowl
+  id: CandyBowlFilledFoodSnackCandyWrappedMystery
+  description: A note placed upon it reads "take no more than two, please!!"
+  suffix: candy, mystery
+  components:
+  - type: Bin
+    initialContents:
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    whitelist:
+      tags:
+      - FoodSnack
+
+- type: entity
+  parent: CandyBowl
+  id: CandyBowlFilledFoodSnackCandyWrappedSpawner
+  description: A note placed upon it reads "take no more than two, please!!"
+  suffix: candy, Strawberry, Banana, Lemon, Mint, Orange
+  components:
+  - type: Bin
+    initialContents:
+    - FoodSnackCandyWrappedBanana
+    - FoodSnackCandyWrappedMint
+    - FoodSnackCandyWrappedLemon
+    - FoodSnackCandyWrappedOrange
+    - FoodSnackCandyWrappedStrawberry
+    - FoodSnackCandyWrappedBanana
+    - FoodSnackCandyWrappedOrange
+    - FoodSnackCandyWrappedLemon
+    - FoodSnackCandyWrappedMint
+    - FoodSnackCandyWrappedStrawberry
+    - FoodSnackCandyWrappedBanana
+    - FoodSnackCandyWrappedMint
+    - FoodSnackCandyWrappedOrange
+    - FoodSnackCandyWrappedLemon
+    - FoodSnackCandyWrappedStrawberry
+    whitelist:
+      tags:
+      - FoodSnack
+
+- type: entity
+  parent: CandyBowl
+  id: CandyBowlFilledFoodSnackCandyWrappedBland
+  description: A note placed upon it reads "take no more than two, please!!"
+  suffix: candy, Bland
+  components:
+  - type: Bin
+    initialContents:
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrappedMystery
+    - FoodSnackCandyWrapped
+    whitelist:
+      tags:
+      - FoodSnack

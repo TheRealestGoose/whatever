@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/31d88c7454e429a64fbae4a9f7b4aecaf838e9a1, edited by TheGoose3375 (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "crema_active_light",
+      "directions": 4
+    },
+    {
+      "name": "crema_closed",
+      "directions": 4
+    },
+    {
+      "name": "crema_open",
+      "directions": 4
+    },
+    {
+      "name": "crema_tray",
+      "directions": 4
+    }
+  ]
+}

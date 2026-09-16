@@ -1,0 +1,235 @@
+- type: entity
+  name: goose
+  parent: SimpleMobBase
+  suffix: syndicate
+  id: MobSyndicateGoose
+  description: Its stomach and mind are an enigma beyond human comprehension.
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: goose
+      sprite: Mobs/Animals/goose.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 25
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: goose
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatChicken
+      amount: 2
+  - type: InteractionPopup # TODO: Make it so there's a separate chance to make certain animals outright hostile towards you.
+    successChance: 0.1 # Yeah, good luck with that.
+    interactSuccessString: petting-success-goose
+    interactFailureString: petting-failure-goose
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: Bloodstream
+    bloodMaxVolume: 100
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+
+- type: entity
+  name: goose
+  parent: SimpleMobBase
+  suffix: angry
+  id: MobEvilGoose
+  description: Its stomach and mind are an enigma beyond human comprehension.
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: goose
+      sprite: Mobs/Animals/goose.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 25
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: goose
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatChicken
+      amount: 2
+  - type: InteractionPopup # TODO: Make it so there's a separate chance to make certain animals outright hostile towards you.
+    successChance: 0.1 # Yeah, good luck with that.
+    interactSuccessString: petting-success-goose
+    interactFailureString: petting-failure-goose
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: Bloodstream
+    bloodMaxVolume: 100
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+
+- type: body
+  id: SpaceGoose
+  name: "space goose"
+  root: chest
+  slots:
+    chest:
+      part: ChestAnimal
+      connections:
+      - groin
+      organs:
+        lungs: OrganSpaceAnimalLungs # Immunity to airloss
+        heart: OrganSpaceAnimalHeart # Immunity to pressure
+    groin:
+      part: GroinAnimal
+      connections:
+      - legs
+      organs:
+        stomach: OrganAnimalStomach
+        liver: OrganAnimalLiver
+        kidneys: OrganAnimalKidneys
+    legs:
+      part: LegsAnimal
+      connections:
+      - feet
+    feet:
+      part: FeetAnimal
+
+- type: entity
+  name: space goose
+  id: MobGooseSpace
+  parent: MobSpaceBasic
+  description: It looks very unfriendly, it's feathers reflect light. Do NOT give it a hug.
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Body # Shitmed Change
+    prototype: SpaceGoose
+  - type: SurgeryTarget # Shitmed
+  - type: UserInterface # Shitmed
+    interfaces:
+      enum.SurgeryUIKey.Key:
+        type: SurgeryBui
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _GooseStation/spaceGoose.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: goose
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: goose
+        BaseUnshaded: glow
+      Critical:
+        Base: goose_dead
+      Dead:
+        Base: goose_dead
+  - type: Butcherable
+    spawned:
+    - id: DiamondOreUnprocessed
+      amount: 1
+    - id: MaterialToothSpaceCarp1
+      amount: 1
+      maxAmount: 7
+      prob: 0.5
+  - type: Reflect
+    reflectProb: 0.95
+    reflects:
+      - Energy
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: Vocal
+    sounds:
+      Unsexed: Bear
+  - type: InteractionPopup # TODO: Make it so there's a separate chance to make certain animals outright hostile towards you.
+    successChance: 0.1 # Yeah, good luck with that.
+    interactSuccessString: petting-success-goose
+    interactFailureString: petting-failure-goose
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: Fauna # Lavaland Change
+  - type: CombatPower # Goobstation
+    factor: 1.25 # times more dangerous than a crew-member
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4.5
+    baseSprintSpeed: 6.5
+
+- type: entity
+  id: MobGooseSpaceSalvage
+  parent: MobGooseSpace
+  suffix: "Salvage Ruleset"
+  components:
+  - type: SalvageMobRestrictions
+
+#- type: entity
+#  id: MobGooseSyndicateAgent
+#  parent: MobSyndicateGoose
+#  suffix: syndicate agent
+#  components:
+#    # make the player a traitor once its taken
+#  - type: AutoTraitor
+#    profile: TraitorReinforcement
+
+#- type: entity
+#  id: MobGooseSyndicateAgentNukeops # Reinforcement exclusive to nukeops uplink
+#  parent: MobSyndicateGoose
+#  suffix: NukeOps
+#  components:
+#  - type: NukeOperative
+
+#- type: ghostRole
+#  id: SyndicateGoose
+#  name: ghost-role-information-syndicate-goose-reinforcement-name
+#  description: ghost-role-information-syndicate-goose-reinforcement-description
+#  rules: ghost-role-information-syndicate-reinforcement-rules
+#  entityPrototype: MobGooseSyndicateAgent
+
+#- type: ghostRole
+#  id: SyndicateGooseNukeops
+#  name: ghost-role-information-syndicate-goose-reinforcement-name
+#  description: ghost-role-information-syndicate-goose-reinforcement-description
+#  rules: ghost-role-information-nukeop-reinforcement-rules
+#  entityPrototype: MobGooseSyndicateAgentNukeops

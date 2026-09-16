@@ -1,0 +1,176 @@
+- type: entity
+  parent: [ MobParrot ]
+  id: MobCockatoo
+  name: cockatoo
+  description: Elite version of the parrot. Still as obnoxious.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: parrot
+      sprite: _GooseStation/Parrots/cuckadoo.rsi
+
+- type: entity
+  parent: [ MobCockatoo ]
+  id: MobCockatooBoss
+  name: Boss
+  description: Someone's boss.
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.5
+    baseSprintSpeed : 6
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: parrot
+      sprite: _GooseStation/Parrots/cuckadoo.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 10
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: parrot
+      Critical:
+        Base: dead
+      Dead:
+        Base: dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: Speech
+    speechSounds: Parrot
+    speechVerb: Parrot
+  - type: Vocal
+    sounds:
+      Unsexed: Parrot
+  - type: ParrotAccent
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: ActiveListener
+  - type: ParrotListener
+  - type: ParrotMemory
+  - type: Inventory
+    templateId: parrot
+    speciesId: parrot
+    displacements:
+      ears:
+        sizeMaps:
+          32:
+            sprite: Mobs/Animals/parrot/displacement.rsi
+            state: ears
+  - type: InventorySlots
+  - type: Strippable
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: InteractionPopup
+    successChance: 0.6
+    interactSuccessString: petting-success-bird
+    interactFailureString: petting-failure-generic
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/parrot_raught.ogg
+  - type: Bloodstream
+    bloodMaxVolume: 50
+  - type: Vocalizer
+    maxVocalizeInterval: 240
+  - type: RadioVocalizer
+    radioAttemptChance: 0.8
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: Loadout
+    prototypes: [ MobBossGear ]
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+  - type: Access
+    tags:
+    - Command
+
+- type: entity
+  parent: [ MobCockatooBoss ]
+  id: MobCockatooBigBoss
+  name: Big Boss
+  description: The Big Boss of repeating everything ever said in his presence. Big Boss is here to ensure you're never alone with your thoughts.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: parrot
+      sprite: _GooseStation/Parrots/boss.rsi
+  - type: Vocalizer
+    maxVocalizeInterval: 300 #talks less, cuz stealthy. but still a parrot, so will talk sometimes.
+  - type: RadioVocalizer
+    radioAttemptChance: 0.3  #^^^
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+
+- type: startingGear
+  id: MobBossGear
+  equipment:
+    ears: ClothingHeadsetCommandService
+
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobCockatoo
+  name: Cockatoo Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: parrot
+      sprite: _GooseStation/Parrots/cuckadoo.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCockatoo
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobCockatooBoss
+  name: Boss Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: parrot
+      sprite: _GooseStation/Parrots/cuckadoo.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCockatooBoss
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobCockatooBigBoss
+  name: Big Boss Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: parrot
+      sprite: _GooseStation/Parrots/boss.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCockatooBigBoss

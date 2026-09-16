@@ -1,0 +1,209 @@
+#maybe replace Welding with Prying for plastic and wood later, for now i kept Welding
+
+- type: constructionGraph
+  id: RackShelf
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: RackShelfSingle
+          completed:
+            - !type:SnapToGrid
+          steps:
+            - material: Steel
+              amount: 4
+              doAfter: 3
+        - to: RackShelfPlasticSingle
+          completed:
+            - !type:SnapToGrid
+          steps:
+            - material: Steel
+              amount: 3
+            - material: Plastic
+              amount: 1
+              doAfter: 3
+        - to: RackShelfWoodSingle
+          completed:
+            - !type:SnapToGrid
+          steps:
+            - material: Steel
+              amount: 3
+            - material: WoodPlank
+              amount: 1
+              doAfter: 3
+    # METAL
+    - node: RackShelfSingle
+      entity: RackShelfSingle
+      edges:
+        - to: RackShelfTwo
+          completed:
+            - !type:SnapToGrid
+            - !type:EmptyAllContainers
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 3
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 2
+          - !type:EmptyAllContainers
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Welding
+              doAfter: 5
+
+    - node: RackShelfTwo
+      entity: RackShelfTwo
+      edges:
+        - to: RackShelf
+          completed:
+            - !type:SnapToGrid
+            - !type:EmptyAllContainers
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 3
+        - to: RackShelfSingle
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 1
+          - !type:EmptyAllContainers
+          steps:
+            - tool: Welding
+              doAfter: 3
+
+    - node: RackShelf
+      entity: RackShelf
+      edges:
+        - to: RackShelfTwo
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 1
+          - !type:EmptyAllContainers
+          steps:
+            - tool: Welding
+              doAfter: 3
+
+    #PLASTIC
+    - node: RackShelfPlasticSingle
+      entity: RackShelfPlasticSingle
+      edges:
+        - to: RackShelfPlasticTwo
+          completed:
+            - !type:SnapToGrid
+            - !type:EmptyAllContainers
+          steps:
+            - material: Plastic
+              amount: 1
+              doAfter: 3
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 1
+          - !type:SpawnPrototype
+                prototype: SheetPlastic1
+                amount: 1
+          - !type:EmptyAllContainers
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Welding
+              doAfter: 5
+
+    - node: RackShelfPlasticTwo
+      entity: RackShelfPlasticTwo
+      edges:
+        - to: RackShelfPlastic
+          completed:
+            - !type:SnapToGrid
+            - !type:EmptyAllContainers
+          steps:
+            - material: Plastic
+              amount: 1
+              doAfter: 3
+        - to: RackShelfPlasticSingle
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetPlastic1
+                amount: 1
+          - !type:EmptyAllContainers
+          steps:
+            - tool: Welding
+              doAfter: 3
+
+    - node: RackShelfPlastic
+      entity: RackShelfPlastic
+      edges:
+        - to: RackShelfPlasticTwo
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetPlastic1
+                amount: 1
+          - !type:EmptyAllContainers
+          steps:
+            - tool: Welding
+              doAfter: 3
+
+    #WOOD
+    - node: RackShelfWoodSingle
+      entity: RackShelfWoodSingle
+      edges:
+        - to: RackShelfWoodTwo
+          completed:
+            - !type:SnapToGrid
+            - !type:EmptyAllContainers
+          steps:
+            - material: WoodPlank
+              amount: 1
+              doAfter: 3
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+                prototype: SheetSteel1
+                amount: 1
+          - !type:SpawnPrototype
+                prototype: MaterialWoodPlank1
+                amount: 1
+          - !type:EmptyAllContainers
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Welding
+              doAfter: 5
+
+    - node: RackShelfWoodTwo
+      entity: RackShelfWoodTwo
+      edges:
+        - to: RackShelfWood
+          completed:
+            - !type:SnapToGrid
+            - !type:EmptyAllContainers
+          steps:
+            - material: WoodPlank
+              amount: 1
+              doAfter: 3
+        - to: RackShelfWoodSingle
+          completed:
+          - !type:SpawnPrototype
+                prototype: MaterialWoodPlank1
+                amount: 1
+          - !type:EmptyAllContainers
+          steps:
+            - tool: Welding
+              doAfter: 3
+
+    - node: RackShelfWood
+      entity: RackShelfWood
+      edges:
+        - to: RackShelfWoodTwo
+          completed:
+          - !type:SpawnPrototype
+                prototype: MaterialWoodPlank1
+                amount: 1
+          - !type:EmptyAllContainers
+          steps:
+            - tool: Welding
+              doAfter: 3

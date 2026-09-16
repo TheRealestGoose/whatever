@@ -1,0 +1,1083 @@
+#region Borgs
+
+- type: entity
+  parent: BaseStructure
+  id: BaseBrokenBorg
+  name: decayed cyborg
+  description: This unit is officially out of service, largely because it has fused with the floor. There might be a few recoverable pieces here.
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/broken_borgs.rsi
+    layers:
+    - state: robot-0
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          robot-0: ""
+          robot-1: ""
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: Pullable
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 4
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  name: random broken borg spawner
+  id: BrokenBorgRobotRandom
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/broken_borgs.rsi
+    layers:
+    - state: robot-0
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSpawner
+    prototypes:
+    - BrokenBorgRobot
+    - BrokenBorgEngineer
+    - BrokenBorgJanitor
+    - BrokenBorgMedical
+    - BrokenBorgMiner
+    - BrokenBorgService
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgRobot
+  name: decayed cyborg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/broken_borgs.rsi
+    layers:
+    - state: robot-0
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          robot-0: ""
+          robot-1: ""
+  - type: Construction
+    graph: BrokenBorg
+    node: robot
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgEngineer
+  name: decayed engineering cyborg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/broken_borgs.rsi
+    layers:
+    - state: engineer-0
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          engineer-0: ""
+          engineer-1: ""
+  - type: Construction
+    graph: BrokenBorg
+    node: engineer
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgJanitor
+  name: decayed janitorial cyborg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/broken_borgs.rsi
+    layers:
+    - state: janitor-0
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          janitor-0: ""
+          janitor-1: ""
+  - type: Construction
+    graph: BrokenBorg
+    node: janitor
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgMedical
+  name: decayed medical cyborg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/broken_borgs.rsi
+    layers:
+    - state: medical-0
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          medical-0: ""
+          medical-1: ""
+          medical-2: ""
+  - type: Construction
+    graph: BrokenBorg
+    node: medical
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgMiner
+  name: decayed mining cyborg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/broken_borgs.rsi
+    layers:
+    - state: miner-0
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          miner-0: ""
+          miner-1: ""
+  - type: Construction
+    graph: BrokenBorg
+    node: miner
+
+- type: entity
+  parent: BaseBrokenBorg
+  id: BrokenBorgService
+  name: decayed service cyborg
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/broken_borgs.rsi
+    layers:
+    - state: service-0
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          service-0: ""
+          service-1: ""
+  - type: Construction
+    graph: BrokenBorg
+    node: service
+
+- type: constructionGraph
+  id: BrokenBorg
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 4
+        - !type:DeleteEntity
+
+    - node: robot
+      edges:
+        - to: start
+          steps:
+            - tool: Welding #remove as much rust as possible first
+              doAfter: 5
+            - tool: Prying #pry off the outer shell
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 2
+            - tool: Cutting #cut away at cables
+              doAfter: 2
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring #loosen the endoskeleton
+              doAfter: 2
+            - tool: Screwing  # ^^^^^^^
+              doAfter: 2
+            - tool: Prying    # ^^^^^^^
+              doAfter: 2
+            - tool: Welding #harvest the insides
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 2
+            - !type:DeleteEntity {}
+
+    - node: engineer
+      edges:
+        - to: start
+          steps:
+            - tool: Welding #remove as much rust as possible first
+              doAfter: 5
+            - tool: Prying #pry off the outer shell
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 2
+            - tool: Cutting #cut away at cables
+              doAfter: 2
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring #loosen the endoskeleton
+              doAfter: 2
+            - tool: Screwing  # ^^^^^^^
+              doAfter: 2
+            - tool: Prying    # ^^^^^^^
+              doAfter: 2
+            - tool: Welding #harvest the insides
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 2
+            - !type:DeleteEntity {}
+
+    - node: janitor
+      edges:
+        - to: start
+          steps:
+            - tool: Welding #remove as much rust as possible first
+              doAfter: 5
+            - tool: Prying #pry off the outer shell
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 2
+            - tool: Cutting #cut away at cables
+              doAfter: 2
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring #loosen the endoskeleton
+              doAfter: 2
+            - tool: Screwing  # ^^^^^^^
+              doAfter: 2
+            - tool: Prying    # ^^^^^^^
+              doAfter: 2
+            - tool: Welding #harvest the insides
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 2
+            - !type:DeleteEntity {}
+
+    - node: medical
+      edges:
+        - to: start
+          steps:
+            - tool: Welding #remove as much rust as possible first
+              doAfter: 5
+            - tool: Prying #pry off the outer shell
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 2
+            - tool: Cutting #cut away at cables
+              doAfter: 2
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring #loosen the endoskeleton
+              doAfter: 2
+            - tool: Screwing  # ^^^^^^^
+              doAfter: 2
+            - tool: Prying    # ^^^^^^^
+              doAfter: 2
+            - tool: Welding #harvest the insides
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 2
+            - !type:DeleteEntity {}
+
+    - node: miner
+      edges:
+        - to: start
+          steps:
+            - tool: Welding #remove as much rust as possible first
+              doAfter: 5
+            - tool: Prying #pry off the outer shell
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 2
+            - tool: Cutting #cut away at cables
+              doAfter: 2
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring #loosen the endoskeleton
+              doAfter: 2
+            - tool: Screwing  # ^^^^^^^
+              doAfter: 2
+            - tool: Prying    # ^^^^^^^
+              doAfter: 2
+            - tool: Welding #harvest the insides
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 2
+            - !type:DeleteEntity {}
+
+    - node: service
+      edges:
+        - to: start
+          steps:
+            - tool: Welding #remove as much rust as possible first
+              doAfter: 5
+            - tool: Prying #pry off the outer shell
+              doAfter: 3
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 2
+            - tool: Cutting #cut away at cables
+              doAfter: 2
+              completed:
+                - !type:SpawnPrototype
+                  prototype: CableApcStack1
+                  amount: 4
+            - tool: Anchoring #loosen the endoskeleton
+              doAfter: 2
+            - tool: Screwing  # ^^^^^^^
+              doAfter: 2
+            - tool: Prying    # ^^^^^^^
+              doAfter: 2
+            - tool: Welding #harvest the insides
+              doAfter: 5
+              completed:
+                - !type:SpawnPrototype
+                  prototype: SheetSteel1
+                  amount: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 2
+            - !type:DeleteEntity {}
+
+
+
+#region Vending machines
+
+- type: entity
+  parent: BaseStructure
+  id: VendingMachineBrokenBase
+  name: broken vending machine
+  description: A brutalised vending machine, damaged beyond repair. Behind what remains of the glass is a couple of unlooted items.
+  abstract: true
+  components:
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Sprite
+    noRot: true
+    sprite: Structures/Machines/VendingMachines/empty.rsi
+    snapCardinals: false
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Appearance
+
+- type: entity
+  parent: VendingMachineBrokenBase
+  id: VendingMachineVendomatBroken
+  name: broken Vendomat
+  description: A brutalised Vendomat, damaged beyond repair. Behind what remains of the glass is a couple of unlooted items.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/vendomat.rsi
+    snapCardinals: false
+    state: broken
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 4
+          MicroManipulatorStockPart:
+            min: 2
+            max: 5
+          CableApcStack1:
+            min: 15
+            max: 30
+          PowerCellSmallPrinted:
+            min: 0
+            max: 1
+          Wirecutter:
+            min: 0
+            max: 1
+          Screwdriver:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Appearance
+
+- type: entity
+  parent: VendingMachineBrokenBase
+  id: VendingMachineCigsBroken
+  name: broken ShadyCigs Deluxe
+  description: A brutalised ShadyCigs Deluxe, damaged beyond repair. Behind what remains of the glass is a couple of unlooted items.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/cigs.rsi
+    snapCardinals: false
+    state: broken
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 4
+          CheapLighter:
+            min: 0
+            max: 2
+          PackPaperRollingFilters:
+            min: 0
+            max: 1
+          Matchbox:
+            min: 1
+            max: 1
+          CigPackGreen:
+            min: -1 #smaller chance, because there's 3 more packs aside from this one
+            max: 1
+          CigPackBlue:
+            min: -1
+            max: 1
+          CigPackRed:
+            min: -1
+            max: 1
+          CigPackBlack:
+            min: -1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Appearance
+
+
+
+#region Piles
+
+# - type: weightedRandomEntity
+#   id: RatKingLoot
+#   weights: # DeltaV: Rebalanced for Rodentia rummaging because we don't have Rat King
+#     RandomSpawner100: 50 #garbage
+#     FoodCheeseSlice: 25 #food
+#     RandomSnacks: 10
+#     RandomFoodSingle: 15
+
+- type: entity
+  parent: BaseStructure
+  id: PileBase
+  name: trash bag pile
+  description: A monument to the fact that "out of sight, out of mind" is a lie we tell ourselves.
+  abstract: true
+  components:
+  - type: RatKingRummageable
+    table: !type:NestedSelector
+      tableId: RatKingLoot
+  - type: InteractionOutline
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/bag-pile.rsi
+    layers:
+    - state: bags-1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+    - state: flies-1
+      map: [ "flies" ]
+  # - type: AmbientSound
+  #   volume: 10 #-2
+  #   range: 3
+  #   sound:
+  #     path: /Audio/Ambience/Temporary/flies.ogg
+  #     params:
+  #       volume: 10
+  # - type: SpamEmitSound
+  #   minInterval: 1
+  #   maxInterval: 3
+  #   sound:
+  #     path: /Audio/_Goobstation/Effects/Grenades/beenade_buzz.ogg
+  #     params:
+  #       volume: 5
+  #       maxDistance: 3
+  #       variation: 0.05
+  #       pitch: 1.5
+  - type: Physics
+    bodyType: Static
+  - type: Climbable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+  - type: Damageable
+    damageContainer: Box
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          bags-1: ""
+          bags-2: ""
+          bags-3: ""
+          bags-4: ""
+          bags-5: ""
+      - flies:
+          flies-1: ""
+          flies-2: ""
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 2
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: 1
+
+- type: entity
+  parent: PileBase
+  id: TrashbagPile
+  name: trash bag pile
+  description: A monument to the fact that "out of sight, out of mind" is a lie we tell ourselves.
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 1 #trash fly far when smash bags with hamma
+        spawn:
+          FoodPacketCnDsTrash:
+            min: 0
+            max: 1
+          FoodPacketBoritosTrash:
+            min: 0
+            max: 1
+          FoodPacketSusTrash:
+            min: 0
+            max: 1
+          FoodPacketRaisinsTrash:
+            min: 0
+            max: 1
+          FoodPacketDanDanTrash:
+            min: 0
+            max: 1
+          FoodPacketChocolateTrash:
+            min: 0
+            max: 1
+          FoodPacketPopcornTrash:
+            min: 0
+            max: 1
+          FoodPacketSemkiTrash:
+            min: 0
+            max: 1
+          FoodPacketSyndiTrash:
+            min: 0
+            max: 1
+          FoodPacketCheesieTrash:
+            min: 0
+            max: 1
+          FoodPacketPistachioTrash:
+            min: 0
+            max: 1
+          FoodPacketChipsTrash:
+            min: 0
+            max: 1
+          FoodPacketChowMeinTrash:
+            min: 0
+            max: 1
+          FoodPacketEnergyTrash:
+            min: 0
+            max: 1
+          FoodTinMRETrash:
+            min: 0
+            max: 1
+          BrokenBottle:
+            min: 0
+            max: 1
+          FoodBowlBigTrash:
+            min: 0
+            max: 1
+          FoodPlateTrash:
+            min: 0
+            max: 1
+          FoodPlateSmallTrash:
+            min: 0
+            max: 1
+          ShardGlass:
+            min: 0
+            max: 1
+          TrashBag:
+            min: 0
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          collection: trashBagRustle
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: PileBase
+  id: TrashPile
+  name: trash pile
+  description: A mountain of waste, reminding of humanity's indifference and irresponsibility.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/trash-pile.rsi
+    snapCardinals: true
+    layers:
+    - state: trash-1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          trash-1: ""
+          trash-2: ""
+          trash-3: ""
+          trash-4: ""
+          trash-5: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        offset: 1
+        spawn:
+          FoodPacketCnDsTrash:
+            min: 0
+            max: 1
+          FoodPacketBoritosTrash:
+            min: 0
+            max: 1
+          FoodPacketSusTrash:
+            min: 0
+            max: 1
+          FoodPacketRaisinsTrash:
+            min: 0
+            max: 1
+          FoodPacketDanDanTrash:
+            min: 0
+            max: 1
+          FoodPacketChocolateTrash:
+            min: 0
+            max: 1
+          FoodPacketPopcornTrash:
+            min: 0
+            max: 1
+          FoodPacketSemkiTrash:
+            min: 0
+            max: 1
+          FoodPacketSyndiTrash:
+            min: 0
+            max: 1
+          FoodPacketCheesieTrash:
+            min: 0
+            max: 1
+          FoodPacketPistachioTrash:
+            min: 0
+            max: 1
+          FoodPacketChipsTrash:
+            min: 0
+            max: 1
+          FoodPacketChowMeinTrash:
+            min: 0
+            max: 1
+          FoodPacketEnergyTrash:
+            min: 0
+            max: 1
+          FoodTinMRETrash:
+            min: 0
+            max: 1
+          BrokenBottle:
+            min: 0
+            max: 2
+          FoodBowlBigTrash:
+            min: 0
+            max: 1
+          FoodPlateTrash:
+            min: 0
+            max: 1
+          FoodPlateSmallTrash:
+            min: 0
+            max: 1
+          ShardGlass:
+            min: 0
+            max: 2
+      - !type:PlaySoundBehavior
+        sound:
+          collection: trashBagRustle
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: BaseStructure
+  id: ScrapMetalPile
+  name: pile of scrap metal
+  description: The only thing this pile is guaranteed to deliver is a thrilling opportunity to visit your doctor.
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _GooseStation/scrap-pile.rsi
+    snapCardinals: true
+    noRot: true
+    layers:
+    - state: scrap-1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          scrap-1: ""
+          scrap-2: ""
+          scrap-3: ""
+          scrap-4: ""
+          scrap-5: ""
+          scrap-6: ""
+          scrap-7: ""
+          scrap-8: ""
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+          PartRodMetal1:
+            min: 1
+            max: 3
+          ScrapBucket:
+            min: 0
+            max: 1
+          ScrapCanister1:
+            min: 0
+            max: 1
+          ScrapAirlock2:
+            min: 0
+            max: 1
+          ScrapFaxMachine:
+            min: 0
+            max: 1
+          ScrapCamera:
+            min: 0
+            max: 1
+          CableApcStack1:
+            min: 0
+            max: 1
+          CableMVStack1:
+            min: 0
+            max: 1
+          CableHVStack1:
+            min: 0
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Construction
+    graph: ScrapMetalPile
+    node: ScrapMetalPile
+
+- type: entity
+  parent: BaseStructure
+  id: BoxPile
+  name: box pile
+  description: A pile of seemingly empty cardboard boxes. Proof that boxes can, in fact, multiply when left unattended and unorganized.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/box-pile.rsi
+    snapCardinals: true
+    layers:
+    - state: box-1
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: Pullable
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Box
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroyHeavy
+      - !type:SpawnEntitiesBehavior #spawn separately for dramatic effect
+        offset: 0.2 #less offset
+        spawn:
+          MaterialCardboard:
+            min: 1
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2 
+        spawn:
+          MaterialCardboard:
+            min: 0
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2 
+        spawn:
+          MaterialCardboard:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          box-1: ""
+          box-2: ""
+          box-3: ""
+          box-4: ""
+  - type: Butcherable #this or cutter VV
+    butcheringType: Knife
+    butcherDelay: 4
+    spawned:
+    - id: MaterialCardboard1
+      amount: 5
+  - type: Construction #me
+    graph: BoxPile
+    node: BoxPile
+
+- type: constructionGraph
+  id: BoxPile
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: MaterialCardboard1
+          amount: 5
+        - !type:DeleteEntity
+
+    - node: BoxPile
+      edges:
+        - to: start
+          steps:
+            - tool: Cutting
+              doAfter: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialCardboard1
+              amount: 5
+            - !type:DeleteEntity {}
+
+- type: constructionGraph
+  id: ScrapMetalPile
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: SheetSteel1
+          amount: 5
+        - !type:SpawnPrototype
+          prototype: SheetPlastic1
+          amount: 3
+        - !type:SpawnPrototype
+          prototype: PartRodMetal1
+          amount: 2
+        - !type:SpawnPrototype
+          prototype: CableApcStack1
+          amount: 2
+        - !type:SpawnPrototype
+          prototype: CableMVStack1
+          amount: 2
+        - !type:SpawnPrototype
+          prototype: CableHVStack1
+          amount: 2
+        - !type:DeleteEntity
+
+    - node: ScrapMetalPile
+      edges:
+        - to: start
+          steps:
+            - tool: Welding
+              doAfter: 5
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 5
+            - !type:SpawnPrototype
+              prototype: SheetPlastic1
+              amount: 3
+            - !type:SpawnPrototype
+              prototype: PartRodMetal1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: CableApcStack1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: CableMVStack1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: CableHVStack1
+              amount: 2
+            - !type:DeleteEntity {}

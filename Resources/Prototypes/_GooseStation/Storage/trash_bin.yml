@@ -1,0 +1,155 @@
+- type: entity
+  parent: CrateGeneric
+  id: TrashBin
+  name: step bin
+  description: One small step for man, a giant leap for station hygene.
+  components:
+  - type: Icon
+    sprite: _GooseStation/trash_bin.rsi
+  - type: Sprite
+    sprite: _GooseStation/trash_bin.rsi
+    offset: 0, 0
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: RatKingRummageable
+    table: !type:NestedSelector
+      tableId: RatKingLoot
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.22,0.20"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Construction
+    graph: TrashBin
+    node: TrashBin
+
+- type: entity
+  parent: TrashBin
+  id: TrashBinFilled
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+          ## Mobs
+        - id: MobCockroach
+          prob: 0.05
+        - id: MobMothroach
+          prob: 0.03
+        - id: MobMouse
+          prob: 0.05
+          ## Packaging
+        - id: FoodPacketBoritosTrash
+          prob: 0.1
+        - id: FoodPacketCheesieTrash
+          prob: 0.1
+        - id: FoodPacketChipsTrash
+          prob: 0.1
+        - id: FoodPacketSusTrash
+          prob: 0.1
+        - id: FoodPacketSyndiTrash
+          prob: 0.1
+        - id: FoodPacketChowMeinTrash
+          prob: 0.1
+        - id: FoodPacketDanDanTrash
+          prob: 0.1
+        - id: FoodPacketMRETrash
+          prob: 0.1
+        - id: FoodPacketPistachioTrash
+          prob: 0.1
+        - id: FoodPacketSemkiTrash
+          prob: 0.1
+        - id: FoodPacketRaisinsTrash
+          prob: 0.1
+          ## Cans
+        - id: FoodTinBeansTrash
+          prob: 0.15
+        - id: FoodTinPeachesTrash
+          prob: 0.15
+        - id: FoodTinMRETrash
+          prob: 0.15
+          ## Cigarette Stuff
+        - id: Ash
+          prob: 0.15
+        - id: CigaretteSpent
+          prob: 0.15
+          ## Moldy food
+        - id: FoodBreadMoldySlice
+          prob: 0.15
+        - id: FoodPizzaMoldySlice
+          prob: 0.15
+          ## Waste
+        - id: TrashBananaPeel
+          prob: 0.15
+        - id: FoodCornTrash
+          prob: 0.15
+          ## Misc
+        - id: DrinkGlass
+          prob: 0.15
+        - id: BrokenBottle
+          prob: 0.15
+        - id: LightTubeBroken
+          prob: 0.15
+        - id: LightBulbBroken
+          prob: 0.15
+        - id: MobMouseDead
+          prob: 0.1
+        - id: Syringe
+          prob: 0.1
+        - id: ShardGlassPlasma
+          prob: 0.1
+
+
+- type: construction
+  id: TrashBin
+  graph: TrashBin
+  startNode: start
+  targetNode: TrashBin
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: constructionGraph
+  id: TrashBin
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: TrashBin
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: Steel
+        amount: 3
+        doAfter: 2
+      - material: Cable
+        amount: 1
+        doAfter: 1
+
+  - node: TrashBin
+    entity: TrashBin
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 2
+      - tool: Welding
+        doAfter: 3

@@ -1,0 +1,105 @@
+- type: entity
+  name: beartrap
+  parent: BaseItem
+  id: Beartrap
+  description: Useful for catching human-sized rodents sneaking into your kitchen.
+  components:
+    - type: Sprite
+      sprite: _GooseStation/beartrap.rsi
+      drawdepth: SmallMobs # if mice can hide under tables, so can mousetraps
+      layers:
+        - state: Beartrap
+          map: ["base"]
+    - type: StepTrigger
+      intersectRatio: 0.2
+      requiredTriggeredSpeed: 2
+      triggerGroups: # Goobstation
+        types:
+        - Mousetrap
+    - type: Mousetrap
+    - type: TriggerOnStepTrigger
+    - type: DamageUserOnTrigger
+      damage:
+        types:
+          Blunt: 50 # base damage, scales based on mass
+          Slash: 25
+    - type: EmitSoundOnUse
+      sound: "/Audio/Items/Handcuffs/cuff_end.ogg"
+      handle: false
+    - type: EmitSoundOnTrigger
+      sound: "/Audio/Weapons/slash.ogg"
+    - type: Item
+      size: Normal
+      sprite: _GooseStation/beartrap.rsi
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.MousetrapVisuals.Visual:
+          base:
+            Armed: { state: BeartrapArmed }
+            Unarmed: { state: Beartrap }
+    - type: Physics
+      bodyType: Dynamic
+    - type: CollisionWake
+      enabled: false
+    - type: Fixtures
+      fixtures:
+        slips:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          layer:
+            - LowImpassable
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          density: 30
+          mask:
+            - ItemMask
+    - type: Rotatable
+    - type: PhysicalComposition #Goobstation - Recycle update
+      materialComposition:
+        Steel: 37
+    - type: Tag
+      tags:
+        - DroneUsable # Goobstation
+
+- type: entity
+  name: beartrap
+  suffix: Armed
+  parent: Beartrap
+  id: BeartrapArmed
+  description: Useful for catching human-sized rodents sneaking into your kitchen.
+  components:
+  - type: Sprite
+    layers:
+    - state: BeartrapArmed
+      map: ["base"]
+  - type: Mousetrap
+    isActive: true
+
+- type: entity
+  id: BeartrapBoxGoose
+  parent: BoxBase
+  name: "Beartrap Box"
+  description: This box is filled with beartraps. Try to get a tider's hand stuck in one.
+  components:
+  - type: Sprite
+    layers:
+      - state: box
+      - state: writing
+  - type: Item
+    sprite: Objects/Storage/boxes.rsi
+    size: Large
+    shape:
+    - 0,0,3,1
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,3
+  - type: StorageFill
+    contents:
+      - id: Beartrap
+        amount: 4

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by TheGoose3375 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+        {
+            "name": "drive"
+        },
+        {
+            "name": "signal"
+        },
+        {
+            "name": "signal-1"
+        },
+        {
+            "name": "signal-2"
+        },
+        {
+            "name": "signal-3"
+        }
+    ]
+}

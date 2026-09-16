@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by TheShuEd (github) for Space Station 14",
+  "states": [
+    {"name": "DamageOverlay_1750", "directions": 4},
+    {"name": "DamageOverlay_2500", "directions": 4}
+  ]
+}
+

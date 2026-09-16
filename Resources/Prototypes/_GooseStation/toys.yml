@@ -1,0 +1,617 @@
+#region bad to the bone
+- type: entity
+  parent: BikeHorn
+  id: BikeHornBadToTheBone
+  name: bad to the bike horn
+  description: A bike horn that plays a sick guitar riff.
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/bikehorn.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Fun/bikehorn.rsi
+    size: Tiny
+  - type: Clothing
+    sprite: Objects/Fun/bikehorn.rsi
+    slots: [Belt]
+    quickEquip: false
+  - type: UseDelay
+    delay: 1.5 #!!!
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_Goobstation/Voice/badtothebone.ogg
+      params:
+        variation: 0.1
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Voice/badtothebone.ogg
+      params:
+        variation: 0.1
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/_Goobstation/Voice/badtothebone.ogg
+      params:
+        variation: 0.1
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/_Goobstation/Voice/badtothebone.ogg
+      params:
+        variation: 0.1
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/_Goobstation/Voice/badtothebone.ogg
+      params:
+        variation: 0.1
+  - type: Tag
+    tags:
+    - Payload # yes, you can make re-usable prank grenades
+    # - BikeHorn #so sorry
+    - VehicleKey #Goobstatiuon - Clowncar
+  - type: MeleeWeapon
+    animationRotation: 135 # WWDP
+    wideAnimationRotation: 135
+    soundHit:
+      path: /Audio/_Goobstation/Voice/badtothebone.ogg
+      params:
+        variation: 0.125
+    damage:
+      types:
+        Blunt: 0
+  - type: Tool
+    qualities:
+    - Honking
+    useSound:
+      path: /Audio/_Goobstation/Voice/badtothebone.ogg
+  - type: Construction
+    graph: BikeHornBadToTheBone
+    node: BikeHornBadToTheBone
+
+- type: constructionGraph
+  id: BikeHornBadToTheBone
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: BikeHornBadToTheBone
+          completed:
+            - !type:SnapToGrid
+          steps:
+            - tag: BikeHorn
+              amount: 1
+              name: "a worthy sacrifice"
+              icon:
+                sprite: Objects/Fun/bikehorn.rsi
+                state: icon
+            - material: Bones
+              amount: 1
+              doAfter: 5
+    - node: BikeHornBadToTheBone
+      entity: BikeHornBadToTheBone
+
+- type: construction
+  id: BikeHornBadToTheBone
+  graph: BikeHornBadToTheBone
+  startNode: start
+  targetNode: BikeHornBadToTheBone
+  name: bad to the bike horn
+  description: A bike horn that plays a sick guitar riff.
+  category: construction-category-misc
+  objectType: Item
+
+
+#region everything else
+- type: entity
+  parent: BasePlushie
+  id: PlushieSpaniard
+  name: spaniard plushie
+  description: This is a plush of a spaniard. All craftsmanship is of the lowest quality. Embroidered upon it's vest are the words "I have no mouth and I must scream".
+  components:
+  - type: Sprite
+    sprite: _GooseStation/plushies.rsi
+    state: spaniard
+  - type: EmitSoundOnUse
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnActivate
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnCollide
+    sound:
+      collection: MaleScreams
+  - type: Food
+    requiresSpecialDigestion: true
+    sound:
+      collection: MaleScreams #only screams if hurt
+  - type: MeleeWeapon
+    soundHit:
+      collection: MaleScreams 
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: ToySqueak
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Blood
+          Quantity: 25
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MaleScreams
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          PlushieSpaniardTorn:
+            min: 1
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpillBehavior
+        solution: food
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: BaseItem
+  id: PlushieSpaniardTorn
+  name: torn spaniard plushie #no stash cuz torn
+  description: This is a torn plush of a spaniard. All craftsmanship is of the lowest quality, but despite that, the plushie looks hurt. Embroidered upon it's vest are the words "I have no mouth and I must scream".
+  components:
+  - type: Sprite
+    sprite: _GooseStation/plushies.rsi
+    state: spaniard-torn
+  - type: EmitSoundOnUse
+    sound:
+      collection: MaleScreams #everything hurts now
+  - type: EmitSoundOnLand
+    sound:
+      collection: MaleScreams
+  - type: EmitSoundOnActivate
+    sound:
+      collection: MaleScreams
+  - type: EmitSoundOnCollide
+    sound:
+      collection: MaleScreams
+  - type: Food
+    requiresSpecialDigestion: true
+    delay: 2
+    sound:
+      collection: MaleScreams
+  - type: MeleeWeapon
+    wideAnimationRotation: 180
+    soundHit:
+      collection: MaleScreams
+    damage:
+      types:
+        Blunt: 0
+    hidden: true
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: MaleScreams
+  - type: UseDelay
+    delay: 1.0
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 100
+  - type: StaticPrice
+    price: 1 #cuz torn
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Payload
+    - ClothMade
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieGoose
+  name: goose plushie
+  description: This is a horrifying plush of a goose. You can feel it staring into your soul.
+  components:
+  - type: Flight
+    isLayerAnimated: false
+    layer: "/Textures/_GooseStation/plushies.rsi"
+    on: true
+    animationKey: "Flap"
+    staminaDrainRate: 0
+    flapSound:
+      path: /Audio/Animals/goose_honk.ogg
+      params:
+        volume: -100
+  - type: Sprite
+    sprite: _GooseStation/plushies.rsi
+    layers:
+      - state: goose
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: DemonsBlood
+          Quantity: 5
+        - ReagentId: Lead #so moth die; this is actually 666 ticks of damage adding up to 400
+          Quantity: 20
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: Food
+    requiresSpecialDigestion: true
+    useSound:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Animals/goose_honk.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Animals/goose_honk.ogg
+
+
+- type: entity
+  id: SpaniardPinataSpawn
+  suffix: spawn
+  name: spaniard pinata
+  description: It just fell from the ceiling!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _GooseStation/plushies.rsi/32x64
+    snapCardinals: true
+    layers:
+    - state: spaniard-pinata-spawn
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+    offset: "0, 0.5"
+    drawdepth: Overdoors
+  - type: TimedDespawn #i've cut off the shaking part here, it's unnecessary
+    lifetime: 1 #2.65
+  - type: SpawnOnDespawn
+    prototype: SpaniardPinata
+  # - type: SpamEmitSound #play sound as it falls
+  #   minInterval: 0.3
+  #   maxInterval: 0.3
+  #   sound:
+  #     path: /Audio/Effects/soft_thump.ogg
+
+- type: entity
+  parent: BaseStructure
+  id: SpaniardPinata
+  name: spaniard pinata
+  description: In a cruel twist of events, the spaniard himself is dangling on a line, lest we forget the candy spilled in the Great Piñata war.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _GooseStation/plushies.rsi/32x64
+    snapCardinals: true
+    layers:
+    - state: spaniard-pinata
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+    offset: "0, 0.5"
+    drawdepth: Overdoors
+  - type: SpriteFade
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+    # canCollide: False
+  - type: Anchorable
+  - type: Pullable
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Box
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MaleScreams
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          PlushieSpaniardTorn:
+            min: 1
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.5
+        spawn:
+          FoodSnackCandyWrappedSpawner:
+            min: 6
+            max: 10
+          FoodSnackCandyWrappedRainbow:
+            min: -1
+            max: 2
+          FoodSnackCandyWrapped:
+            min: 0
+            max: 5
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Fixtures #make it dangle if someone goes under?
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.29,-0.1,0.275,0.75"
+        density: 60
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+
+# - type: entity
+#   parent: PlushieSpaniard
+#   id: PlushieSpaniardVoodoo #DONT WORK DONT CARE
+#   suffix: Voodoo
+#   components:
+#   - type: Flammable
+#     fireSpread: true
+#     alwaysCombustible: true
+#     damage:
+#       types:
+#         Heat: 1
+#   - type: FireVisuals
+#     sprite: Effects/fire.rsi
+#     normalState: fire
+#   - type: Damageable
+#     damageModifierSet: Wood
+#   - type: Voodoo
+#     targetName: FruFru01
+#   - type: Destructible
+#     thresholds:
+#     - trigger:
+#         !type:DamageTrigger
+#         damage: 90
+#       behaviors:
+#       - !type:SpawnEntitiesBehavior
+#         spawn:
+#           Ash:
+#             min: 1
+#             max: 1
+#       - !type:DoActsBehavior
+#         acts: [ "Destruction" ]
+
+
+#region Stuff from trinkets
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieKitten
+  name: kitten plush
+  description: Soft, small, adorable. Perfect cuddle buddy.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: kitten
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/drop.ogg 
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Animals/cat_meow.ogg
+  - type: SpawnItemsOnUse
+    items: 
+    - id: EffectHearts
+    uses: 999999
+
+- type: entity
+  parent: PlushieKitten
+  id: PlushieKittenWizard
+  name: wizard kitten plush
+  description: Soft, small, adorable. Perfect cuddle buddy. This one comes with a hat and a staff!
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: kitten_wizard
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieMonkey
+  name: monkey plush
+  description: Soft, small, adorable. Perfect crime buddy.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: monkey
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/ferret_happy.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/drop.ogg 
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Animals/ferret_happy.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Animals/ferret_happy.ogg
+  - type: SpawnItemsOnUse
+    items: 
+    - id: EffectHearts
+    uses: 999999
+
+- type: entity
+  parent: PlushieMonkey
+  id: PlushieMonkeyAssistant
+  name: assistant monkey plush
+  description: Soft, small, adorable. Perfect crime buddy. This one is wearing the assistant jumpsuit of a bygone era.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: monkey_assistant
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieBeeGoon
+  name: bee plush
+  description: Soft, small, adorable. A beeloved companion.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: bee_cute
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_Goobstation/Effects/Grenades/beenade_buzz.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/drop.ogg 
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/_Goobstation/Effects/Grenades/beenade_buzz.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/_Goobstation/Effects/Grenades/beenade_buzz.ogg
+  - type: SpawnItemsOnUse
+    items: 
+    - id: EffectHearts
+    uses: 999999
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieBrullbar
+  name: brullbar plush
+  description: Soft, small, horrifying. A force to be reckoned with.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: brullbar
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_Goobstation/Wraith/Mobs/brullbar/brullbar_roar.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/drop.ogg 
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/_Goobstation/Wraith/Mobs/brullbar/brullbar_roar.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/_Goobstation/Wraith/Mobs/brullbar/brullbar_roar.ogg
+  - type: SpawnItemsOnUse
+    items: 
+    - id: EffectHearts
+    uses: 999999
+
+- type: entity
+  parent: BasePlushie
+  id: PlushieBunny
+  name: bunny plush
+  description: Soft, small, adorable. Perfect cuddle buddy.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: bunny
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/ferret_happy.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/drop.ogg 
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Animals/ferret_happy.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Animals/ferret_happy.ogg
+  - type: SpawnItemsOnUse
+    items: 
+    - id: EffectHearts
+    uses: 999999
+
+- type: entity
+  parent: PlushieBunny
+  id: PlushieBunnyMask
+  name: masked bunny plush
+  description: Soft, small, adorable. Perfect cuddle buddy. With this mask on, it looks a bit sinister.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: bunny_mask
