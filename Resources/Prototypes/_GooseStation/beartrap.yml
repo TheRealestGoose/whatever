@@ -18,7 +18,8 @@
         - Mousetrap
     - type: Mousetrap
     - type: TriggerOnStepTrigger
-    - type: DamageUserOnTrigger
+    - type: DamageOnTrigger
+      targetUser: true
       damage:
         types:
           Blunt: 50 # base damage, scales based on mass

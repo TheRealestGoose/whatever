@@ -29,6 +29,9 @@
             "name": "permit_weapon"
         },
         {
+            "name": "forklift_lisence"
+        },
+        {
             "name": "permit_forged"
         }
     ]

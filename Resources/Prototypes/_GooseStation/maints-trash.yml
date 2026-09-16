@@ -583,7 +583,7 @@
   description: A monument to the fact that "out of sight, out of mind" is a lie we tell ourselves.
   abstract: true
   components:
-  - type: RatKingRummageable
+  - type: Rummageable
     table: !type:NestedSelector
       tableId: RatKingLoot
   - type: InteractionOutline
