@@ -6,7 +6,7 @@
   description: A candy, still in its wrapper.
   abstract: true
   components:
-  - type: Food
+  - type: Edible
   - type: Tag
     tags:
     - FoodSnack
@@ -36,7 +36,7 @@
   # - type: FlavorProfile
   #   flavors:
   #   - cherry
-  - type: Food
+  - type: Edible
   - type: Tag
     tags:
     - FoodSnack

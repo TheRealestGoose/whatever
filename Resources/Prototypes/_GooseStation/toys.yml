@@ -121,7 +121,7 @@
   - type: EmitSoundOnCollide
     sound:
       collection: MaleScreams
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
     sound:
       collection: MaleScreams #only screams if hurt
@@ -278,7 +278,7 @@
   - type: EmitSoundOnCollide
     sound:
       path: /Audio/Animals/goose_honk.ogg
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
     useSound:
       path: /Audio/Animals/goose_honk.ogg
