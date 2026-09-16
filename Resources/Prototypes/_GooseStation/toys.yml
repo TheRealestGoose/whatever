@@ -107,7 +107,7 @@
   description: This is a plush of a spaniard. All craftsmanship is of the lowest quality. Embroidered upon it's vest are the words "I have no mouth and I must scream".
   components:
   - type: Sprite
-    sprite: _GooseStation/plushies.rsi
+    sprite: _GooseStation/plushies/32x.rsi
     state: spaniard
   - type: EmitSoundOnUse
     sound:
@@ -188,7 +188,7 @@
   description: This is a torn plush of a spaniard. All craftsmanship is of the lowest quality, but despite that, the plushie looks hurt. Embroidered upon it's vest are the words "I have no mouth and I must scream".
   components:
   - type: Sprite
-    sprite: _GooseStation/plushies.rsi
+    sprite: _GooseStation/plushies/32x.rsi
     state: spaniard-torn
   - type: EmitSoundOnUse
     sound:
@@ -202,7 +202,7 @@
   - type: EmitSoundOnCollide
     sound:
       collection: MaleScreams
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
     delay: 2
     sound:
@@ -245,7 +245,7 @@
   components:
   - type: Flight
     isLayerAnimated: false
-    layer: "/Textures/_GooseStation/plushies.rsi"
+    layer: "/Textures/_GooseStation/plushies/32x.rsi"
     on: true
     animationKey: "Flap"
     staminaDrainRate: 0
@@ -254,7 +254,7 @@
       params:
         volume: -100
   - type: Sprite
-    sprite: _GooseStation/plushies.rsi
+    sprite: _GooseStation/plushies/32x.rsi
     layers:
       - state: goose
   - type: SolutionContainerManager
@@ -299,7 +299,7 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: _GooseStation/plushies.rsi/32x64
+    sprite: _GooseStation/plushies/32x64.rsi
     snapCardinals: true
     layers:
     - state: spaniard-pinata-spawn
@@ -325,7 +325,7 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: _GooseStation/plushies.rsi/32x64
+    sprite: _GooseStation/plushies/32x64.rsi
     snapCardinals: true
     layers:
     - state: spaniard-pinata

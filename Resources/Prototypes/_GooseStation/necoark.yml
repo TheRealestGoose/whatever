@@ -74,7 +74,7 @@
     factions:
     - AllHostile
   - type: Sprite
-    sprite: _GooseStation/negro-arc.rsi/64x
+    sprite: _GooseStation/negro-arc/64x.rsi
     drawdepth: Mobs
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
@@ -181,7 +181,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: negro-arc-move
-      sprite: _GooseStation/negro-arc.rsi/64x
+      sprite: _GooseStation/negro-arc/64x.rsi
       scale: 0.5, 0.5
   - type: Physics
   - type: MovementSpeedModifier
@@ -270,7 +270,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: negro-arc-sleeping
-      sprite: _GooseStation/negro-arc.rsi/48x
+      sprite: _GooseStation/negro-arc/48x.rsi
       scale: 0.5, 0.5
   - type: Physics
   - type: Fixtures
@@ -336,7 +336,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: negro-arc-dance
-      sprite: _GooseStation/negro-arc.rsi/64x
+      sprite: _GooseStation/negro-arc/64x.rsi
       scale: 0.5, 0.5
   - type: Physics
   - type: Fixtures
@@ -393,5 +393,5 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: negro-arc-dance-faster
-      sprite: _GooseStation/negro-arc.rsi/64x
+      sprite: _GooseStation/negro-arc/64x.rsi
       scale: 0.5, 0.5
