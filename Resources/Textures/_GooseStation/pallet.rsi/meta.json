@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Pallet made by FruFru01 (Discord), Tarp and Rope sprites by TheGoose3375 (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "full"
+    },
+    {
+      "name": "pallet"
+    },
+    {
+      "name": "tarp"
+    },
+    {
+      "name": "ropes"
+    }
+  ]
+}

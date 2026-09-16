@@ -1,0 +1,104 @@
+# ᵍᵒᵒˢᵉ ʷᵃˢ ʰᵉʳᵉ
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: gameMap
+  id: Axioma
+  mapName: 'Axioma Station'
+  mapPath: /Maps/_GooseStation/axioma.yml
+  minPlayers: 0
+  maxPlayers: 69
+  stations:
+    Axioma:
+      stationProto: StandardNanotrasenStation #AxiomaNanotrasenStation
+      components:
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/_GooseStation/Shuttles/emergency_axioma.yml
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Axioma {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'TG'
+        - type: StationJobs
+          availableJobs:
+            Passenger: [ -1, -1 ]
+            #Command
+            Captain: [ 1, 1 ]
+            NanotrasenRepresentative: [ 1, 1 ] #? #IAA (Internal Affairs Agent)
+            BlueshieldOfficer: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            #Security
+            HeadOfSecurity: [ 1, 1 ]
+            Warden: [ 1, 1 ]
+            Detective: [ 1, 1 ]
+            SecurityOfficer: [ 6, 6 ]
+            SecurityCadet: [ 4, 4 ]
+            Brigmedic: [ 1, 1 ] #check, if no work also change on nox
+            Lawyer: [ 3, 3 ]
+            #Engineering
+            ChiefEngineer: [ 1, 1 ]
+            StationEngineer: [ 8, 8 ]
+            AtmosphericTechnician: [ 3, 3 ]
+            TechnicalAssistant: [ 6, 6 ]
+            #Cargo
+            Quartermaster: [ 1, 1 ]
+            CargoTechnician: [ 6, 6 ]
+            SalvageSpecialist: [ 3, 3 ]
+            ShaftMiner: [ 4, 4 ]
+            #Medical
+            ChiefMedicalOfficer: [ 1, 1 ]
+            MedicalDoctor: [ 7, 7 ]
+            Chemist: [ 2, 2 ]
+            Psychologist: [ 1, 1 ]
+            MedicalIntern: [ 6, 6 ]
+            Paramedic: [ 1, 1 ]
+            #Science
+            ResearchDirector: [ 1, 1 ]
+            Scientist: [ 8, 8 ]
+            ResearchAssistant: [ 6, 6 ]
+            Borg: [ 3, 3 ]
+            StationAi: [ 1, 1 ]
+            #Service
+            Bartender: [ 2, 2 ]
+            Botanist: [ 3, 3 ]
+            Chef: [ 2, 2 ]
+            Clown: [ 1, 1 ]
+            Janitor: [ 3, 3 ]
+            Mime: [ 1, 1 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            Musician: [ 2, 2 ]
+            Reporter: [ 2, 2 ]
+            RadioHost: [ 1, 1 ]
+            ServiceWorker: [ 2, 2 ]
+        # - type: StationGoal
+        #   goals:
+        #   #Base
+        #   - Shuttle
+        #   - Singularity
+        #   - SolarPanels
+        #   - Artifacts
+        #   - Bank
+        #   - Zoo
+        #   - Tesla
+        #   #SS220
+        #   - Saveplanet
+        #   - Expedition
+        #   - Guests
+        #   - PneumaticTubes
+        #   - Robotisation
+        #   - Homekeepers
+        #   - ComplexPVO
+        #   - SportComplex
+        #   #Station special
+        #   - XenobiologyRepair
+
+# - type: entity ???????????????????????
+#   id: AxiomaNanotrasenStation
+#   parent: StandardNanotrasenStation
+#   categories: [ HideSpawnMenu ]
+#   components:
+#     - type: StationMinimap
+#       minimapData: !type:StationMinimapData
+#         mapTexture: SS220/ViewableMaps/Axioma.png
+#         originOffset: -85, 110
+#         mapScale: 6.4

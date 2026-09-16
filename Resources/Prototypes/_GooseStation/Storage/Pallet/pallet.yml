@@ -1,0 +1,986 @@
+- type: entity
+  id: StoragePallet
+  parent: BaseStructure
+  name: pallet
+  description: A masterpiece of industrial engineering, if your definition of engineering is "slapped it together and prayed."
+  components:
+  - type: Sprite
+    drawdepth: SmallMobs
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    state: pallet
+  - type: Appearance
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroyHeavy
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Anchorable
+  - type: Pullable
+  - type: InteractionOutline
+  - type: Construction
+    graph: Pallet
+    node: StoragePallet
+
+- type: entity
+  id: StoragePalletCargoBase
+  parent: StoragePallet
+  name: covered pallet
+  description: A cargo pallet covered with tarpaulin. A note on the tarp reads, "Pry with care, or end up with half the share." #breaking yields half
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#ffffff"
+    - state: ropes
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Damageable
+    damageModifierSet: FlimsyMetallic #cuz plastic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 360
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  id: StoragePalletCargoSteel
+  parent: StoragePalletCargoBase
+  suffix: Steel
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#919295"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoSteel
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetSteel1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoRodMetal
+  parent: StoragePalletCargoBase
+  suffix: RodMetal
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#58585c"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoRodMetal
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          PartRodMetal1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoPlasteel
+  parent: StoragePalletCargoBase
+  suffix: Plasteel
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#B1C4DE"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoPlasteel
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetPlasteel1: #harder to ruin
+            min: 15
+            max: 25
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoPlastic
+  parent: StoragePalletCargoBase
+  suffix: Plastic
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#FFFFFF"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoPlastic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetPlastic1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoPlasma
+  parent: StoragePalletCargoBase
+  suffix: Plasma
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#d5559d"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoPlasma
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetPlasma1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoUranium
+  parent: StoragePalletCargoBase
+  suffix: Uranium
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#359535"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoUranium
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetUranium1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoGlass
+  parent: StoragePalletCargoBase
+  suffix: Glass
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#bad4e5"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetGlass1: #easier to ruin
+            min: 5
+            max: 20
+          ShardGlass: #+shards (you can get some back)
+            min: 3
+            max: 6
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoRGlass
+  parent: StoragePalletCargoBase
+  suffix: RGlass
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#819bad"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoRGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetRGlass1: #standart (i'd make it harder to ruin but there's shards)
+            min: 10
+            max: 20
+          ShardGlassReinforced: #+shards (you can get some back)
+            min: 3
+            max: 6
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoPGlass
+  parent: StoragePalletCargoBase
+  suffix: PGlass
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#d5b4cd"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoPGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetPGlass1: #easier to ruin
+            min: 5
+            max: 20
+          ShardGlassPlasma: #+shards (you can get some back)
+            min: 3
+            max: 6
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoRPGlass
+  parent: StoragePalletCargoBase
+  suffix: RPGlass
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#b195a9"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoRPGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetRPGlass1: #standart (i'd make it harder to ruin but there's shards)
+            min: 10
+            max: 20
+          ShardGlassPlasma: #+shards (you can get some back)
+            min: 3
+            max: 6
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoUGlass
+  parent: StoragePalletCargoBase
+  suffix: UGlass
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#b8dac0"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoUGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetUGlass1: #standart
+            min: 10
+            max: 20
+          ShardGlassUranium: #+shards (you can get some back)
+            min: 3
+            max: 6
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoRUGlass
+  parent: StoragePalletCargoBase
+  suffix: RUGlass #russian glass
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#88a38f"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoRUGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetRUGlass1: #a bit harder to ruin
+            min: 15
+            max: 20 #shards included VVV
+          ShardGlassUranium: #+shards (you can get some back)
+            min: 3
+            max: 6
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoCloth
+  parent: StoragePalletCargoBase
+  suffix: Cloth
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#D7E0E0"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoCloth
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          MaterialCloth1: #easy to ruin, but it really depends
+            min: 5
+            max: 25
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoDurathread
+  parent: StoragePalletCargoBase
+  suffix: Durathread
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#8b9bb4"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoDurathread
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          MaterialDurathread1: #harder to ruin
+            min: 15
+            max: 25
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoWood
+  parent: StoragePalletCargoBase
+  suffix: Wood
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#b78c68"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoWood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          MaterialWoodPlank1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoCardboard
+  parent: StoragePalletCargoBase
+  suffix: Cardboard
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#A69A8B"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoCardboard
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          MaterialCardboard1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoBiomass
+  parent: StoragePalletCargoBase
+  suffix: Biomass
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#695c1e"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoBiomass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          MaterialBiomass1: #standart
+            min: 30
+            max: 60
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoBrass
+  parent: StoragePalletCargoBase
+  suffix: Brass
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#FFAC42"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoBrass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          SheetBrass1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoSilver
+  parent: StoragePalletCargoBase
+  suffix: Silver
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#E0FFFD"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoSilver
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          IngotSilver1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: StoragePalletCargoGold
+  parent: StoragePalletCargoBase
+  suffix: Gold
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/pallet.rsi
+    layers:
+    - state: pallet
+    - state: tarp
+      color: "#FFD900"
+    - state: ropes
+  - type: Construction
+    graph: Pallet
+    node: StoragePalletCargoGold
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80 #reinforced by ropes n stuff
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+          # params:
+          #   volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          StoragePallet:
+            min: 1
+            max: 1
+          IngotGold1: #standart
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+
+#region Random
+- type: entity
+  name: random sheet pallet
+  id: StoragePalletCargoSpawnerRandomSheet
+  parent: MarkerBase
+  suffix: Steel, Plasteel, Plastic, Plasma, Glass, Brass
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Materials/Sheets/metal.rsi
+          state: steel_3
+    - type: RandomSpawner
+      rarePrototypes:
+        - StoragePallet
+      rareChance: 0.03
+      prototypes:
+        - StoragePalletCargoSteel
+        - StoragePalletCargoPlasteel
+        - StoragePalletCargoPlastic
+        - StoragePalletCargoPlasma
+        - StoragePalletCargoGlass
+        - StoragePalletCargoBrass
+      chance: 0.97
+      offset: 0
+
+- type: entity
+  name: random glass pallet
+  id: StoragePalletCargoSpawnerRandomGlass
+  parent: MarkerBase
+  suffix: Glass
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Materials/Sheets/glass.rsi
+          state: glass_3
+    - type: RandomSpawner
+      rarePrototypes:
+        - StoragePallet
+        - StoragePalletCargoRGlass
+        - StoragePalletCargoRPGlass
+        - StoragePalletCargoRUGlass
+      rareChance: 0.4
+      prototypes:
+        - StoragePalletCargoGlass
+        - StoragePalletCargoPGlass
+        - StoragePalletCargoUGlass
+      chance: 0.6
+      offset: 0
+
+- type: entity
+  name: random organic pallet
+  id: StoragePalletCargoSpawnerRandomOrganic
+  parent: MarkerBase
+  suffix: Organic
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Materials/materials.rsi
+          state: wood_3
+    - type: RandomSpawner
+      rarePrototypes:
+        - StoragePallet
+        - StoragePalletCargoBiomass
+      rareChance: 0.03
+      prototypes:
+        - StoragePalletCargoCloth
+        - StoragePalletCargoDurathread
+        - StoragePalletCargoWood
+        - StoragePalletCargoCardboard
+      chance: 0.97
+      offset: 0
+
+- type: entity
+  name: random pallet
+  id: StoragePalletSpawnerRandom
+  parent: MarkerBase
+  suffix: Any
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Materials/Sheets/metal.rsi
+          state: plasteel_3
+    - type: RandomSpawner
+      rarePrototypes:
+        - StoragePallet
+        - StoragePalletCargoBiomass
+        - StoragePalletCargoRGlass
+        - StoragePalletCargoRPGlass
+        - StoragePalletCargoRUGlass
+        - StoragePalletCargoSilver
+        - StoragePalletCargoGold
+      rareChance: 0.03
+      prototypes:
+        - StoragePalletCargoSteel
+        - StoragePalletCargoPlasteel
+        - StoragePalletCargoPlastic
+        - StoragePalletCargoPlasma
+        - StoragePalletCargoGlass
+        - StoragePalletCargoPGlass
+        - StoragePalletCargoUGlass
+        - StoragePalletCargoUranium
+        - StoragePalletCargoCloth
+        - StoragePalletCargoDurathread
+        - StoragePalletCargoWood
+        - StoragePalletCargoCardboard
+        - StoragePalletCargoBrass
+        - StoragePalletCargoRodMetal
+      chance: 0.97
+      offset: 0

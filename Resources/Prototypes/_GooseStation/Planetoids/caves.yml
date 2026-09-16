@@ -1,0 +1,376 @@
+# ideas:
+# shadow blob planet? (search FOR ANOTHER PLANET for generation)
+# ^ overlay (THAT) over a small vgroid so it looks like a universe shape thingy 
+# ^ more expensive ores but also chasms, no empty space: all empty space is chasms
+
+# - type: entity
+#   id: VGRoidAsteroidBeltCacheRoomMarker
+#   parent: BaseRoomMarker
+#   name: VGRoid interior marker
+#   components:
+#   - type: RoomFill
+#     roomWhitelist:
+#       tags:
+#       - Haunted
+
+- type: dungeonConfig
+  id: VGRoidAsteroidCaves
+  layers:
+    - !type:PrototypeDunGen
+      proto: VGRoidBlobSmall
+    - !type:PrototypeDunGen
+      proto: VGRoidExteriorSmall
+    - !type:PrototypeDunGen
+      proto: VGRoidBelt
+    - !type:PrototypeDunGen
+      proto: VGRoidCaveSystem
+    - !type:PrototypeDunGen
+      proto: VGRoidFillDummyForCrystals
+      inheritDungeons: All
+    - !type:OreDunGen
+      replacement: AsteroidRockMining
+      entity: RandomCrystal
+      count: 1
+      minGroupSize: 1000
+      maxGroupSize: 1000
+    # - !type:PrototypeDunGen #paths not needed if only 1 dungeon
+    #   proto: VGRoidSmallPaths
+    #   inheritDungeons: All
+    # - !type:EntityTableDunGen #replaced with cave system
+    #   minCount: 8
+    #   maxCount: 12
+    #   table:
+    #     id: VGRoidAsteroidBeltCacheRoomMarker
+    # Fill
+    - !type:PrototypeDunGen
+      proto: VGRoidFillAsteroidRock
+      inheritDungeons: All
+    # fix interiors
+    # - !type:OreDunGen
+    #   replacement: IronRock
+    #   entity: AsteroidRock
+    #   count: 1
+    #   minGroupSize: 1
+    #   maxGroupSize: 1
+    # - !type:OreDunGen
+    #   replacement: IronRockSilver
+    #   entity: AsteroidRockSilver
+    #   count: 1
+    #   minGroupSize: 1
+    #   maxGroupSize: 1
+    # Ores
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockTin
+      count: 12
+      minGroupSize: 6
+      maxGroupSize: 11
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockCoal
+      count: 12
+      minGroupSize: 4
+      maxGroupSize: 8
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockQuartz
+      count: 12
+      minGroupSize: 6
+      maxGroupSize: 11
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockSalt
+      count: 5
+      minGroupSize: 8
+      maxGroupSize: 10
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockGold
+      count: 9
+      minGroupSize: 4
+      maxGroupSize: 8
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockSilver
+      count: 9
+      minGroupSize: 4
+      maxGroupSize: 8
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockPlasma
+      count: 7
+      minGroupSize: 3
+      maxGroupSize: 6
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockUranium
+      count: 7
+      minGroupSize: 3
+      maxGroupSize: 6
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockArtifactFragment
+      count: 6
+      minGroupSize: 1
+      maxGroupSize: 3
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockDiamond
+      count: 6
+      minGroupSize: 1
+      maxGroupSize: 2
+    - !type:OreDunGen
+      replacement: AsteroidRock
+      entity: AsteroidRockGibtonite
+      count: 15 # you don't really hit it on purpose so it should be common
+      minGroupSize: 1
+      maxGroupSize: 1
+    # Crabs
+    - !type:OreDunGen
+      replacement: AsteroidRockTin
+      entity: AsteroidRockTinCrab
+      count: 8
+      minGroupSize: 1
+      maxGroupSize: 1
+    - !type:OreDunGen
+      replacement: AsteroidRockCoal
+      entity: AsteroidRockCoalCrab
+      count: 8
+      minGroupSize: 1
+      maxGroupSize: 1
+    - !type:OreDunGen
+      replacement: AsteroidRockQuartz
+      entity: AsteroidRockQuartzCrab
+      count: 8
+      minGroupSize: 1
+      maxGroupSize: 1
+    - !type:OreDunGen
+      replacement: AsteroidRockGold
+      entity: AsteroidRockGoldCrab
+      count: 7
+      minGroupSize: 1
+      maxGroupSize: 1
+    - !type:OreDunGen
+      replacement: AsteroidRockSilver
+      entity: AsteroidRockSilverCrab
+      count: 7
+      minGroupSize: 1
+      maxGroupSize: 1
+    - !type:OreDunGen
+      replacement: AsteroidRockUranium
+      entity: AsteroidRockUraniumCrab
+      count: 4
+      minGroupSize: 1
+      maxGroupSize: 1
+    - !type:OreDunGen
+      replacement: AsteroidRockBananium
+      entity: AsteroidRockBananiumCrab
+      count: 1
+      minGroupSize: 1
+      maxGroupSize: 1
+
+# Configs
+# Fill with rocks.
+- type: dungeonConfig
+  id: VGRoidFillAsteroidRock
+  layers:
+  - !type:FillGridDunGen
+    entity: AsteroidRock
+    allowedTiles:
+    - FloorAsteroidSand
+
+- type: dungeonConfig
+  id: VGRoidFillDummyForCrystals
+  layers:
+  - !type:FillGridDunGen
+    entity: AsteroidRockMining
+    allowedTiles:
+    - FloorAsteroidSandBorderless
+
+- type: entity
+  id: RandomCrystal
+  parent: MarkerBase
+  name: random crystal
+  suffix: "0.01%"
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Decoration/crystal.rsi
+        state: crystal_grey
+  - type: RandomSpawner
+    chance: 0.01
+    prototypes:
+      - CrystalGreen
+      - CrystalPink
+      - CrystalOrange
+      - CrystalBlack
+      - CrystalBlue
+      - CrystalYellow
+      - CrystalCyan
+    offset: 0.0
+
+- type: dungeonConfig
+  id: VGRoidBlobSmall
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 125, 125 #169, 169
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+      blendWeight: 0.80
+    layers:
+    - tile: FloorAsteroidSand
+      threshold: 0.50
+      noise:
+        frequency: 0.010
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 2
+        gain: 0.5
+
+- type: dungeonConfig
+  id: VGRoidCaveSystem
+  # minOffset: 40
+  # maxOffset: 60
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 110, 110
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+    layers:
+    - tile: FloorAsteroidSandBorderless
+      threshold: 0.7
+      invert: true
+      noise:
+        seed: 0
+        noiseType: Perlin
+        fractalType: Ridged
+        octaves: 1
+        frequency: 0.05
+        gain: 0.5
+
+# - type: dungeonConfig #FOR ANOTHER PLANET
+#   id: VGRoidCaveSystem
+#   # minOffset: 40
+#   # maxOffset: 60
+#   layers:
+#   - !type:NoiseDistanceDunGen
+#     size: 125, 125
+#     distanceConfig: !type:DunGenEuclideanSquaredDistance
+#     layers:
+#     - tile: FloorAsteroidSandRed
+#       threshold: 0.5
+#       invert: true
+#       noise:
+#         seed: 0
+#         noiseType: Perlin
+#         fractalType: Ridged
+#         octaves: 1
+#         frequency: 0.1
+#         gain: 0.5
+
+- type: dungeonConfig
+  id: VGRoidBelt
+  # minOffset: 40
+  # maxOffset: 60
+  layers:
+  - !type:NoiseDistanceDunGen
+    size: 250, 250
+    distanceConfig: !type:DunGenEuclideanSquaredDistance
+    layers:
+    - tile: FloorAsteroidSand
+      threshold: 0.45
+      noise:
+        frequency: 0.080
+        noiseType: OpenSimplex2
+        fractalType: FBm
+        octaves: 5
+        lacunarity: 1.5
+        gain: 0.5
+
+- type: dungeonConfig
+  id: VGRoidExteriorSmall
+  reserveTiles: true
+  layers:
+  - !type:PrototypeDunGen
+    proto: VGRoidExteriorDungeonsSmall
+  - !type:SplineDungeonConnectorDunGen
+    tile: PlatingAsteroid
+    widenTile: FloorAsteroidSand
+
+- type: dungeonConfig
+  id: VGRoidExteriorDungeonsSmall
+  reserveTiles: true
+  minCount: 1
+  maxCount: 1
+  layers:
+  - !type:ExteriorDunGen
+    proto: Experiment
+  - !type:EntityTableDunGen
+    minCount: 20
+    maxCount: 30
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 20
+    maxCount: 30
+    table: !type:NestedSelector
+      tableId: SalvageScrapSpawnerValuable
+  - !type:EntityTableDunGen
+    minCount: 20
+    maxCount: 35
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerCommon
+  - !type:EntityTableDunGen
+    minCount: 25
+    maxCount: 35
+    table: !type:NestedSelector
+      tableId: SalvageTreasureSpawnerValuable
+  - !type:MobsDunGen
+    minCount: 6
+    maxCount: 10
+    contents: VGRoidExteriorDungeonsMobs
+
+# - type: entityTable
+#   id: VGRoidExteriorDungeonsMobs
+#   table: !type:GroupSelector
+#     children:
+#     - id: SalvageSpawnerMobMiningAsteroid
+#       amount: 1
+
+#- type: dungeonConfig
+#  id: VGRoidInteriorDungeons
+#  minCount: 3
+#  maxCount: 5
+#  # Just randomly spawn these in bounds, doesn't really matter if they go out.
+
+# - type: dungeonConfig
+#   id: VGRoidSmallPaths
+#   reserveTiles: true
+#   layers:
+#   - !type:ReplaceTileDunGen
+#     layers:
+#     - tile: FloorAsteroidSand
+#       threshold: 0.75
+#       noise:
+#         frequency: 0.040
+#         noiseType: OpenSimplex2
+#         fractalType: Ridged
+#         lacunarity: 1.5
+#         octaves: 2
+#         gain: 2.0
+#   # Mobs
+#   # If you want exterior dungeon mobs add them under the prototype.
+#   - !type:MobsDunGen
+#     minCount: 25
+#     maxCount: 35
+#     contents: VGRoidSmallPathsMobs
+
+# - type: entityTable
+#   id: VGRoidSmallPathsMobs
+#   table: !type:GroupSelector
+#     children:
+#     - id: SalvageSpawnerMobMiningAsteroid
+#       amount: 1
+
+# #- type: dungeonConfig
+# #  id: VGRoidOres

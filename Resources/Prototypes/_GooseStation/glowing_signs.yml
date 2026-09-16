@@ -1,0 +1,125 @@
+- type: entity
+  id: OpenSign
+  name: open sign
+  description: A classic "Open" sign. Includes a manual power switch on the frame.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    canCollide: false
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmash
+  - type: WallMount
+    direction: 180
+    arc: 180
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _GooseStation/open_sign.rsi
+    layers:
+      - state: off
+        map: [ "base" ]
+      - state: glow
+        # shader: unshaded
+        map: [ "glow" ]
+        visible: false
+  - type: ItemToggle
+    onActivate: true
+    wieldToggle: false
+    soundActivate:
+      path: /Audio/Machines/lightswitch.ogg
+    soundDeactivate:
+      path: /Audio/Machines/lightswitch.ogg
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemToggleVisuals.State:
+        glow:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PowerDeviceVisuals.Powered:
+        glow:
+          True: { state: glow, shader: unshaded }
+          False: { state: off, shader: "" }
+  - type: ApcPowerReceiver
+  - type: ExtensionCableReceiver
+  - type: Appearance
+  - type: ItemToggleVisuals
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: OnAirSign
+  name: on air sign
+  description: An "On Air" sign typical of any studio. There is a switch on the back side.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    canCollide: false
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmash
+  - type: WallMount
+    direction: 180
+    arc: 180
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _GooseStation/onair_sign.rsi
+    layers:
+      - state: off
+        map: [ "base" ]
+      - state: glow
+        # shader: unshaded
+        map: [ "glow" ]
+        visible: false
+  - type: ItemToggle
+    onActivate: true
+    wieldToggle: false
+    soundActivate:
+      path: /Audio/Machines/lightswitch.ogg
+    soundDeactivate:
+      path: /Audio/Machines/lightswitch.ogg
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemToggleVisuals.State:
+        glow:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PowerDeviceVisuals.Powered:
+        glow:
+          True: { state: glow, shader: unshaded }
+          False: { state: off, shader: "" }
+  - type: ApcPowerReceiver
+  - type: ExtensionCableReceiver
+  - type: Appearance
+  - type: ItemToggleVisuals
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

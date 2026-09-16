@@ -1,0 +1,712 @@
+# - type: entity #doesnt work, needs its own component or ui thingy
+#   parent: BaseItem
+#   id: GooseUplinkCartridge
+#   name: shop cartridge
+#   description: Lets you access the shop.
+#   components:
+#   - type: Sprite
+#     sprite: Objects/Devices/cartridge.rsi
+#     state: cart-y
+#   # - type: UIFragment
+#   #   ui: !type:StoreBoundUserInterface
+#   - type: UserInterface
+#     interfaces:
+#       enum.StoreUiKey.Key:
+#         type: StoreBoundUserInterface
+#   - type: Cartridge
+#     programName: Shop
+#     icon:
+#       sprite:  Objects/Misc/books.rsi
+#       state: book_icon
+  # - type: NotekeeperCartridge #not needed?
+
+- type: listing
+  id: GooseShopLootbox
+  name: le epic box
+  productEntity: Lootbox
+  cost:
+    SpaceCash: 10000
+  categories:
+  - GooseStationStore
+
+- type: listing
+  id: GooseBoxCardboardTruthOrDare
+  description: This small box contains the entirety of the truth and dare game! Instructions included.
+  productEntity: BoxCardboardTruthOrDare
+  cost:
+    SpaceCash: 5000
+  categories:
+  - GooseStationStore
+
+# - type: listing
+#   id: GooseShopLootbox
+#   name: casa de goose
+#   productEntity: Lootbox
+#   cost:
+#     SpaceCash: 1
+#   categories:
+#   - GooseStationStore
+
+- type: storeCategory
+  id: GooseStationStore
+  name: "Le stuff!1!"
+  priority: 0
+
+- type: currency
+  id: SpaceCash
+  displayName: spesos
+  cash:
+    1: SpaceCash
+  canWithdraw: true
+
+- type: entity
+  id: StorePresetGooseShop
+  abstract: true
+  components:
+  - type: Store
+    name: "Le Epic Store!11!"
+    categories:
+    - GooseStationStore
+    currencyWhitelist:
+    - SpaceCash
+    balance:
+      SpaceCash: 0
+    # sales: # WD EDIT
+    #   enabled: true
+    #   minMultiplier: 0.2
+    #   maxMultiplier: 0.8
+    #   minItems: 4
+    #   maxItems: 8
+    #   salesCategory: UplinkSales
+
+- type: entity
+  id: GooseUplinkWallmount
+  parent: StorePresetGooseShop
+  name: Store Interface
+  description: Gives you access to a store page for buying things. Powered by the corporate greed.
+  suffix: directional
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Fixtures
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    canCollide: false
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Machines/computers.rsi
+    layers:
+      - map: ["computerLayerBody"]
+        state: telescreen_frame
+      - map: ["computerLayerScreen"]
+        shader: unshaded
+        state: telescreen
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    balance:
+      SpaceCash: 0
+  - type: WallMount
+    arc: 175
+
+
+- type: entity
+  id: SpawnPodLootbox
+  name: Drop Lootbox
+  parent: SpawnSupplyEmpty
+  components:
+  - type: SpawnOnDespawn
+    prototype: Lootbox
+
+- type: entity
+  id: Lootbox
+  name: lootbox
+  description: A lootbox that contains a randomised set of items! Guaranteed to have one toy, one clothing item and one utility item!
+  parent: [PresentBase, BaseItem]
+  suffix: Random
+  components:
+  - type: Sprite
+    sprite: _GooseStation/lootbox.rsi
+    layers:
+      - state: loot
+  - type: SpawnItemsOnUse
+    sound:
+      path: /Audio/Items/toolbox_open.ogg
+    items:
+    # toys
+      - id: PlushieGoose
+        orGroup: GiftToys
+      - id: PlushieSpaniard
+        orGroup: GiftToys
+      - id: ToyFigurineAltQuartermaster
+        orGroup: GiftToys
+      - id: ToyFigurineAltSalvage
+        orGroup: GiftToys
+    # clothing
+      - id: ClothingMaskBigBossClown
+        orGroup: GiftClothing
+      - id: ClothingNeckLiveleakMeme
+        orGroup: GiftClothing
+      - id: ClothingNeckIfunnyMeme
+        orGroup: GiftClothing
+      - id: ClothingNeckGlowingCloak #my magnum opus
+        orGroup: GiftClothing
+      - id: ClothingNeckGlowingArmbands
+        orGroup: GiftClothing
+      - id: ClothingShoesRocketBoots #my second magnum opus
+        orGroup: GiftClothing
+      - id: ClothingMaskTacticalNeckGaiter #my third magnum opus
+        orGroup: GiftClothing
+      - id: ClothingHandsHoloGloves #my fourth magnum opus
+        orGroup: GiftClothing
+    # utility
+      - id: BeartrapBoxGoose
+        orGroup: GiftUtil
+      - id: FoodBoxNugget
+        orGroup: GiftUtil
+      # - id: DrinkJarWhat
+      #   orGroup: GiftUtil
+    # extra
+      - id: BoxFolderSpacesteinFiles
+        onGroup: GiftExtra
+        prob: 0.1
+
+
+# funn clothes>:::
+# idea: trapped versions of these. you can put them on ppl like cuffs but they're SelfUnremovable
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckLiveleakMeme
+  name: liveleak watermark
+  description: A LiveLeak watermark, a dark joke about fame and fear.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/liveleak.rsi
+    scale: 0.5,0.5
+  - type: Clothing
+    mappedLayer:
+    sprite: _GooseStation/liveleak.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        scale: 0.5,0.5
+        offset: 0,0.125
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckIfunnyMeme
+  name: ifunny watermark
+  description: Marks you as the least funny person on the station.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/ifunny.rsi
+    scale: 0.5,0.5
+  - type: Clothing
+    mappedLayer:
+    sprite: _GooseStation/ifunny.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        scale: 0.5,0.5
+        # offset: 0,0.125
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckGlowingCloak
+  name: glowing cloak
+  description: A cool glowing cloak. Color configurable with a multitool!
+  components:
+  - type: Sprite
+    sprite: _GooseStation/glowingcloak.rsi
+    layers:
+      - state: icon
+      - state: icon-unshaded
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: EnergySword
+  - type: ItemToggle
+    # Goobstation start
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+    # Goobstation end
+    soundActivate:
+      path: /Audio/Items/pen_click.ogg
+    soundDeactivate:
+      path: /Audio/Items/pen_click.ogg
+  # - type: ItemToggleActiveSound #obnoxious
+  #   activeSound:
+  #     path: /Audio/Weapons/ebladehum.ogg
+  # - type: ItemTogglePointLight #better without it
+  #   toggleableVisualsColorModulatesLights: true
+  - type: UseDelay
+    delay: 1.0
+  # - type: PointLight #better without it
+  #   enabled: false
+  #   radius: 1.2
+  #   energy: 1
+  #   color: white
+  #   netsync: false
+  - type: Appearance
+  - type: ToggleableVisuals # Add support for multiple layers
+    spriteLayer: blade
+    clothingVisuals:
+      neck:
+        - state: equipped-NECK-unshaded
+          shader: unshaded
+    inhandVisuals:
+      left:
+      - state: inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: inhand-right-unshaded
+        shader: unshaded
+  - type: UserInterface # Goobstation-EsColorPicker
+    interfaces:
+      enum.EsColorPickerMenu.Key:
+        type: EsColorPickerBUI
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckGlowingArmbands
+  name: glowing armbands
+  description: A pair of cool glowing armbands. Color configurable with a multitool!
+  components:
+  - type: Sprite
+    sprite: _GooseStation/glowing-armbands.rsi
+    layers:
+      - state: icon
+      - state: icon-unshaded
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: EnergySword
+  - type: ItemToggle
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+    soundActivate:
+      path: /Audio/Items/pen_click.ogg
+    soundDeactivate:
+      path: /Audio/Items/pen_click.ogg
+  - type: UseDelay
+    delay: 1.0
+  - type: Appearance
+  - type: ToggleableVisuals
+    spriteLayer: blade
+    clothingVisuals:
+      neck:
+        - state: equipped-NECK-unshaded
+          shader: unshaded
+    inhandVisuals:
+      left:
+      - state: inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: inhand-right-unshaded
+        shader: unshaded
+  - type: UserInterface
+    interfaces:
+      enum.EsColorPickerMenu.Key:
+        type: EsColorPickerBUI
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesRocketBoots
+  name: rocket boots
+  description: Rocket-propelled boots with rollers hidden in the sole as well as built in illumination (Color configurable with a multitool!). Extreme caution is adviced when using these!
+  components:
+  - type: Sprite
+    sprite: _GooseStation/rocket-boots.rsi
+    layers:
+      - state: icon
+      - state: icon-unshaded
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: Clothing
+    sprite: _GooseStation/rocket-boots.rsi
+    clothingVisuals:
+      shoes:
+      - state: equipped-FEET
+        visible: true
+      - state: equipped-FEET-unshaded
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: ItemToggle
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+    soundActivate:
+      path: /Audio/Items/pen_click.ogg
+    soundDeactivate:
+      path: /Audio/Items/pen_click.ogg
+  - type: Skates
+    friction: 0.075
+    frictionNoInput: 0.075
+    speedDamage: 1.5 #just a bit more than normal skates
+    stunSeconds: 2 #less than normal skates
+    minimumSpeed: 8
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSkates
+      params:
+        variation: 0.08
+  - type: JumpAbility
+    jumpDistance: 1
+    jumpThrowSpeed: 20
+    jumpSound: /Audio/Effects/extinguish.ogg
+  - type: ActionGrant
+    actions:
+    - ActionGravityJump
+  - type: ItemActionGrant
+    actions:
+    - ActionGravityJump
+    activeIfWorn: true
+    restrictedSlots:
+    - FEET
+  - type: Appearance
+  - type: ClothingSpeedModifier #they are heavy..
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: StaticPrice
+    price: 750
+  - type: EnergySword
+  - type: UseDelay
+    delay: 1.0
+  - type: ToggleableVisuals
+    spriteLayer: blade
+    clothingVisuals:
+      shoes:
+        - state: equipped-FEET-unshaded
+          shader: unshaded
+    inhandVisuals:
+      left:
+      - state: inhand-left-unshaded
+        shader: unshaded
+      right:
+      - state: inhand-right-unshaded
+        shader: unshaded
+  - type: UserInterface
+    interfaces:
+      enum.EsColorPickerMenu.Key:
+        type: EsColorPickerBUI
+
+- type: entity
+  parent: ClothingShoesRocketBoots
+  id: ClothingShoesRocketBootsSuicidal
+  name: damaged rocket boots
+  description: Rocket-propelled boots with rollers hidden in the sole as well as built in illumination (Color configurable with a multitool!). Something is wrong with these...
+  components:
+  - type: Skates
+    friction: 0.075
+    frictionNoInput: 0.075
+    speedDamage: 15
+    stunSeconds: 1
+    minimumSpeed: 8
+
+- type: entity
+  parent: ClothingMaskBase
+  id: ClothingMaskTacticalNeckGaiter
+  name: full-cover neck gaiter
+  description: "Tactical neck gaiter with integrated flash protection and face illumination (Color configurable with a multitool!)."
+  components:
+  - type: Sprite
+    sprite:  _GooseStation/tactical-gaiter.rsi
+    layers:
+      - state: icon
+      - state: icon-unshaded
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  # - type: Clothing
+  #   sprite:  _GooseStation/tactical-gaiter.rsi
+  #   clothingVisuals:
+  #     shoes:
+  #     - state: equipped-FEET
+  #       visible: true
+  #     - state: equipped-FEET-unshaded
+  #       color: "#FFFFFF"
+  #       visible: false
+  #       shader: unshaded
+  #       map: [ "blade" ]
+  - type: Appearance
+  - type: ItemToggle
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+    soundActivate:
+      path: /Audio/Items/pen_click.ogg
+    soundDeactivate:
+      path: /Audio/Items/pen_click.ogg
+  - type: EnergySword
+  - type: UseDelay
+    delay: 1.0
+  - type: ToggleableVisuals
+    spriteLayer: blade
+    clothingVisuals:
+      mask:
+        - state: equipped-MASK-unshaded
+          shader: unshaded
+  - type: UserInterface
+    interfaces:
+      enum.EsColorPickerMenu.Key:
+        type: EsColorPickerBUI
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+      protectionTime: 7 #3 seconds of blindness instead of 10
+    # - type: IdentityBlocker # no work sadly
+    #   coverage: FULL
+    - type: FlashImmunity # flash protection
+  - type: BreathMask
+  - type: IdentityBlocker #supposed to change into FULL on active, but doesnt work.
+    coverage: MOUTH
+  # - type: IngestionBlocker # combat filters
+  #   blockSmokeIngestion: true # stops from eating, also a bit OP
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - IPCMaskWearable
+
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsHoloGloves
+  name: holographic gloves
+  description: "These gloves can insulate against electricity and pry open unpowered airlocks. Features multitool-configurable glowing elements that deploy as holographic claws or a self-powering disabler when switched on."
+  components:
+  - type: Sprite
+    sprite:  _GooseStation/holo-gloves.rsi
+    layers:
+      - state: icon
+      - state: icon-unshaded
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: Appearance
+  - type: ItemToggle
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+    soundActivate:
+      path: /Audio/Items/pen_click.ogg
+    soundDeactivate:
+      path: /Audio/Items/pen_click.ogg
+  - type: EnergySword
+  - type: UseDelay
+    delay: 1.0
+  - type: Clothing
+    sprite:  _GooseStation/holo-gloves.rsi
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND
+  - type: ToggleableVisuals
+    spriteLayer: blade
+    clothingVisuals:
+      gloves:
+        - state: equipped-HAND-unshaded #-alt
+          shader: unshaded
+  - type: UserInterface
+    interfaces:
+      enum.EsColorPickerMenu.Key:
+        type: EsColorPickerBUI
+  - type: ClothingGrantComponent
+    component:
+    - type: Prying #allows prying unpowered unbolted doors
+      pryPowered: false
+      force: false
+      speedModifier: 1.5
+      instaPry: true #wanted false but sounds weird so no
+  - type: Insulated #just free insuls, 10k + gamba is worth it
+  - type: BatteryDrinkerSource # Goobstation - Energycrit
+    maxAmount: 100
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 10
+  - type: Battery
+    maxCharge: 500
+    startingCharge: 500
+  - type: ExaminableBattery
+  - type: ComponentToggler
+    removeComponents:
+      - type: ItemSwitch
+        showLabel: true
+        state: claws
+        states:
+          claws: !type:ItemSwitchState
+            verb: claws
+            sprite:
+              sprite: _GooseStation/holo-gloves.rsi
+              state: icon
+            components:
+              - type: MeleeWeapon
+                animationRotation: -45 # WWDP      # from esword, kept just in case
+                heavyStaminaCost: 2.5 # goob edit  # doesnt actually do anything
+                wideAnimationRotation: -135        # cuz i turned wideswing off
+                mustBeEquippedToUse: true #IMPORTANT BRUH
+                canWideSwing: false
+                attackRate: 1.2
+                soundHit:
+                  path: /Audio/Weapons/bladeslice.ogg
+                damage:
+                  types:
+                    Slash: 7
+                    Heat: 5
+                    Structural: 30 #30 is just enough for rocks #doesnt have to
+                woundSeverityMultipliers: # Goobstation
+                  Slash: 1.5
+                  Heat: 1.5
+            soundStateActivate:
+              collection: sparks
+              params:
+                variation: 0.125
+          disabler: !type:ItemSwitchState
+            verb: disabler
+            sprite:
+              sprite: _GooseStation/holo-gloves.rsi
+              state: icon
+            components:
+              # - type: AmmoCounter #so doesnt pam red squares
+              - type: GunExecutionBlacklist # Goobstation
+              - type: PacifismAllowedGun
+              - type: Gun
+                fireRate: 2
+                selectedMode: SemiAuto
+                clumsyProof: true
+                availableModes:
+                - SemiAuto
+                soundGunshot:
+                  path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+              - type: ProjectileBatteryAmmoProvider
+                proto: BulletDisabler
+                fireCost: 100 #more than disabler cuz smaller
+            soundStateActivate:
+              collection: sparks
+              params:
+                variation: 0.125
+      - type: MeleeWeapon
+        animationRotation: -45 # WWDP      # from esword, kept just in case
+        heavyStaminaCost: 2.5 # goob edit  # doesnt actually do anything
+        wideAnimationRotation: -135        # cuz i turned wideswing off
+        mustBeEquippedToUse: true #IMPORTANT BRUH
+        canWideSwing: false
+        attackRate: 1.2
+        soundHit:
+          path: /Audio/Weapons/bladeslice.ogg
+        damage:
+          types:
+            Slash: 7
+            Heat: 5
+            Structural: 30 #30 is just enough for rocks #doesnt have to
+        woundSeverityMultipliers: # Goobstation
+          Slash: 1.5
+          Heat: 1.5
+      # - type: AmmoCounter
+      - type: GunExecutionBlacklist # Goobstation
+      - type: PacifismAllowedGun
+      - type: Gun
+        fireRate: 2
+        selectedMode: SemiAuto
+        clumsyProof: true
+        availableModes:
+        - SemiAuto
+        soundGunshot:
+          path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+      - type: ProjectileBatteryAmmoProvider
+        proto: BulletDisabler
+        fireCost: 100 #more than disabler, because small
+    components:
+      - type: ItemSwitch
+        showLabel: true
+        state: claws
+        states:
+          claws: !type:ItemSwitchState
+            verb: claws
+            sprite:
+              sprite: _GooseStation/holo-gloves.rsi
+              state: icon
+            components:
+              - type: MeleeWeapon
+                animationRotation: -45 # WWDP      # from esword, kept just in case
+                heavyStaminaCost: 2.5 # goob edit  # doesnt actually do anything
+                wideAnimationRotation: -135        # cuz i turned wideswing off
+                mustBeEquippedToUse: true #IMPORTANT BRUH
+                canWideSwing: false
+                attackRate: 1.2
+                soundHit:
+                  path: /Audio/Weapons/bladeslice.ogg
+                damage:
+                  types:
+                    Slash: 7
+                    Heat: 5
+                    Structural: 30 #30 is just enough for rocks #doesnt have to
+                woundSeverityMultipliers: # Goobstation
+                  Slash: 1.5
+                  Heat: 1.5
+            soundStateActivate:
+              collection: sparks
+              params:
+                variation: 0.125
+
+          disabler: !type:ItemSwitchState
+            verb: disabler
+            sprite:
+              sprite: _GooseStation/holo-gloves.rsi
+              state: icon
+            components:
+              # - type: AmmoCounter #so doesnt pam red squares
+              - type: GunExecutionBlacklist # Goobstation
+              - type: PacifismAllowedGun
+              - type: Gun
+                fireRate: 2
+                selectedMode: SemiAuto
+                clumsyProof: true
+                availableModes:
+                - SemiAuto
+                soundGunshot:
+                  path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+              - type: ProjectileBatteryAmmoProvider
+                proto: BulletDisabler
+                fireCost: 100 #more than disabler cuz smaller
+            soundStateActivate:
+              collection: sparks
+              params:
+                variation: 0.125
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+
+# glowing magician tophat
+# glowing graplin gun gloves - FAIL
+# glowing utility belt, like the utility toolbelt, but slows you down a bit. look into the clothing injecting chemicals thing, the belt could inject chemicals. maybe make it have a chemical container that you can refill.
+# glowing wings that give you the harpy flight action and they need to be imbedded like gemini holoprojector from RD's locker
+# holo-backpack
+# works as a modsuit basic modsuit except the pieces are chameleon and gives a chameleon implant action
+# emag to access black market, maybe one free set of the stuff

@@ -112,21 +112,39 @@
           - ChunkDebrisSmall
           - ChunkDebrisSmall
           - ChunkDebris
-        # goob - no vgroid
-        #vgroid: !type:DungeonSpawnGroup
-        #  minimumDistance: 300
-        #  maximumDistance: 350
-        #  nameDataset: NamesBorer
-        #  stationGrid: false
-        #  addComponents:
-        # - type: Gravity
-        #    enabled: true
-        #    inherent: true
-        #  - type: IFF
-        #    flags: HideLabel
-        #    color: "#d67e27"
-        #  protos:
-        #  - VGRoid
+        # GOOSESTATION - PLANETOIDS
+        # vgroid: !type:DungeonSpawnGroup
+        #   minimumDistance: 300
+        #   maximumDistance: 350
+        #   nameDataset: NamesBorer
+        #   stationGrid: false
+        #   addComponents:
+        #   - type: Gravity
+        #     enabled: true
+        #     inherent: true
+        #   - type: IFF
+        #     # flags: HideLabel
+        #     color: "#ABABAB"
+        #   protos:
+        #   - VGRoidAsteroidCaves
+        vgroid1: !type:DungeonSpawnGroup
+          minimumDistance: 300
+          maximumDistance: 350
+          nameDataset: NamesBorer
+          stationGrid: false
+          addComponents:
+          - type: Gravity
+            enabled: true
+            inherent: true
+          - type: IFF
+            # flags: HideLabel
+            color: "#8D27D6"
+          protos:
+          - VGRoidShadowChasms
+        # GOOSESTATION - PLANETOIDS END
+        mining: !type:GridSpawnGroup
+          paths:
+          - /Maps/Shuttles/mining.yml
 
 - type: entity
   id: BaseStationCentcomm

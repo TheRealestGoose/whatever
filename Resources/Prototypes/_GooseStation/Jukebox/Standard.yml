@@ -1,0 +1,126 @@
+- type: entity
+  id: JukeboxRadio
+  name: radio
+  parent: BaseItem
+  description: An oldschool radio. Music quality leaves much to be desired.
+  components:
+  - type: Animateable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _GooseStation/jukebox.rsi
+    layers:
+    - state: "on"
+      map: ["enum.JukeboxVisualLayers.Base"]
+  - type: Transform
+  - type: Jukebox
+    onState: on
+    offState: off
+    selectState: select
+  - type: Appearance
+  - type: ActivatableUI
+    key: enum.JukeboxUiKey.Key
+  - type: UserInterface
+    interfaces:
+        enum.JukeboxUiKey.Key:
+          type: JukeboxBoundUserInterface
+        enum.WiresUiKey.Key:
+          type: WiresBoundUserInterface
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+  # - type: Fixtures
+  #   fixtures:
+  #     fix1:
+  #       shape:
+  #         !type:PhysShapeAabb
+  #         bounds: "-0.25,-0.45,0.25,0.45"
+  #       mask:
+  #       - MachineMask
+  #       layer:
+  #       - MachineLayer
+  #       density: 200
+
+- type: jukebox
+  id: UpgradeStation
+  name: TF2 - Upgrade Station
+  path:
+    path: /Audio/_GooseStation/Radio/upgrade_station.ogg
+
+# - type: jukebox
+#   id: GorodSochi
+#   name: Sergejj Trofimov - Gorod Sochi
+#   path:
+#     path: /Audio/_GooseStation/Lobby/gorod_sochi.ogg
+
+# - type: jukebox
+#   id: MissYou
+#   name: Sergejj Trofimov - I Miss You
+#   path:
+#     path: /Audio/_GooseStation/Lobby/skuchau_po_tebe.ogg
+
+# - type: jukebox
+#   id: SmilingAtPeople
+#   name: Sergejj Trofimov - Smiling At People
+#   path:
+#     path: /Audio/_GooseStation/Lobby/ulybatsa_ludyam.ogg
+
+# - type: jukebox
+#   id: WindInMyHead
+#   name: Sergejj Trofimov - Wind In My Head
+#   path:
+#     path: /Audio/_GooseStation/Lobby/veter_v_golove.ogg
+
+- type: jukebox
+  id: SevenKAboveGround
+  name: Valerijj Syutkin - Seven Thousand Above Ground
+  path:
+    path: /Audio/_GooseStation/Radio/seven_thousand_above_ground.ogg
+
+# - type: jukebox
+#   id: SummerSoon
+#   name: Oleg Mityaev - Summer Soon
+#   path:
+#     path: /Audio/_GooseStation/Lobby/skoro_leto.ogg
+
+# - type: jukebox
+#   id: Sosedka
+#   name: Oleg Mityaev - Sosedka
+#   path:
+#     path: /Audio/_GooseStation/Lobby/sosedka.ogg
+
+# - type: jukebox
+#   id: Lybimaya
+#   name: Oleg Mityaev - Good Morning Love
+#   path:
+#     path: /Audio/_GooseStation/Lobby/lybimaya.ogg
+
+# - type: jukebox
+#   id: BrightPast
+#   name: Oleg Mityaev - Bright Past
+#   path:
+#     path: /Audio/_GooseStation/Lobby/svetloe_proshloe.ogg
+
+- type: jukebox
+  id: CheekiBreeki
+  name: The Chalkeaters - Cheeki Breeki
+  path:
+    path: /Audio/_GooseStation/Radio/cheeki_breeki.ogg
+
+- type: jukebox
+  id: BalatroMain
+  name: Balatro - Main
+  path:
+    path: /Audio/_GooseStation/Radio/balatro_main.ogg

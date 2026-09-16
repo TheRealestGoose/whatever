@@ -1,0 +1,145 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "taken from IDR, probably goonstation",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "key"
+        },
+        {
+            "name": "key_radio"
+        },
+        {
+            "name": "key_larry"
+        },
+        {
+            "name": "key_iron"
+        },
+        {
+            "name": "key_hot",
+            "delays": [
+                [
+                    1.5,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.7,
+                    0.1,
+                    0.1,
+                    0.1,
+                    1.5
+                ]
+            ]
+        },
+        {
+            "name": "key_lead"
+        },
+        {
+            "name": "key_gold"
+        },
+        {
+            "name": "key_vr"
+        },
+        {
+            "name": "key_owl"
+        },
+        {
+            "name": "key_bone"
+        },
+        {
+            "name": "key_cold"
+        },
+        {
+            "name": "key_lunar"
+        },
+        {
+            "name": "key_solar"
+        },
+        {
+            "name": "key_niobium"
+        },
+        {
+            "name": "key_silver"
+        },
+        {
+            "name": "chompskey"
+        },
+        {
+            "name": "key_iridium",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "key_onyx",
+            "delays": [
+                [
+                    0.2,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    6,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "pkey2"
+        },
+        {
+            "name": "ckey0"
+        },
+        {
+            "name": "ckey1"
+        },
+        {
+            "name": "ckey2"
+        },
+        {
+            "name": "pkey0"
+        },
+        {
+            "name": "pkey1"
+        },
+        {
+            "name": "key_round"
+        },
+        {
+            "name": "skull"
+        },
+        {
+            "name": "bloodyskull"
+        },
+        {
+            "name": "hairball1"
+        },
+        {
+            "name": "hairball2"
+        },
+        {
+            "name": "hairball3"
+        },
+        {
+            "name": "key_cat"
+        }
+    ]
+}

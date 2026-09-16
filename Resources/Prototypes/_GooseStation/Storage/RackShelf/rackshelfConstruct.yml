@@ -1,0 +1,50 @@
+- type: construction
+  id: RackShelfSingle
+  graph: RackShelf
+  startNode: start
+  targetNode: RackShelfSingle
+  name: metal rack shelf
+  description: A hardware storage rack with shelves. You can attach two additional shelves to it!
+  icon:
+    sprite: _GooseStation/rack_shelf.rsi
+    state: icon
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: RackShelfPlasticSingle
+  graph: RackShelf
+  startNode: start
+  targetNode: RackShelfPlasticSingle
+  name: plastic rack shelf
+  description: A hardware storage rack with shelves. You can attach two additional shelves to it!
+  icon:
+    sprite: _GooseStation/rack_shelf.rsi
+    state: icon
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: RackShelfWoodSingle
+  graph: RackShelf
+  startNode: start
+  targetNode: RackShelfWoodSingle
+  name: wood rack shelf
+  description: A hardware storage rack with shelves. You can attach two additional shelves to it!
+  icon:
+    sprite: _GooseStation/rack_shelf.rsi
+    state: icon
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

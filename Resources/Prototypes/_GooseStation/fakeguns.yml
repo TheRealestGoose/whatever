@@ -1,0 +1,786 @@
+- type: entity
+  id: PelletShotgunCaps
+  categories: [ HideSpawnMenu ]
+  parent: PelletShotgun
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 0.01
+
+- type: entity
+  id: PelletShotgunSpreadCaps
+  categories: [ HideSpawnMenu ]
+  parent: PelletShotgunCaps
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunCaps
+    count: 6
+    spread: 22
+# stuff (^^) for those things (VV) and those things (VVVV) to work
+
+- type: entity
+  id: BaseShellShotgunToy
+  parent: BaseShellShotgun
+  suffix: Toy
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunToy
+    - Cartridge
+
+- type: entity
+  id: ShellShotgunCaps
+  parent: BaseShellShotgunToy
+  suffix: Caps
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunSpreadCaps
+
+#shotgun foam
+- type: entity
+  id: PelletShotgunSpreadFoam
+  categories: [ HideSpawnMenu ]
+  parent: BulletFoam
+  components:
+  - type: ProjectileSpread
+    proto: BulletFoam
+    count: 6
+    spread: 22
+
+- type: entity
+  id: ShellShotgunFoam
+  parent: BaseShellShotgunToy
+  suffix: Foam
+  components:
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunSpreadFoam
+    deleteOnSpawn: true
+# stuff (^^) for this stuff (VV) to work
+
+#region magazines and stuff
+#BASE
+- type: entity
+  id: BaseMagazineToy
+  abstract: true
+  components:
+    - type: BallisticAmmoProvider
+      whitelist:
+        tags:
+          - CartridgeCap
+          - BulletFoam
+
+# #pistol
+- type: entity
+  id: BaseMagazinePistolToy
+  parent: [ BaseMagazineToy, BaseMagazinePistol ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolToy
+
+- type: entity
+  id: BaseMagazinePistolHighCapacityToy
+  parent: [ BaseMagazineToy, BaseMagazinePistolHighCapacity ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolToy
+
+- type: entity
+  id: BaseMagazinePistolSubMachineGunToy
+  parent: [ BaseMagazineToy, BaseMagazinePistolSubMachineGun ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolSubMachineGunToy
+
+- type: entity
+  id: BaseMagazinePistolCaselessRifleToy
+  parent: [ BaseMagazineToy, BaseMagazinePistolCaselessRifle ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazinePistolCaselessRifleToy
+
+# #shotgun
+- type: entity
+  id: BaseMagazineShotgunToy
+  parent: [ BaseMagazineToy, BaseMagazineShotgun ]
+  abstract: true
+  components:
+    - type: Tag
+      tags:
+      - MagazineShotgunToy
+    - type: BallisticAmmoProvider
+      whitelist:
+        tags:
+          - CartridgeCap
+          - BulletFoam
+          - ShellShotgunToy
+
+# #LMG
+- type: entity
+  id: BaseMagazineLightRifleBoxToy
+  parent: [ BaseMagazineToy, MagazineLightRifleBox ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - MagazineLightRifleBoxToy
+
+# #filled mags (with caps) =================
+# #BASE cap mag
+- type: entity
+  id: BaseMagazineToyCaps
+  parent: BaseMagazineToy
+  abstract: true
+  suffix: Toy, CapsFilled
+  components:
+    - type: BallisticAmmoProvider
+      proto: CartridgeCap
+
+# #pistol
+- type: entity
+  id: MagazinePistolCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolHighCapacityCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolHighCapacityToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolSubMachineGunCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolSubMachineGunToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolCaselessRifleCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazinePistolCaselessRifleToy ]
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+# #LMG
+- type: entity
+  id: MagazineLightRifleBoxCaps
+  parent: [ BaseMagazineToyCaps, BaseMagazineLightRifleBoxToy ]
+
+
+# #shotgun
+- type: entity
+  id: MagazineShotgunCaps
+  parent: BaseMagazineShotgunToy #can't parent BaseMagazineToyCaps cuz shotgun uses unique ones
+  suffix: Toy, CapsFilled
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunCaps
+    - type: Sprite
+      layers:
+        - state: pellets
+          map: ["enum.GunVisualLayers.Base"]
+
+- type: entity
+  id: MagazineShotgunFoam
+  parent: BaseMagazineShotgunToy 
+  suffix: Toy, FoamFilled
+  components:
+    - type: BallisticAmmoProvider
+      proto: ShellShotgunFoam
+    - type: Sprite
+      layers:
+        - state: pellets
+          map: ["enum.GunVisualLayers.Base"]
+
+# #filled mags (with foam) =================
+# #BASE foam mag
+- type: entity
+  id: BaseMagazineToyFoam
+  parent: BaseMagazineToy
+  abstract: true
+  suffix: Toy, FoamFilled
+  components:
+    - type: BallisticAmmoProvider
+      proto: BulletFoam
+
+# #pistol
+- type: entity
+  id: MagazinePistolFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistol ]
+  components:
+    - type: Sprite
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolHighCapacityFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistolHighCapacityToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolSubMachineGunFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistolSubMachineGunToy ]
+  components:
+    - type: Sprite
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazinePistolCaselessRifleFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazinePistolCaselessRifleToy ]
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+# #LMG
+- type: entity
+  id: MagazineLightRifleBoxFoam
+  parent: [ BaseMagazineToyFoam, BaseMagazineLightRifleBoxToy ]
+
+#region GUNS bEGIN
+####
+- type: entity
+  id: BaseGunToy
+  suffix: Toy
+  abstract: true
+  components:
+  - type: ScannableForPoints
+    points: 0
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 0
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud # Goobstation ^
+  - type: GunExecutionBlacklist
+  - type: PacifismAllowedGun
+  - type: Gun
+    clumsyProof: true
+
+- type: entity
+  parent: [ BaseGunToy, WeaponLauncherChinaLake ]
+  id: WeaponLauncherChinaLakeToy
+  description: PLOOP. HONK! Wait, what?
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - ToyGrenade
+    capacity: 3
+    proto: GrenadeToy #still a bit violent, make explode into foam darts instead
+    soundInsert:      #...nah
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+
+- type: entity
+  parent: [ BaseGunToy, WeaponSubMachineGunC20r ]
+  id: WeaponSubMachineGunC20rToy
+  description: A firearm that is often used by the infamous nuclear operatives. Uses ...uhh, foam ammo?
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolSubMachineGunCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolSubMachineGunToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
+
+- type: entity
+  parent: [ BaseGunToy, WeaponShotgunBulldog ]
+  id: WeaponShotgunBulldogToy
+  description: It's a magazine-fed shotgun designed for close quarters jokes.
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineShotgunCaps
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineShotgunToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+
+- type: entity
+  name: L6 SAW
+  id: WeaponLightMachineGunL6Toy
+  parent: [ BaseGunToy, WeaponLightMachineGunL6 ]
+  description: A rather traditionally made LMG with a pleasantly lacquered wooden pistol grip. This one feels light. SHOW THEM REAL DAKKA.
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineLightRifleBoxCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineLightRifleBoxToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
+
+- type: entity
+  name: viper
+  parent: [ BaseGunToy, WeaponPistolViper ]
+  id: WeaponPistolViperToy
+  description: A small, easily concealable, but somewhat underpowered capgun. Retrofitted with a fully automatic receiver.
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolHighCapacityCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
+  - type: Tag
+    tags:
+    - Sidearm
+    - ToySidearm
+
+- type: entity
+  parent: [ BaseGunToy, WeaponRevolverPython ]
+  id: WeaponRevolverPythonToy
+  description: A robust revolver favoured by Donk Co. agents. Uses .45 bananium ammo.
+  components:
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - CartridgeCap
+        - SpeedLoaderCap
+    proto: CartridgeCap
+  - type: Tag
+    tags:
+    - Sidearm
+    - ToySidearm
+
+- type: entity
+  name: cobra
+  parent: [ BaseGunToy, WeaponPistolCobra ]
+  id: WeaponPistolCobraToy
+  description: A rugged, robust operator handgun with inbuilt silencer. Where does casings come from?!
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolCaselessRifleCaps
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistolCaselessRifleToy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCap
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeCap
+            - BulletFoam
+
+- type: entity
+  name: Kardashev-Mosin
+  parent: [ BaseGunToy, WeaponSniperMosin ]
+  id: WeaponSniperMosinToy
+  description: A weapon for hunting, or the clown's endless maints warfare against security.
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 0
+    angle: 0
+    wideAnimationRotation: -135
+    soundHit:
+      collection: MetalThud
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeCap
+    whitelist:
+      tags:
+        - CartridgeCap
+        - BulletFoam
+
+- type: entity
+  name: Hristov
+  parent: [ BaseGunToy, BaseWeaponSniper, BaseGunWieldable ]
+  id: WeaponSniperHristovToy
+  description: A portable anti-materiel rifle. The scope is made from a glass bottle bottom. Go and do Boom! HEADSHOT!
+  components:
+  - type: Gun
+    # fireRate: 0.4 # Goobstation
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+    resetOnHandSelected: false # Goobstation - quickscope pro
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      # - CartridgeAntiMaterielToy
+      - CartridgeCap
+      - BulletFoam
+    capacity: 5
+    proto: CartridgeCap #CartridgeAntiMaterielToyStun
+#region funny turret
+
+- type: entity
+  id: PelletShotgunSpreadCapsThree
+  categories: [ HideSpawnMenu ]
+  parent: PelletShotgunCaps
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunCaps
+    count: 3
+    spread: 10
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretFunny
+  description: A ballistic machine gun auto-turret. Spreads joy and sillyness, can be repaired by a wrench.
+  suffix: Theatre
+  components:
+  - type: Repairable
+    qualityNeeded: "Anchoring"
+    doAfterDelay: 3
+  - type: Gun
+    fireRate: 1
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+  - type: BallisticAmmoProvider
+    proto: PelletShotgunSpreadCapsThree
+    capacity: 69
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+  - type: TurretTargetSettings
+    exemptAccessLevels:
+    - Theatre
+  - type: TriggerWhenEmpty
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 250
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:TriggerBehavior
+  - type: SpawnOnTrigger
+    proto: PuddleSpaceLube
+
+- type: entity
+  name: funny electrical toolbox
+  suffix: Theatre, Turret
+  parent: ToolboxElectrical
+  id: ToolboxElectricalTurretTheatre
+  description: A toolbox typically stocked with electrical gear. It beckons you to hit it with a tool in a funny location.
+  components:
+  - type: StorageFill
+    contents:
+    - id: Wrench
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,0,1
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 1
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              WeaponTurretFunny:
+                min: 1
+                max: 1
+  - type: StaticPrice
+    price: 69
+
+
+
+#region table and bags
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledShotgunToy
+  name: Bulldog bundle
+  description: "Lean and mean: Contains the popular Bulldog Shotgun, 3 12g slug drum and 6 12g buckshot drums for best airsoft match."
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponShotgunBulldogToy
+      - id: MagazineShotgunCaps
+        amount: 3
+      - id: MagazineShotgunFoam
+        amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledSMGToy
+  name: C-20r bundle
+  description: "Old faithful: The classic C-20r Submachine Gun, bundled with eight magazines for best pranks!"
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponSubMachineGunC20rToy
+      - id: MagazinePistolSubMachineGunCaps
+        amount: 3 #more fun :p
+      - id: MagazinePistolSubMachineGunFoam
+        amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledRevolverToy
+  name: Python bundle
+  description: "Go loud and proud with a fully loaded capgun Python, bundled with four speed loaders."
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponRevolverPythonToy
+      - id: SpeedLoaderCap
+        amount: 3
+      - id: BoxCartridgeCap
+        amount: 1
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledLMGToy
+  name: L6 Saw bundle
+  description: "More dakka: The iconic L6 lightmachinegun, bundled with 4 box magazines. Of course, it's a plastic!"
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponLightMachineGunL6Toy
+      - id: MagazineLightRifleBoxCaps
+        amount: 3
+      - id: MagazineLightRifleBoxFoam
+        amount: 1
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
+  name: China-Lake bundle
+  description: "An old China-Lake grenade launcher bundled with 14 rounds of various honking capability."
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+      - id: WeaponLauncherChinaLakeToy
+      - id: GrenadeToy
+        amount: 20
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateAmmo
+  id: ClothingBackpackDuffelSyndicateAmmoFilledToy
+  name: ammo bundle
+  description: "Reloading! Contains 4 magazines for the C-20r, 4 drums for the Bulldog, 2 ammo boxes for the L6 SAW and spare grenades for China Lake."
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+      - id: MagazinePistolSubMachineGunCaps
+        amount: 4
+      - id: MagazineShotgunCaps
+        amount: 4
+      - id: MagazineLightRifleBoxCaps
+        amount: 2
+      - id: GrenadeToy
+        amount: 6
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponPistolCobraToy
+  name: Cobra bundle
+  description: "All you need for covert pranking operations in maints"
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPistolCobraToy
+    - id: MagazinePistolCaselessRifleCaps
+      amount: 2
+    - id: MagazinePistolCaselessRifleFoam
+      amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy
+  name: Viper bundle
+  description: "Everything you need for John Week cosplay in this bundle"
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponPistolViperToy
+    - id: MagazinePistolHighCapacityCaps
+      amount: 2
+    - id: MagazinePistolHighCapacityFoam
+      amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy
+  name: Mosin bundle
+  description: "Prepare for maints warfare."
+  suffix: Toy, Bundle
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSniperMosinToy
+    - id: BoxCartridgeCap
+    - id: BoxDonkSoftBox
+
+- type: entity
+  id: BriefcaseSyndieSniperToyBundleFilled
+  parent: BriefcaseSyndie
+  suffix: Toy, Bundle
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,6,3
+  - type: StorageFill
+    contents:
+      - id: WeaponSniperHristovToy
+      - id: BoxCartridgeCap
+      - id: BoxDonkSoftBox
+      - id: ClothingUniformJumpsuitTacticool
+      - id: ClothingHeadHatSyndie
+
+- type: entityTable
+  id: AllToyWeaponsBundleTable
+  table: !type:GroupSelector
+    children:
+    - id: ClothingBackpackDuffelSyndicateFilledShotgunToy
+    - id: ClothingBackpackDuffelSyndicateFilledSMGToy
+    - id: ClothingBackpackDuffelSyndicateFilledRevolverToy
+    - id: ClothingBackpackDuffelSyndicateFilledLMGToy
+    - id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
+    - id: ClothingBackpackDuffelSyndicateFilledWeaponPistolCobraToy
+    - id: ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy
+    - id: ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy
+    - id: BriefcaseSyndieSniperToyBundleFilled
+    - id: ToolboxElectricalTurretTheatre

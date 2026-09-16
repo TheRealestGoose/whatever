@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by TheGoose3375 (Discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+    "states": [
+    {
+        "name": "darksteel",
+        "directions": 4
+    },
+    {
+        "name": "darksteel-corner",
+        "directions": 4
+    },
+    {
+        "name": "darksteel-round",
+        "directions": 4
+    },
+    {
+        "name": "darksteel-small",
+        "directions": 4
+    },
+    {
+        "name": "whitesteel",
+        "directions": 4
+    },
+    {
+        "name": "whitesteel-corner",
+        "directions": 4
+    },
+    {
+        "name": "whitesteel-round",
+        "directions": 4
+    },
+    {
+        "name": "whitesteel-small",
+        "directions": 4
+    },
+    {
+        "name": "steel",
+        "directions": 4
+    },
+    {
+        "name": "steel-corner",
+        "directions": 4
+    },
+    {
+        "name": "steel-round",
+        "directions": 4
+    },
+    {
+        "name": "steel-small",
+        "directions": 4
+    },
+    {
+        "name": "wood",
+        "directions": 4
+    },
+    {
+        "name": "wood-corner",
+        "directions": 4
+    },
+    {
+        "name": "wood-round",
+        "directions": 4
+    },
+    {
+        "name": "wood-small",
+        "directions": 4
+    }
+  ]
+}

@@ -498,6 +498,9 @@
     slots:
     - HEAD
     quickEquip: false
+  - type: Currency #goose
+    price:
+      TrashBananaPeel: 1
 
 - type: entity
   parent: TrashBananaPeel
@@ -523,6 +526,9 @@
           Quantity: 1
         - ReagentId: Carbon
           Quantity: 2
+  - type: Currency #goose
+    price:
+      TrashBananaPeel: 2
 
 - type: entity
   parent: TrashBananaPeel
@@ -543,6 +549,9 @@
       path: /Audio/Effects/slip.ogg
       params:
         volume: -100
+  - type: Currency #goose
+    price:
+      TrashBananaPeel: 4
 
 - type: entity
   parent: TrashBananaPeel
@@ -559,6 +568,9 @@
   - type: Clothing
     sprite: Objects/Materials/materials.rsi
     equippedPrefix: peel
+  - type: Currency #goose
+    price:
+      TrashBananaPeel: 5
 
 - type: entity
   name: carrot

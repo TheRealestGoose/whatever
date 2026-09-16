@@ -1,0 +1,731 @@
+#region Base
+
+- type: entity
+  id: RackShelfBase #metal
+  parent: BaseStructure
+  name: metal rack shelf
+  description: A hardware storage rack with shelves.
+  abstract: true
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,0.2,0.49,-0.2"
+        density: 70
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Transform
+  - type: Appearance
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: Pullable
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+
+- type: entity
+  id: RackShelfPlasticBase #plastic
+  parent: RackShelfBase
+  name: plastic rack shelf
+  description: A hardware storage rack with shelves.
+  abstract: true
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,0.2,0.49,-0.2"
+        density: 65
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Damageable
+    damageModifierSet: FlimsyMetallic #doesnt exist for plastic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak #plasticbreak does not exist
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetPlastic1:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: RackShelfWoodBase #wood
+  parent: RackShelfBase
+  name: wood rack shelf
+  description: A hardware storage rack with shelves.
+  abstract: true
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,0.2,0.49,-0.2"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+#region Sizes
+
+- type: entity
+  id: BaseRackSingle
+  description: A hardware storage rack with shelves. Has a single shelf.
+  suffix: Single
+  abstract: true
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,2 #one shelf
+    # - 0,4,9,6
+    # - 0,8,9,10
+    maxItemSize: Large
+  - type: StorageFillVisualizer
+    maxFillLevels: 4
+    fillBaseName: box-single
+
+- type: entity
+  id: BaseRackTwo
+  description: A hardware storage rack with shelves. Has two shelves.
+  suffix: Two
+  abstract: true
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,2 #two shelf
+    - 0,4,9,6
+    # - 0,8,9,10
+    maxItemSize: Large
+  - type: StorageFillVisualizer
+    maxFillLevels: 5
+    fillBaseName: box-two
+
+- type: entity
+  id: BaseRackThree
+  description: A hardware storage rack with shelves. Has three shelves.
+  abstract: true
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,2 #full shelf
+    - 0,4,9,6
+    - 0,8,9,10
+    maxItemSize: Large
+  - type: StorageFillVisualizer
+    maxFillLevels: 7
+    fillBaseName: box
+
+#region Racks
+
+#single
+- type: entity
+  id: RackShelfSingle
+  parent: [RackShelfBase, BaseRackSingle]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon-steel-single
+      - state: box-single-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelfSingle
+
+- type: entity
+  id: RackShelfPlasticSingle
+  parent: [RackShelfPlasticBase, BaseRackSingle]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon-single
+      - state: box-single-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelfPlasticSingle
+
+- type: entity
+  id: RackShelfWoodSingle
+  parent: [RackShelfWoodBase, BaseRackSingle]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon-wood-single
+      - state: box-single-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelfWoodSingle
+
+#two
+- type: entity
+  id: RackShelfTwo
+  parent: [RackShelfBase, BaseRackTwo]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon-steel-two
+      - state: box-two-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelfTwo
+
+- type: entity
+  id: RackShelfPlasticTwo
+  parent: [RackShelfPlasticBase, BaseRackTwo]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon-two
+      - state: box-two-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelfPlasticTwo
+
+- type: entity
+  id: RackShelfWoodTwo
+  parent: [RackShelfWoodBase, BaseRackTwo]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon-wood-two
+      - state: box-two-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelfWoodTwo
+
+#three
+- type: entity
+  id: RackShelf
+  parent: [RackShelfBase, BaseRackThree]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon-steel
+      - state: box-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelf
+
+- type: entity
+  id: RackShelfPlastic
+  parent: [RackShelfPlasticBase, BaseRackThree]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon
+      - state: box-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelfPlastic
+
+- type: entity
+  id: RackShelfWood
+  parent: [RackShelfWoodBase, BaseRackThree]
+  components:
+  - type: Sprite
+    sprite: _GooseStation/warehouse_racks.rsi
+    layers:
+      - state: icon-wood
+      - state: box-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Construction
+    graph: RackShelf
+    node: RackShelfWood
+
+#region Filled
+
+- type: entity
+  id: RackShelfFilledSingle
+  suffix: Single, Filled, Random
+  parent: [RackShelfSingle, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFilledPlasticSingle
+  suffix: Single, Filled, Random
+  parent: [RackShelfPlasticSingle, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFilledWoodSingle
+  suffix: Single, Filled, Random
+  parent: [RackShelfWoodSingle, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFilledTwo
+  suffix: Two, Filled, Random
+  parent: [RackShelfTwo, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFilledPlasticTwo
+  suffix: Two, Filled, Random
+  parent: [RackShelfPlasticTwo, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFilledWoodTwo
+  suffix: Two, Filled, Random
+  parent: [RackShelfWoodTwo, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFilled
+  suffix: Filled, Random
+  parent: [RackShelf, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFilledPlastic
+  suffix: Filled, Random
+  parent: [RackShelfPlastic, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFilledWood
+  suffix: Filled, Random
+  parent: [RackShelfWood, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFiller
+  abstract: true
+  components:
+    - type: StorageFill
+      contents:
+        #goosestation additions
+        - id: CybersunFlippo
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: ClothingMaskGasVoiceChameleon
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: PlushieGoose
+          prob: 0.01
+        - id: ClothingNeckOldClothWrap
+          prob: 0.01
+        - id: Beartrap
+          prob: 0.025
+        - id: PlushieSpaniard
+          prob: 0.01
+        - id: BoxCardboard
+          prob: 0.25
+        - id: MaterialCardboard10
+          prob: 0.25
+        - id: PosterLegal #posters
+          prob: 0.25
+        - id: PosterContraband
+          prob: 0.2
+        #ends here
+        - id: Lantern
+          prob: 0.33
+        - id: FlashlightLantern
+          prob: 0.33
+        - id: Wirecutter
+          prob: 0.33
+        - id: Screwdriver
+          prob: 0.33
+        - id: Wrench
+          prob: 0.33
+        - id: Crowbar
+          prob: 0.50
+        - id: Welder
+          prob: 0.33
+        - id: trayScanner
+          prob: 0.2
+        - id: GasAnalyzer
+          prob: 0.2
+        - id: GeigerCounter
+          prob: 0.2
+        - id: Multitool
+          prob: 0.10
+        - id: ClothingHandsGlovesColorYellow
+          prob: 0.05
+        - id: ClothingHandsGlovesFingerlessInsulated
+          prob: 0.07
+        - id: ClothingHeadHatCone
+          prob: 0.2
+        - id: WeaponFlareGun
+          prob: 0.1
+        - id: ClothingHandsGlovesColorYellowBudget
+          prob: 0.25
+        - id: ClothingHeadHatWelding
+          prob: 0.2
+        - id: ModularReceiver
+          prob: 0.1
+        - id: DrinkSpaceGlue
+          prob: 0.20
+        - id: DrinkSpaceLube
+          prob: 0.20
+        - id: CableApcStack10
+          prob: 0.2
+        - id: CableMVStack10
+          prob: 0.2
+        - id: CableHVStack10
+          prob: 0.2
+        - id: Wristwatch
+          prob: 0.05
+        # hardhat loot
+        - id: null
+          prob: 0.3
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatWhite
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatYellow
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatRed
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatOrange
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatBlue
+          prob: 0.1
+          orGroup: hardhat
+        # battery loot
+        - id: PowerCellSmall
+          prob: 0.33
+          orGroup: battery
+        - id: PowerCellMedium
+          prob: 0.2
+          orGroup: battery
+        - id: PowerCellHigh
+          prob: 0.05
+          orGroup: battery
+        # plushie loot
+        - id: null
+          prob: 0.80
+          orGroup: shark
+        - id: PlushieSharkPink
+          prob: 0.05
+          orGroup: shark
+        - id: PlushieSharkGrey
+          prob: 0.05
+          orGroup: shark
+        - id: PlushieSharkBlue
+          prob: 0.05
+          orGroup: shark
+        # part loot
+        - id: null
+          prob: 0.60
+          orGroup: part
+        - id: MicroManipulatorStockPart
+          prob: 0.2
+          orGroup: part
+        - id: MicroManipulatorStockPart
+          prob: 0.2
+          orGroup: part
+        - id: MicroManipulatorStockPart
+          prob: 0.2
+          orGroup: part
+        # Syndicate loot
+        - id: null
+          prob: 0.95
+          orGroup: syndiemaintloot
+        - id: ClothingUniformJumpskirtOperative
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: ClothingUniformJumpsuitOperative
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: CyberPen
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: CigPackSyndicate
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: ClothingShoesBootsCombatFilled
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: BalloonSyn
+          prob: 0.005
+          orGroup: syndiemaintloot
+
+#region RandomMarkers
+#any
+- type: entity
+  id: RandomRackShelfSpawner
+  name: random rack shelf spawner
+  parent: MarkerBase
+  suffix: Empty, Any
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: icon
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomRackShelfTable
+
+- type: entity
+  id: RandomRackShelfFilledSpawner
+  name: random filled rack shelf spawner
+  parent: MarkerBase
+  suffix: Filled, Any
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: icon
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: box-6
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomFilledRackShelfTable
+
+#metal
+- type: entity
+  id: RandomRackShelfMetalSpawner
+  name: random metal rack shelf spawner
+  parent: MarkerBase
+  suffix: Empty, Metal
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: icon-steel-two
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomMetalRackShelfTable
+
+- type: entity
+  id: RandomRackShelfFilledMetalSpawner
+  name: random filled metal rack shelf spawner
+  parent: MarkerBase
+  suffix: Filled, Metal
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: icon-steel-two
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: box-two-4
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomFilledMetalRackShelfTable
+
+#plastic
+- type: entity
+  id: RandomRackShelfPlasticSpawner
+  name: random plastic rack shelf spawner
+  parent: MarkerBase
+  suffix: Empty, Plastic
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: icon-two
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomPlasticRackShelfTable
+
+- type: entity
+  id: RandomRackShelfFilledPlasticSpawner
+  name: random filled plastic rack shelf spawner
+  parent: MarkerBase
+  suffix: Filled, Plastic
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: icon-two
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: box-two-4
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomFilledPlasticRackShelfTable
+
+#wood
+- type: entity
+  id: RandomRackShelfWoodSpawner
+  name: random wood rack shelf spawner
+  parent: MarkerBase
+  suffix: Empty, Wood
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: icon-wood-two
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomWoodRackShelfTable
+
+- type: entity
+  id: RandomRackShelfFilledWoodSpawner
+  name: random filled wood rack shelf spawner
+  parent: MarkerBase
+  suffix: Filled, Wood
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: icon-wood-two
+    - sprite: _GooseStation/warehouse_racks.rsi
+      state: box-two-4
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomFilledWoodRackShelfTable
+
+#tables
+- type: entityTable
+  id: RandomRackShelfTable
+  table: !type:GroupSelector
+    children:
+    - id: RackShelfSingle
+    - id: RackShelfTwo
+    - id: RackShelf
+    - id: RackShelfPlasticSingle
+    - id: RackShelfPlasticTwo
+    - id: RackShelfPlastic
+    - id: RackShelfWoodSingle
+    - id: RackShelfWoodTwo
+    - id: RackShelfWood
+
+- type: entityTable
+  id: RandomMetalRackShelfTable
+  table: !type:GroupSelector
+    children:
+    - id: RackShelfSingle
+    - id: RackShelfTwo
+    - id: RackShelf
+
+- type: entityTable
+  id: RandomPlasticRackShelfTable
+  table: !type:GroupSelector
+    children:
+    - id: RackShelfPlasticSingle
+    - id: RackShelfPlasticTwo
+    - id: RackShelfPlastic
+
+- type: entityTable
+  id: RandomWoodRackShelfTable
+  table: !type:GroupSelector
+    children:
+    - id: RackShelfWoodSingle
+    - id: RackShelfWoodTwo
+    - id: RackShelfWood
+
+- type: entityTable
+  id: RandomFilledRackShelfTable
+  table: !type:GroupSelector
+    children:
+    - id: RackShelfFilledSingle
+    - id: RackShelfFilledTwo
+    - id: RackShelfFilled
+    - id: RackShelfFilledPlasticSingle
+    - id: RackShelfFilledPlasticTwo
+    - id: RackShelfFilledPlastic
+    - id: RackShelfFilledWoodSingle
+    - id: RackShelfFilledWoodTwo
+    - id: RackShelfFilledWood
+
+- type: entityTable
+  id: RandomFilledMetalRackShelfTable
+  table: !type:GroupSelector
+    children:
+    - id: RackShelfFilledSingle
+    - id: RackShelfFilledTwo
+    - id: RackShelfFilled
+
+- type: entityTable
+  id: RandomFilledPlasticRackShelfTable
+  table: !type:GroupSelector
+    children:
+    - id: RackShelfFilledPlasticSingle
+    - id: RackShelfFilledPlasticTwo
+    - id: RackShelfFilledPlastic
+
+- type: entityTable
+  id: RandomFilledWoodRackShelfTable
+  table: !type:GroupSelector
+    children:
+    - id: RackShelfFilledWoodSingle
+    - id: RackShelfFilledWoodTwo
+    - id: RackShelfFilledWood
