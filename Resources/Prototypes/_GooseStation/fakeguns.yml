@@ -557,7 +557,7 @@
   - type: TurretTargetSettings
     exemptAccessLevels:
     - Theatre
-  - type: TriggerWhenEmpty
+  - type: TriggerOnEmptyGunshot
   - type: Destructible
     thresholds:
     - trigger:
