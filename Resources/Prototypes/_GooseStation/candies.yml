@@ -1,6 +1,6 @@
 #region Base
 - type: entity
-  parent: FoodBase
+  parent: BaseItem
   id: FoodSnackCandyWrappedBase
   name: wrapped candy
   description: A candy, still in its wrapper.

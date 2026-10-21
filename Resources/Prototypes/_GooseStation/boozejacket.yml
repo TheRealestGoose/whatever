@@ -32,9 +32,6 @@
   - type: Appearance
   - type: Item
     size: Ginormous
-  - type: Tag
-    tags:
-      - DrinkCup #?
   # - type: Openable
   #   sound:
   #     collection: bottleOpenSounds
@@ -141,62 +138,3 @@
     materialComposition:
       Plastic: 500
       Steel: 50
-
-# - type: entity
-#   id: BeerCoatNozzle
-#   parent: BaseItem
-#   name: booze coat nozzle
-#   description: A specialized nozzle intended for pouring a cold one.
-#   components:
-#   - type: Sprite
-#     sprite: Objects/Weapons/Guns/Basic/extinguishernozzle.rsi
-#     state: icon
-#   - type: Item
-#     sprite: Objects/Weapons/Guns/Basic/extinguishernozzle.rsi
-#     size: Normal
-#   - type: FirefighterTankRefillable
-#     externalContainer: true
-#     targetSlot: OUTERCLOTHING
-#     providerWhitelist:
-#       tags:
-#       - DrinkCup
-#   - type: Tag
-#     tags:
-#     - Nozzle
-
-#   - type: Spray
-#     transferAmount: 15
-#     pushbackAmount: 60
-#     spraySound:
-#       path: /Audio/Effects/extinguish.ogg
-#     sprayedPrototype: ExtinguisherSpray
-#     vaporAmount: 5
-#     vaporSpread: 120
-#     sprayDistance: 5
-#     sprayVelocity: 2.0
-#     externalContainer: true
-#     targetSlot: BACK
-#     providerWhitelist:
-#       tags:
-#       - NozzleBackTank
-#       - AtmosBackTank
-
-#   - type: PacifismAllowedGun
-#   - type: Gun
-#     fireRate: 1
-#     selectedMode: SemiAuto
-#     availableModes:
-#     - SemiAuto
-#     - FullAuto
-#     soundGunshot:
-#       path: /Audio/Effects/thunk.ogg
-#     soundEmpty:
-#       path: /Audio/Items/hiss.ogg
-#     clumsyProof: true
-#   - type: ClothingSlotAmmoProvider
-#     targetSlot: BACK
-#     providerWhitelist:
-#       tags:
-#       - AtmosBackTank
-#   - type: UseDelay
-#     delay: 0.5

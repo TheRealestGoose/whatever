@@ -8,8 +8,8 @@
       sprite: _GooseStation/beartrap.rsi
       drawdepth: SmallMobs # if mice can hide under tables, so can mousetraps
       layers:
-        - state: Beartrap
-          map: ["enum.ToggleableVisuals.Layer"]
+      - state: Beartrap
+        map: ["enum.ToggleableVisuals.Layer"]
     - type: StepTrigger
       intersectRatio: 0.2
       requiredTriggeredSpeed: 2
@@ -17,6 +17,15 @@
         types:
         - Mousetrap
     - type: Mousetrap
+    - type: ItemToggle
+      soundActivate: "/Audio/Items/Handcuffs/cuff_end.ogg"
+      soundDeactivate: "/Audio/Weapons/slash.ogg"
+      popupActivate: mousetrap-on-activate
+      popupDeactivate: mousetrap-on-deactivate
+    - type: UseDelay
+    - type: ItemToggleOnTrigger
+      canActivate: false
+      showPopup: false # only show the popup when arming/disarming the trap in your hand
     - type: TriggerOnStepTrigger
     - type: DamageOnTrigger #DamageUserOnTrigger
       targetUser: true
@@ -24,14 +33,9 @@
         types:
           Blunt: 10 # base damage, scales based on mass
           Slash: 30
-    - type: StunOnTrigger
-      stunAmount: 3
-      refresh: false
-    - type: EmitSoundOnUse
-      sound: "/Audio/Items/Handcuffs/cuff_end.ogg"
-      handle: false
-    - type: EmitSoundOnTrigger
-      sound: "/Audio/Weapons/slash.ogg"
+    # - type: StunOnTrigger
+    #   stunAmount: 3
+    #   refresh: false
     - type: Item
       size: Normal
       sprite: _GooseStation/beartrap.rsi
@@ -62,13 +66,9 @@
           density: 30
           mask:
             - ItemMask
-    - type: Rotatable
     - type: PhysicalComposition #Goobstation - Recycle update
       materialComposition:
-        Steel: 37
-    - type: Tag
-      tags:
-        - DroneUsable # Goobstation
+        Steel: 35
 
 - type: entity
   name: beartrap
@@ -81,8 +81,8 @@
     layers:
     - state: BeartrapArmed
       map: ["enum.ToggleableVisuals.Layer"]
-  - type: Mousetrap
-    isActive: true
+  - type: ItemToggle
+    activated: true
 
 - type: entity
   id: BeartrapBoxGoose

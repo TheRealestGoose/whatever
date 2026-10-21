@@ -163,8 +163,8 @@
   category: construction-category-misc
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  name: unroll corporate poster
-  description: You are not immune to propaganda
+  name: unroll-corporate-poster
+  description: you-are-not-immune-to-propaganda
 
 - type: construction
   id: PosterContraband
@@ -174,8 +174,8 @@
   category: construction-category-misc
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  name: unroll questionable poster
-  description: You are not immune to propaganda
+  name: unroll-questionable-poster
+  description: you-are-not-immune-to-propaganda
 
 - type: constructionGraph
   id: Poster
@@ -186,7 +186,7 @@
         - to: Legit
           steps:
             - tag: PosterLegal
-              name: rolled up corporate poster
+              name: rolled-up-corporate-poster
               icon:
                 sprite: Structures/Wallmounts/posters.rsi
                 state: rolled_legit
@@ -194,7 +194,7 @@
         - to: Contraband
           steps:
             - tag: PosterContra
-              name: rolled up questionable poster
+              name: rolled-up-questionable-poster
               icon:
                 sprite: Structures/Wallmounts/posters.rsi
                 state: rolled_contraband

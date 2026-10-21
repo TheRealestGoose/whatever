@@ -93,8 +93,6 @@
   graph: BikeHornBadToTheBone
   startNode: start
   targetNode: BikeHornBadToTheBone
-  name: bad to the bike horn
-  description: A bike horn that plays a sick guitar riff.
   category: construction-category-misc
   objectType: Item
 

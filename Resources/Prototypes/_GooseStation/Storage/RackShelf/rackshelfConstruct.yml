@@ -3,8 +3,8 @@
   graph: RackShelf
   startNode: start
   targetNode: RackShelfSingle
-  name: metal rack shelf
-  description: A hardware storage rack with shelves. You can attach two additional shelves to it!
+  name: metal-rack-shelf
+  description: you-can-attach-two-additional-shelves-to-it
   icon:
     sprite: _GooseStation/rack_shelf.rsi
     state: icon
@@ -20,8 +20,8 @@
   graph: RackShelf
   startNode: start
   targetNode: RackShelfPlasticSingle
-  name: plastic rack shelf
-  description: A hardware storage rack with shelves. You can attach two additional shelves to it!
+  name: plastic-rack-shelf
+  description: you-can-attach-two-additional-shelves-to-it
   icon:
     sprite: _GooseStation/rack_shelf.rsi
     state: icon
@@ -37,8 +37,8 @@
   graph: RackShelf
   startNode: start
   targetNode: RackShelfWoodSingle
-  name: wood rack shelf
-  description: A hardware storage rack with shelves. You can attach two additional shelves to it!
+  name: wood-rack-shelf
+  description: you-can-attach-two-additional-shelves-to-it
   icon:
     sprite: _GooseStation/rack_shelf.rsi
     state: icon
