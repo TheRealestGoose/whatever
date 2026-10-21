@@ -156,7 +156,7 @@
   abstract: true
   components:
   - type: Store
-    name: "Honkmother's favors"
+    name: uplink-clown-name
     categories:
     - UplinkWearablesClown
     - AdditionalClown
@@ -169,7 +169,7 @@
 
 - type: listing
   id: FoodPieBananaCreamSet
-  description: The most dangerous weapon in the entire galaxy! DANGER 100%
+  description: food-pie-banana-cream-set-desc
   productEntity: FoodPieBananaCream
   cost:
     TrashBananaPeel: 20
@@ -197,7 +197,7 @@
 
 - type: listing
   id: CrayonRainbow
-  description: Another crayon! Go write something bad infront of security, you know you want to.
+  description: crayon-rainbow-desc
   productEntity: CrayonRainbow
   cost:
     TrashBananaPeel: 10
@@ -214,7 +214,7 @@
 
 - type: listing
   id: UplinkHonkImplanterSet
-  name: Honk-implanter
+  name: honk-implant-name
   productEntity: BikeHornImplanter
   cost:
     TrashBananaPeel: 5
@@ -223,7 +223,7 @@
 
 - type: listing
   id: VehicleClowncarTraineeSet
-  description: Insert the thing you cherish most (bikehorn) in the slot under the wheel to start the clown-train. This car has a built-in radio. Run over a security officer!
+  description: behicle-clowncar-trainee-set-desc
   productEntity: VehicleClowncarTrainee
   cost:
     TrashBananaPeel: 125
@@ -235,7 +235,7 @@
 
 - type: listing
   id: MobHonkBotSet
-  name: Absolute power
+  name: mob-honk-bot-set-name
   productEntity: MobHonkBot
   cost:
     TrashBananaPeel: 100
@@ -268,7 +268,7 @@
 
 - type: listing
   id: ClothingBackpackDuffelSyndicateCostumeClownSet
-  description: A duffelbag containing a complete set of clown clothing, including a clown PDA and ID card. You can make an army of clowns!
+  description: clown-costume-set
   productEntity: ClothingBackpackDuffelSyndicateCostumeClown
   cost:
     TrashBananaPeel: 10
@@ -285,7 +285,7 @@
 
 - type: listing
   id: CigPackSyndicateSet
-  description: The hard life of a clown, sit and smoke with the mime...
+  description: interdynes-cigs-set
   productEntity: CigPackSyndicate
   cost:
     TrashBananaPeel: 10
@@ -294,7 +294,7 @@
 
 - type: listing
   id: SoapOmegaSet
-  description: I got the power that my mother never dreamed of. Glory to HonkMother!
+  description: omega-soap-iii
   productEntity: SoapOmega
   cost:
     TrashBananaPeel: 110
@@ -351,7 +351,7 @@
 
 - type: listing
   id: SpaceCashCounterfeit10Set
-  description: Looks real at a glance.
+  description: counterfeit-cash-10
   productEntity: SpaceCashCounterfeit10
   cost:
     TrashBananaPeel: 10
@@ -368,7 +368,7 @@
 
 - type: listing
   id: FloorTileItemCarpetClown
-  description: "Spread the influence."
+  description: clown-carpet-desc
   productEntity: FloorTileItemCarpetClown
   cost:
     TrashBananaPeel: 1
@@ -413,8 +413,8 @@
 
 - type: listing
   id: ChemistryBottleCrapoToxinSet
-  name: crapium
-  description: 30 units of crapotoxin, makes people fart. Foolish crewmember! I laced yo shit!
+  name: crapo-toxin-set-name
+  description: crapo-toxin-set-desc
   productEntity: ChemistryBottleCrapoToxin
   cost:
     TrashBananaPeel: 30
@@ -423,8 +423,8 @@
 
 - type: listing
   id: ChemistryBottleLaughterSet
-  name: funny juice
-  description: 30 units of laughter, makes people laugh. Foolish crewmember! I laced yo shit!
+  name: laughter-set-name
+  description: laughter-set-desc
   productEntity: ChemistryBottleLaughter
   cost:
     TrashBananaPeel: 30
@@ -542,6 +542,8 @@
 
 - type: entity
   id: LockerClownFilled
+  name: clown locker
+  description: "This is where the magic happens."
   suffix: Filled
   parent: LockerBaseSecure
   components:
@@ -559,6 +561,8 @@
 
 - type: entity
   id: LockerMimeFilled
+  name: mime locker
+  description: ".... .. ..... ... ..... ....... ."
   suffix: Filled
   parent: LockerMime
   components:

@@ -64,7 +64,7 @@
   abstract: true
   components:
   - type: Store
-    name: "Le Epic Store!11!"
+    name: uplink-goose-name
     categories:
     - GooseStationStore
     currencyWhitelist:

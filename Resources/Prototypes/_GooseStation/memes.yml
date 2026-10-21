@@ -46,8 +46,11 @@
   tileBreakChance: [0]
   tileBreakIntensity: [0]
   lightColor: White
-  texturePath: /Textures/_GooseStation/truthbomb.rsi
+  texturePath: /Textures/_GooseStation/truthboom.rsi
   fireStates: 3
+
+- type: Tag
+  id: TruthNukeTriggerer
 
 - type: entity
   id: PaperHappeningsReportTruth

@@ -1,6 +1,9 @@
 tiles-yellow-circuit-floor = yellow circuit floor
 tiles-purple-circuit-floor = purple circuit floor
 
+yellow-circuit-floor-stack = yellow-circuit floor
+purple-circuit-floor-stack = purple-circuit floor
+
 tiles-shuttle-glass-floor = shuttle glass
 
 cp14-tiles-grass = meadow grass

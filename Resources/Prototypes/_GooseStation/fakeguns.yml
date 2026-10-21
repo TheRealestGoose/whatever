@@ -30,6 +30,9 @@
     - ShellShotgunToy
     - Cartridge
 
+- type: Tag
+  id: ShellShotgunToy
+
 - type: entity
   id: ShellShotgunCaps
   parent: BaseShellShotgunToy
@@ -89,6 +92,9 @@
       tags:
       - MagazinePistolToy
 
+- type: Tag
+  id: MagazinePistolToy
+
 - type: entity
   id: BaseMagazinePistolHighCapacityToy
   parent: [ BaseMagazineToy, BaseMagazinePistolHighCapacity ]
@@ -107,6 +113,9 @@
       tags:
       - MagazinePistolSubMachineGunToy
 
+- type: Tag
+  id: MagazinePistolSubMachineGunToy
+
 - type: entity
   id: BaseMagazinePistolCaselessRifleToy
   parent: [ BaseMagazineToy, BaseMagazinePistolCaselessRifle ]
@@ -115,6 +124,9 @@
     - type: Tag
       tags:
       - MagazinePistolCaselessRifleToy
+
+- type: Tag
+  id: MagazinePistolCaselessRifleToy
 
 # #shotgun
 - type: entity
@@ -132,6 +144,9 @@
           - BulletFoam
           - ShellShotgunToy
 
+- type: Tag
+  id: MagazineShotgunToy
+
 # #LMG
 - type: entity
   id: BaseMagazineLightRifleBoxToy
@@ -141,6 +156,9 @@
   - type: Tag
     tags:
       - MagazineLightRifleBoxToy
+
+- type: Tag
+  id: MagazineLightRifleBoxToy
 
 # #filled mags (with caps) =================
 # #BASE cap mag

@@ -1,6 +1,6 @@
 - type: stack
   id: FloorTileYCircuit
-  name: yellow-circuit floor
+  name: yellow-circuit-floor-stack
   spawn: FloorTileItemYCircuit
   maxCount: 30
 
@@ -32,7 +32,7 @@
 
 - type: stack
   id: FloorTilePCircuit
-  name: purple-circuit floor
+  name: purple-circuit-floor-stack
   spawn: FloorTileItemPCircuit
   maxCount: 30
 

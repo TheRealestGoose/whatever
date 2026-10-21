@@ -69,8 +69,8 @@
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true
-    unfoldVerbText: "Show dogtags"
-    foldVerbText: "Hide dogtags"
+    unfoldVerbText: dogtag-unfold
+    foldVerbText: dogtag-fold
   - type: FoldableClothing
     foldedEquippedPrefix: hidden
     foldedHeldPrefix: hidden

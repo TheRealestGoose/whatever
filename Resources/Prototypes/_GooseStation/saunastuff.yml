@@ -25,46 +25,46 @@
   - type: Damageable
   - type: DamageRandomPopup
     popups:
-      - "Andalusia"
-      - "Antifreeze"
-      - "Arnold palmer"
-      - "B-52"
-      - "Bahama Mama"
-      - "Black Russian"
-      - "White Russian"
-      - "Kira special"
-      - "Bloody Mary"
-      - "Budget Insuls"
-      - "Cafe Latte"
-      - "Cream of Coconut"
-      - "Bloody Mary"
-      - "Bartend's Non-Alcoholic Special"
-      - "Bartend's Special"
-      - "Bartender's Ultimatum"
-      - "Ice Cream"
-      - "Iced Coffee"
-      - "Iced Green Tea"
-      - "Iced Tea"
-      - "Lemonade"
-      - "Pilk"
-      - "Posca"
-      - "Rewriter"
-      - "Root beer float"
-      - "Ray Rogers"
-      - "Shierley Temple"
-      - "Smite"
-      - "Starkist"
-      - "Tortuga"
-      - "Triple Citrus"
-      - "Tequila Sunrise"
-      - "Syndicate Bomb"
-      - "White Gilgamesh"
-      - "Pan-Galactic Gargle Blaster"
-      - "Moonshine"
-      - "Manhattan"
-      - "Irish Cream"
-      - "Irish Car Bomb"
-      - "Triple Citrus"
+      - andalusia
+      - antifreeze
+      - arnold-palmer
+      - b-52
+      - bahama-mama
+      - black-russian
+      - white-russian
+      - kira-special
+      - bloody-mary
+      - budget-insuls
+      - cafe-latte
+      - cream-of-coconut
+      - bloody-mary-2
+      - bartends-non-alcoholic-special
+      - bartends-special
+      - bartenders-ultimatum
+      - ice-cream
+      - iced-coffee
+      - iced-green-tea
+      - iced-tea
+      - lemonade
+      - pilk
+      - posca
+      - rewriter
+      - root-beer-float
+      - ray-rogers
+      - shierley-temple
+      - smite
+      - starkist
+      - tortuga
+      - triple-citrus
+      - tequila-sunrise
+      - syndicate-bomb
+      - white-gilgamesh
+      - pan-galactic-gargle-blaster
+      - moonshine
+      - manhattan
+      - irish-cream
+      - irish-car-bomb
+      - triple-citrus-2
 
 # coal pit
 - type: entity
