@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from GoonStation13 at https://github.com/goonstation/goonstation/tree/0120c2dd406c2c07d953833fe9f0237ec5801384, modified by TheGoose3375 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "solo"
+    },
+    {
+      "name": "solo_closed"
+    },
+    {
+      "name": "right"
+    },
+    {
+      "name": "right_closed"
+    },
+    {
+      "name": "middle"
+    },
+    {
+      "name": "middle_closed"
+    },
+    {
+      "name": "left"
+    },
+    {
+      "name": "left_closed"
+    }
+  ]
+}

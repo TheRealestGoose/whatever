@@ -1,0 +1,158 @@
+# Drink board
+- type: entity
+  name: drinks dartboard
+  id: TargetDartsDrinks
+  parent: BaseStructureDynamic
+  description: Can't choose what to drink? This helpful dartboard is here for you.
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Darts/target.rsi
+    state: target_dart
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: InteractionOutline
+  - type: Physics
+  - type: Damageable
+  - type: DamageRandomPopup
+    popups:
+      - "Andalusia"
+      - "Antifreeze"
+      - "Arnold palmer"
+      - "B-52"
+      - "Bahama Mama"
+      - "Black Russian"
+      - "White Russian"
+      - "Kira special"
+      - "Bloody Mary"
+      - "Budget Insuls"
+      - "Cafe Latte"
+      - "Cream of Coconut"
+      - "Bloody Mary"
+      - "Bartend's Non-Alcoholic Special"
+      - "Bartend's Special"
+      - "Bartender's Ultimatum"
+      - "Ice Cream"
+      - "Iced Coffee"
+      - "Iced Green Tea"
+      - "Iced Tea"
+      - "Lemonade"
+      - "Pilk"
+      - "Posca"
+      - "Rewriter"
+      - "Root beer float"
+      - "Ray Rogers"
+      - "Shierley Temple"
+      - "Smite"
+      - "Starkist"
+      - "Tortuga"
+      - "Triple Citrus"
+      - "Tequila Sunrise"
+      - "Syndicate Bomb"
+      - "White Gilgamesh"
+      - "Pan-Galactic Gargle Blaster"
+      - "Moonshine"
+      - "Manhattan"
+      - "Irish Cream"
+      - "Irish Car Bomb"
+      - "Triple Citrus"
+
+# coal pit
+- type: entity
+  name: water vapor gas miner sauna
+  parent: GasMinerBase
+  id: GasMinerWaterVaporSauna
+  components:
+    - type: GasMiner
+      spawnTemperature: 350
+      # maxExternalAmount: 100
+      maxExternalPressure: 250 #120.3
+      spawnAmount: 100000
+      spawnGas: WaterVapor
+
+# swim trunks
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingSwimmingTrunksColorWhite
+  name: white swimming trunks
+  description: This is not for YOUR protection, but for others'. Please do not swim naked.
+  components:
+  - type: Sprite
+    sprite: Mobs/Customization/underwear.rsi
+    state: lowriders
+  - type: Clothing
+    sprite: Mobs/Customization/underwear.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: lowriders
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingSwimmingTrunksColorBlack
+  name: black swimming trunks
+  description: This is not for YOUR protection, but for others'. Please do not swim naked.
+  components:
+  - type: Sprite
+    sprite: Mobs/Customization/underwear.rsi
+    state: lowriders
+    color: "#3f3f3f"
+  - type: Clothing
+    sprite: Mobs/Customization/underwear.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: lowriders
+        color: "#3f3f3f"
+
+# swimsuit
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingSwimsuitColorWhite
+  name: white swimsuit
+  description: Remember, Eroticism and Pornography are banned on Nanotrasen stations.
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Customization/underwear.rsi
+      state: lowriders
+    - sprite: Mobs/Customization/undershirt.rsi
+      state: sports
+  - type: Clothing
+    clothingVisuals:
+      jumpsuit:
+      - sprite: Mobs/Customization/underwear.rsi
+        state: lowriders
+      - sprite: Mobs/Customization/undershirt.rsi
+        state: sports
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingSwimsuitColorBlack
+  name: black swimsuit
+  description: Remember, Eroticism and Pornography are banned on Nanotrasen stations.
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Mobs/Customization/underwear.rsi
+      state: lowriders
+      color: "#3f3f3f"
+    - sprite: Mobs/Customization/undershirt.rsi
+      state: sports
+      color: "#3f3f3f"
+  - type: Clothing
+    clothingVisuals:
+      jumpsuit:
+      - sprite: Mobs/Customization/underwear.rsi
+        state: lowriders
+        color: "#3f3f3f"
+      - sprite: Mobs/Customization/undershirt.rsi
+        state: sports
+        color: "#3f3f3f"

@@ -1,0 +1,69 @@
+- type: dungeonConfig
+  id: AncientComplex
+  layers:
+  - !type:PrefabDunGen
+    roomWhitelist:
+      tags:
+      - SalvageExperiment #tweak this to have no rooms or make custom rooms for it, also add black lights everywhere and try making windows and doors not spawn broken
+    presets:
+    - Bucket
+    - Wow
+    - SpaceShip
+    - Tall
+
+  - !type:CorridorDunGen
+    width: 3
+    tile: FloorTechMaintDark
+
+  - !type:DungeonEntranceDunGen
+    count: 2
+    tile: FloorTechMaintDark
+    contents: BaseAirlock
+
+  - !type:RoomEntranceDunGen
+    tile: FloorTechMaintDark
+    contents: BaseAirlock
+
+  - !type:EntranceFlankDunGen
+    tile: FloorTechMaintDark
+    contents: BaseWindow
+
+  - !type:ExternalWindowDunGen
+    tile: FloorTechMaintDark
+    contents: BaseWindow
+
+  - !type:WallMountDunGen
+    contents: AncientWalls
+    tile: FloorTechMaintDark
+
+  - !type:BoundaryWallDunGen
+    wall: WallReinforcedRust
+    cornerWall: WallReinforcedRust
+    tile: FloorTechMaintDark
+
+  - !type:JunctionDunGen
+    width: 1
+    tile: FloorTechMaintDark
+    contents: BaseAirlock
+
+  - !type:JunctionDunGen
+    width: 3
+    tile: FloorTechMaintDark
+    contents: BaseAirlock
+
+  - !type:AutoCablingDunGen
+    entity: CableApcExtension
+
+  - !type:CornerClutterDunGen
+    contents: BaseClutter
+
+  # no decals 4 u
+
+- type: entityTable
+  id: AncientWalls
+  table: !type:GroupSelector
+    children:
+    # Posters
+    - id: PosterBroken
+    - id: ExtinguisherCabinetFilled
+      prob: 0.1

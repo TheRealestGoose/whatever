@@ -1,0 +1,259 @@
+- type: entity
+  parent: [ ClothingOuterEVASuitBase, ClothingOuterBaseToggleable, BaseSyndicateContraband ]
+  id: ClothingOuterSuitFakeBase
+  abstract: true
+  components:
+  - type: ScannableForPoints
+    points: 0
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Suits/eva_emergency.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Suits/eva_emergency.rsi
+  - type: ClothingSpeedModifier #Cloth replica so no slowdown?
+    walkModifier: 1
+    sprintModifier: 1
+  - type: HeldSpeedModifier
+  - type: PressureProtection
+    highPressureMultiplier: 0.6
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.2
+    coolingCoefficient: 0.2
+  - type: Tag
+    tags:
+    - SuitEVA
+    - Softsuit
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetFake
+
+- type: entity
+  parent: [ClothingHeadEVAHelmetBase, BaseSyndicateContraband]
+  id: ClothingHeadHelmetFake
+  abstract: true
+  components:
+  - type: ScannableForPoints
+    points: 0
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/eva_large.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/eva_large.rsi
+  - type: Tag
+    tags:
+    - HelmetEVA
+
+- type: entity
+  id: ClothingCellLightBase
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      map: [ "light" ]
+  - type: Clothing
+    equippedPrefix: off
+  - type: ToggleableVisuals
+    spriteLayer: light
+  - type: ItemTogglePointLight
+  - type: PointLight
+    enabled: false
+    radius: 3
+    energy: 2
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    netsync: false
+  - type: Appearance
+  - type: HandheldLight
+    addPrefix: true
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        interpolate: Linear
+        maxDuration: 2.0
+        startValue: 3.0
+        endValue: 2.0
+        isLooped: true
+        reverseWhenFinished: true
+      - !type:PulseBehaviour
+        id: blinking
+        interpolate: Nearest
+        maxDuration: 1.0
+        startValue: 0.1
+        endValue: 2.0
+        isLooped: true
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+
+# #syndie hardsuits
+
+#blood-red
+- type: entity
+  parent: [ClothingCellLightBase,ClothingHeadHelmetFake]
+  id: ClothingHeadHelmetHardsuitSyndieToy
+  name: blood-red hardsuit helmet
+  description: An advanced red hardsuit helmet designed for work in special operations. This one is just cloth replica.
+  suffix: Toy
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/syndicate.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/syndicate.rsi
+  - type: PointLight
+    color: green
+
+- type: entity
+  parent: ClothingOuterSuitFakeBase
+  name: blood-red hardsuit
+  description: A heavily armored hardsuit designed for work in special operations. This one is just a cloth replica.
+  suffix: Toy
+  id: ClothingOuterHardsuitSyndieToy
+  components:
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitSyndieToy
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+
+#medic
+- type: entity
+  parent: [ClothingCellLightBase,ClothingHeadHelmetFake]
+  id: ClothingHeadHelmetHardsuitSyndieMedicToy
+  name: blood-red medic hardsuit helmet
+  description: An advanced red hardsuit helmet specifically designed for field medic operations. This one is just cloth replica.
+  suffix: Toy
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/syndiemedic.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/syndiemedic.rsi
+  - type: PointLight
+    color: green
+
+- type: entity
+  parent: ClothingOuterSuitFakeBase
+  name: blood-red medic hardsuit
+  description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations. This one is just a cloth replica.
+  suffix: Toy
+  id: ClothingOuterHardsuitSyndieMedicToy
+  components:
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitSyndieMedicToy
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+
+#elite
+- type: entity
+  parent: [ClothingCellLightBase,ClothingHeadHelmetFake]
+  id: ClothingHeadHelmetHardsuitSyndieEliteToy
+  name: syndicate elite hardsuit
+  description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders. This one is just cloth replica.
+  suffix: Toy
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/syndieelite.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/syndieelite.rsi
+  - type: PointLight
+    color: red
+
+- type: entity
+  parent: ClothingOuterSuitFakeBase
+  name: syndicate elite hardsuit
+  description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders. This one is just a cloth replica.
+  suffix: Toy
+  id: ClothingOuterHardsuitSyndieEliteToy
+  components:
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitSyndieEliteToy
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+
+#commander
+- type: entity
+  parent: [ClothingCellLightBase,ClothingHeadHelmetFake]
+  id: ClothingHeadHelmetHardsuitSyndieCommanderToy
+  name: syndicate hardsuit helmet
+  description: A bulked up version of the blood-red hardsuit's helmet, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights. This one is just cloth replica.
+  suffix: Toy
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/syndiecommander.rsi
+  - type: PointLight
+    color: green
+
+- type: entity
+  parent: ClothingOuterSuitFakeBase
+  name: syndicate commander hardsuit
+  description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights. This one is just a cloth replica.
+  suffix: Toy
+  id: ClothingOuterHardsuitSyndieCommanderToy
+  components:
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitSyndieCommanderToy
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+
+#juggernaut
+- type: entity
+  parent: [ClothingHeadHelmetFake]
+  id: ClothingHeadHelmetHardsuitJuggernautToy
+  name: cybersun juggernaut helmet
+  description: Made of compressed red matter, this helmet was designed in the Tau chromosphere facility. This one is just cloth replica.
+  suffix: Toy
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/cybersun.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/cybersun.rsi
+
+- type: entity
+  parent: ClothingOuterSuitFakeBase
+  name: cybersun juggernaut suit
+  description: A suit made by the cutting edge R&D department at Cybersun to be hyper resilient. This one is just a cloth replica.
+  suffix: Toy
+  id: ClothingOuterHardsuitJuggernautToy
+  components:
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitJuggernautToy
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+
+#region table
+- type: entityTable
+  id: AllFakeSyndieHardsuitsTable
+  table: !type:GroupSelector
+    children:
+    - id: ClothingOuterHardsuitSyndieToy
+    - id: ClothingOuterHardsuitSyndieMedicToy
+    - id: ClothingOuterHardsuitSyndieEliteToy
+    - id: ClothingOuterHardsuitSyndieCommanderToy
+    - id: ClothingOuterHardsuitJuggernautToy

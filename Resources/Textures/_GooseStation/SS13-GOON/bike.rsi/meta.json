@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "taken from Goonstation 13",
+    "size": {
+        "x": 64,
+        "y": 64
+    },
+    "states": [
+        {
+            "name": "speedbike_blue",
+            "directions": 4
+        },
+        {
+            "name": "speedbike_red",
+            "directions": 4
+        },
+        {
+            "name": "cover_blue",
+            "directions": 4
+        },
+        {
+            "name": "cover_red",
+            "directions": 4
+        },
+        {
+            "name": "speedwagon",
+            "directions": 4
+        },
+        {
+            "name": "speedwagon_cover",
+            "directions": 4
+        }
+    ]
+}

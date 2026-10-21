@@ -1,0 +1,535 @@
+- type: stack
+  id: FloorTileYCircuit
+  name: yellow-circuit floor
+  spawn: FloorTileItemYCircuit
+  maxCount: 30
+
+- type: entity
+  name: yellow circuit floor
+  parent: FloorTileItemBase
+  id: FloorTileItemYCircuit
+  components:
+  - type: Sprite
+    sprite: _GooseStation/tile-item.rsi
+    state: ycircuit
+  - type: Item
+    heldPrefix: ycircuit
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorYellowCircuit
+  - type: Stack
+    stackType: FloorTileYCircuit
+
+- type: entity
+  parent: FloorTileItemYCircuit
+  id: FloorTileItemYCircuit4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+
+- type: stack
+  id: FloorTilePCircuit
+  name: purple-circuit floor
+  spawn: FloorTileItemPCircuit
+  maxCount: 30
+
+- type: entity
+  name: purple circuit floor
+  parent: FloorTileItemBase
+  id: FloorTileItemPCircuit
+  components:
+  - type: Sprite
+    sprite: _GooseStation/tile-item.rsi
+    state: pcircuit
+  - type: Item
+    heldPrefix: pcircuit
+  - type: FloorTile
+    outputs:
+      - Plating
+      - FloorPurpleCircuit
+  - type: Stack
+    stackType: FloorTilePCircuit
+
+- type: entity
+  parent: FloorTileItemPCircuit
+  id: FloorTileItemPCircuit4
+  suffix: 4
+  components:
+  - type: Stack
+    count: 4
+
+
+- type: tile
+  id: FloorYellowCircuit
+  name: tiles-yellow-circuit-floor
+  sprite: /Textures/_GooseStation/Tiles/yellow_circuit.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemYCircuit
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorPurpleCircuit
+  name: tiles-purple-circuit-floor
+  sprite: /Textures/_GooseStation/Tiles/purple_circuit.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemPCircuit
+  heatCapacity: 10000
+
+
+- type: tile
+  id: FloorShuttleGlass
+  name: tiles-shuttle-glass-floor
+  sprite: /Textures/_GooseStation/Tiles/shuttleglass.png
+  variants: 1
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepTile
+  itemDrop: SheetGlass1
+  heatCapacity: 10000
+
+
+- type: tile
+  id: FloorSanitary
+  name: floor-sanitary
+  sprite: /Textures/_GooseStation/Tiles/sanitary.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryHorizontal
+  name: floor-sanitary-horizontal
+  sprite: /Textures/_GooseStation/Tiles/sanitary_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryMini
+  name: floor-sanitary-mini
+  sprite: /Textures/_GooseStation/Tiles/sanitary_mini.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteelMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryMiniHorizontal
+  name: floor-sanitary-mini-horizontal
+  sprite: /Textures/_GooseStation/Tiles/sanitary_mini_horizontal.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteelMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryMiniVertical
+  name: floor-sanitary-mini-vertical
+  sprite: /Textures/_GooseStation/Tiles/sanitary_mini_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteelMini
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryMono
+  name: floor-sanitary-mono
+  sprite: /Textures/_GooseStation/Tiles/sanitary_mono.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteelMono
+  heatCapacity: 10000
+
+- type: tile
+  id: FloorSanitaryVertical
+  name: floor-sanitary-vertical
+  sprite: /Textures/_GooseStation/Tiles/sanitary_vertical.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+
+#region CP14
+
+
+
+
+- type: tile
+  id: CP14FloorGrass
+  name: cp14-tiles-grass
+  sprite: /Textures/_GooseStation/Tiles/cp14/Grass/grass.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 3
+  edgeSprites:
+    SouthEast: /Textures/_GooseStation/Tiles/cp14/Grass/single_edge_SE.png
+    NorthEast: /Textures/_GooseStation/Tiles/cp14/Grass/single_edge_NE.png
+    NorthWest: /Textures/_GooseStation/Tiles/cp14/Grass/single_edge_NW.png
+    SouthWest: /Textures/_GooseStation/Tiles/cp14/Grass/single_edge_SW.png
+    South: /Textures/_GooseStation/Tiles/cp14/Grass/double_edge_S.png
+    East: /Textures/_GooseStation/Tiles/cp14/Grass/double_edge_E.png
+    North: /Textures/_GooseStation/Tiles/cp14/Grass/double_edge_N.png
+    West: /Textures/_GooseStation/Tiles/cp14/Grass/double_edge_W.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepGrass
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14FloorGrassAstro
+  parent: CP14FloorGrass
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14FloorGrassLight
+  name: cp14-tiles-grass-light
+  sprite: /Textures/_GooseStation/Tiles/cp14/GrassLight/grass.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 4
+  edgeSprites:
+    SouthEast: /Textures/_GooseStation/Tiles/cp14/GrassLight/single_edge_SE.png
+    NorthEast: /Textures/_GooseStation/Tiles/cp14/GrassLight/single_edge_NE.png
+    NorthWest: /Textures/_GooseStation/Tiles/cp14/GrassLight/single_edge_NW.png
+    SouthWest: /Textures/_GooseStation/Tiles/cp14/GrassLight/single_edge_SW.png
+    South: /Textures/_GooseStation/Tiles/cp14/GrassLight/double_edge_S.png
+    East: /Textures/_GooseStation/Tiles/cp14/GrassLight/double_edge_E.png
+    North: /Textures/_GooseStation/Tiles/cp14/GrassLight/double_edge_N.png
+    West: /Textures/_GooseStation/Tiles/cp14/GrassLight/double_edge_W.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepGrass
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14FloorGrassLightAstro
+  parent: CP14FloorGrassLight
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14FloorGrassTall
+  name: cp14-tiles-grass-tall
+  sprite: /Textures/_GooseStation/Tiles/cp14/GrassTall/grass.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 5
+  edgeSprites:
+    SouthEast: /Textures/_GooseStation/Tiles/cp14/GrassTall/single_edge_SE.png
+    NorthEast: /Textures/_GooseStation/Tiles/cp14/GrassTall/single_edge_NE.png
+    NorthWest: /Textures/_GooseStation/Tiles/cp14/GrassTall/single_edge_NW.png
+    SouthWest: /Textures/_GooseStation/Tiles/cp14/GrassTall/single_edge_SW.png
+    South: /Textures/_GooseStation/Tiles/cp14/GrassTall/double_edge_S.png
+    East: /Textures/_GooseStation/Tiles/cp14/GrassTall/double_edge_E.png
+    North: /Textures/_GooseStation/Tiles/cp14/GrassTall/double_edge_N.png
+    West: /Textures/_GooseStation/Tiles/cp14/GrassTall/double_edge_W.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepGrass
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14FloorGrassTallAstro
+  parent: CP14FloorGrassTall
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14Cavedrought
+  name: cp14-cavedrought
+  sprite: /Textures/_GooseStation/Tiles/cp14/Dirt/cavedrought.png
+  variants: 16
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_GooseStation/Tiles/cp14/Dirt/single_edge_SE.png
+    NorthEast: /Textures/_GooseStation/Tiles/cp14/Dirt/single_edge_NE.png
+    NorthWest: /Textures/_GooseStation/Tiles/cp14/Dirt/single_edge_NW.png
+    SouthWest: /Textures/_GooseStation/Tiles/cp14/Dirt/single_edge_SW.png
+    South: /Textures/_GooseStation/Tiles/cp14/Dirt/double_edge_S.png
+    East: /Textures/_GooseStation/Tiles/cp14/Dirt/double_edge_E.png
+    North: /Textures/_GooseStation/Tiles/cp14/Dirt/double_edge_N.png
+    West: /Textures/_GooseStation/Tiles/cp14/Dirt/double_edge_W.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14CavedroughtAstro
+  parent: CP14Cavedrought
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14Sand
+  name: cp14-csand
+  sprite: /Textures/_GooseStation/Tiles/cp14/Sand/sand.png
+  variants: 5
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 2
+  edgeSprites:
+    SouthEast: /Textures/_GooseStation/Tiles/cp14/Sand/single_edge_SE.png
+    NorthEast: /Textures/_GooseStation/Tiles/cp14/Sand/single_edge_NE.png
+    NorthWest: /Textures/_GooseStation/Tiles/cp14/Sand/single_edge_NW.png
+    SouthWest: /Textures/_GooseStation/Tiles/cp14/Sand/single_edge_SW.png
+    South: /Textures/_GooseStation/Tiles/cp14/Sand/double_edge_S.png
+    East: /Textures/_GooseStation/Tiles/cp14/Sand/double_edge_E.png
+    North: /Textures/_GooseStation/Tiles/cp14/Sand/double_edge_N.png
+    West: /Textures/_GooseStation/Tiles/cp14/Sand/double_edge_W.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14SandAstro
+  parent: CP14Sand
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14Snow
+  name: cp14-snow
+  sprite: /Textures/_GooseStation/Tiles/cp14/Snow/snow.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 5
+  edgeSprites:
+    SouthEast: /Textures/_GooseStation/Tiles/cp14/Snow/single_edge_SE.png
+    NorthEast: /Textures/_GooseStation/Tiles/cp14/Snow/single_edge_NE.png
+    NorthWest: /Textures/_GooseStation/Tiles/cp14/Snow/single_edge_NW.png
+    SouthWest: /Textures/_GooseStation/Tiles/cp14/Snow/single_edge_SW.png
+    South: /Textures/_GooseStation/Tiles/cp14/Snow/double_edge_S.png
+    East: /Textures/_GooseStation/Tiles/cp14/Snow/double_edge_E.png
+    North: /Textures/_GooseStation/Tiles/cp14/Snow/double_edge_N.png
+    West: /Textures/_GooseStation/Tiles/cp14/Snow/double_edge_W.png
+  # itemDrop: FloorTileItemAstroSnow
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepSnow
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14SnowAstro
+  parent: CP14Snow
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14SnowDeep
+  name: cp14-snow-deep
+  sprite: /Textures/_GooseStation/Tiles/cp14/SnowDeep/snow.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 4
+  edgeSprites:
+    SouthEast: /Textures/_GooseStation/Tiles/cp14/SnowDeep/single_edge_SE.png
+    NorthEast: /Textures/_GooseStation/Tiles/cp14/SnowDeep/single_edge_NE.png
+    NorthWest: /Textures/_GooseStation/Tiles/cp14/SnowDeep/single_edge_NW.png
+    SouthWest: /Textures/_GooseStation/Tiles/cp14/SnowDeep/single_edge_SW.png
+    South: /Textures/_GooseStation/Tiles/cp14/SnowDeep/double_edge_S.png
+    East: /Textures/_GooseStation/Tiles/cp14/SnowDeep/double_edge_E.png
+    North: /Textures/_GooseStation/Tiles/cp14/SnowDeep/double_edge_N.png
+    West: /Textures/_GooseStation/Tiles/cp14/SnowDeep/double_edge_W.png
+  # itemDrop: FloorTileItemAstroSnow
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepSnow
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14SnowDeepAstro
+  parent: CP14SnowDeep
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14SnowDeepDeep
+  name: cp14-snow-deep-deep
+  sprite: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/snow.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 3
+  edgeSprites:
+    SouthEast: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/single_edge_SE.png
+    NorthEast: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/single_edge_NE.png
+    NorthWest: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/single_edge_NW.png
+    SouthWest: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/single_edge_SW.png
+    South: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/double_edge_S.png
+    East: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/double_edge_E.png
+    North: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/double_edge_N.png
+    West: /Textures/_GooseStation/Tiles/cp14/SnowDeepDeep/double_edge_W.png
+  # itemDrop: FloorTileItemAstroSnow
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepSnow
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: CP14SnowDeepDeepAstro
+  parent: CP14SnowDeepDeep
+  baseTurf: Plating
+  isSubfloor: false
+  weather: false
+
+- type: tile
+  id: CP14Ice
+  name: cp14-ice
+  sprite: /Textures/_GooseStation/Tiles/cp14/ice.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  isSubfloor: true
+  friction: 0.05
+  heatCapacity: 10000
+  weather: true
+  mobFriction: 0.5
+  mobAcceleration: 2
+  indestructible: true
+
+- type: tile
+  id: CP14Cave
+  name: cp14-cave
+  sprite: /Textures/_GooseStation/Tiles/cp14/cave.png
+  variants: 14
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepAsteroid
+  heatCapacity: 10000

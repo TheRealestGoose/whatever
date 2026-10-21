@@ -1,0 +1,116 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "uhhh i think i took this from CM13",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "spent_buckshot"
+        },
+        {
+            "name": "spent_flech"
+        },
+        {
+            "name": "spent_slug"
+        },
+        {
+            "name": "gunoil"
+        },
+        {
+            "name": "prescription_bottle"
+        },
+        {
+            "name": "rabbitsfoot"
+        },
+        {
+            "name": "lucky_feather"
+        },
+        {
+            "name": "flair_initech"
+        },
+        {
+            "name": "flair_io"
+        },
+        {
+            "name": "flair_peace_smiley"
+        },
+        {
+            "name": "flair_uscm"
+        },
+        {
+            "name": "tickets_to_space_jam"
+        },
+        {
+            "name": "riot_shield"
+        },
+        {
+            "name": "gasmask"
+        },
+        {
+            "name": "swat_shield"
+        },
+        {
+            "name": "swat_shield_up"
+        },
+        {
+            "name": "mp_shield"
+        },
+        {
+            "name": "mp_shield_up"
+        },
+        {
+            "name": "trimmed_wire"
+        },
+        {
+            "name": "chaplain_patch"
+        },
+        {
+            "name": "cartridge"
+        },
+        {
+            "name": "bullet_pipe"
+        },
+        {
+            "name": "nvg"
+        },
+        {
+            "name": "nvg_down"
+        },
+        {
+            "name": "nvg_down_powered"
+        },
+        {
+            "name": "netting"
+        },
+        {
+            "name": "netting_jungle"
+        },
+        {
+            "name": "netting_desert"
+        },
+        {
+            "name": "netting_urban"
+        },
+        {
+            "name": "netting_snow"
+        },
+        {
+            "name": "raincover"
+        },
+        {
+            "name": "raincover_urban"
+        },
+        {
+            "name": "raincover_desert"
+        },
+        {
+            "name": "raincover_jungle"
+        },
+        {
+            "name": "raincover_snow"
+        }
+    ]
+}

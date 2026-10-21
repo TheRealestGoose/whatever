@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by TheGoose3375 (discord)",
+  "size": {
+    "x": 64,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "board"
+    },
+    {
+      "name": "fill-0"
+    },
+    {
+      "name": "fill-1"
+    },
+    {
+      "name": "fill-2"
+    },
+    {
+      "name": "fill-3"
+    },
+    {
+      "name": "fill-4"
+    },
+    {
+      "name": "fill-5"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+- type: spaceBiome
+  id: RangeBiomeBase
+  abstract: true
+  noiseRanges: {}
+  chunkComponents:
+  - type: DebrisFeaturePlacerController
+    densityNoiseChannel: Density
+  - type: NoiseDrivenDebrisSelector
+    noiseChannel: Wreck
+  - type: NoiseRangeCarver
+    ranges:
+    - 0.4, 0.6
+    noiseChannel: Carver
+  # - type: PointSetDistanceCarver #i assume this isn't important?
+
+- type: entity
+  id: AsteroidDebrisSmallTEST
+  parent: BaseAsteroidDebris
+  name: asteroid debris large
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 10
+
+- type: entity
+  id: AsteroidDebrisSmallTEST1
+  parent: BaseAsteroidDebris
+  name: asteroid debris large
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 11
+
+- type: spaceBiome
+  id: AsteroidsNear
+  parent: RangeBiomeBase
+  priority: 2
+  distanceRange: 0, 1000
+  chunkComponents:
+    - type: SimpleDebrisSelector
+      debrisTable:
+        - id: AsteroidDebrisSmallTEST
+        - id: AsteroidDebrisSmallTEST1
+    - type: NoiseDrivenDebrisSelector
+      noiseChannel: Wreck
+      debrisTable:
+        - id: ScrapDebrisSmall
+        - id: ScrapDebrisMedium
+
+- type: entity
+  id: AsteroidDebrisMassiveTEST
+  parent: BaseAsteroidDebris
+  name: asteroid debris large
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 50
+
+- type: entity
+  id: AsteroidDebrisMassiveTEST1
+  parent: BaseAsteroidDebris
+  name: asteroid debris large
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 51
+
+- type: spaceBiome
+  id: AsteroidsMid
+  parent: RangeBiomeBase
+  priority: 1
+  distanceRange: 1000, 2000
+  chunkComponents:
+    - type: SimpleDebrisSelector
+      debrisTable:
+        - id: AsteroidDebrisMassiveTEST
+        - id: AsteroidDebrisMassiveTEST1
+    - type: NoiseDrivenDebrisSelector
+      noiseChannel: Wreck
+      debrisTable:
+        - id: ScrapDebrisMedium
+        - id: ScrapDebrisLarge
+
+- type: entity
+  id: AsteroidDebrisGiantTEST
+  parent: BaseAsteroidDebris
+  name: asteroid debris large
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 100
+
+- type: entity
+  id: AsteroidDebrisGiantTEST1
+  parent: BaseAsteroidDebris
+  name: asteroid debris large
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 101
+
+- type: spaceBiome
+  id: AsteroidsFar
+  parent: RangeBiomeBase
+  priority: 0
+  noiseRanges: {}
+  chunkComponents:
+    - type: SimpleDebrisSelector
+      debrisTable:
+        - id: AsteroidDebrisGiantTEST
+        - id: AsteroidDebrisGiantTEST1
+    - type: NoiseDrivenDebrisSelector
+      noiseChannel: Wreck
+      debrisTable:
+        - id: ScrapDebrisMedium
+        - id: ScrapDebrisLarge
+
+- type: worldgenConfig
+  id: Goose
+  components:
+    - type: WorldController
+    - type: BiomeSelection
+      biomes:
+        - AsteroidsNear
+        - AsteroidsMid
+        - AsteroidsFar

@@ -1,0 +1,119 @@
+- type: entity
+  parent: UniformShortsRed
+  id: UniformBoxersShaftMiner
+  name: shaft miner boxers
+  description: Protects your shaft while you miner.
+  components:
+  - type: Armor
+    coverage:
+    - Groin
+    traumaDeductions:
+      Dismemberment: 0.2
+      OrganDamage: 0.1
+      BoneDamage: 0.05
+      VeinsDamage: 0.05
+      NerveDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.20
+  - type: ExplosionResistance
+    damageCoefficient: 0.99
+
+- type: entity
+  id: ClothingNeckCassieClothWrap
+  name: tattered cloak
+  parent: ClothingNeckBase
+  description: A tattered scratchy fabric wrap, faded over the years. Smells faintly of cats.
+  suffix: CharacterItem
+  components:
+  - type: HideLayerClothing
+    clothingSlots: [BACK]
+  - type: Sprite
+    sprite: _GooseStation/cassiemantle.rsi
+  - type: Item
+    size: Small
+  - type: Clothing
+    quickEquip: true
+    slots:
+    - neck
+    sprite: _GooseStation/cassiemantle.rsi
+
+- type: entity
+  parent: Clothing
+  id: CMIDCardStandardDogtag
+  name: dog tag
+  description: A marine dog tag.
+  components:
+  - type: Access
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Item
+    size: Tiny
+    heldPrefix: null
+  - type: Sprite
+    sprite: _GooseStation/dogtags.rsi
+    state: dogtag
+  - type: Clothing
+    slots:
+    - idcard
+    - neck
+    sprite: _GooseStation/dogtags.rsi
+  - type: IdCard
+    nameLocId: access-id-card-component-owner-name-job-title-text
+    fullNameLocId: access-id-card-component-owner-full-name-job-title-text
+    canMicrowave: false
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: "Show dogtags"
+    foldVerbText: "Hide dogtags"
+  - type: FoldableClothing
+    foldedEquippedPrefix: hidden
+    foldedHeldPrefix: hidden
+  - type: GenericVisualizer
+    visuals:
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
+  - type: StationRecordKeyStorage
+  - type: MiningPoints # DeltaV
+  - type: NanoChatCard # DeltaV
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDCardStandardDogtagHidden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: hidden
+  - type: Item
+    heldPrefix: hidden
+  - type: Sprite
+    layers:
+    - state: dogtag
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: dogtag
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: AdolfDogtag
+  name: Adolf 'Corporal' Shephard's ID card (Bartender)
+  description: A marine dog tag. It looks battered and the name is barely readable.
+  suffix: CharacterItem
+  components:
+  - type: PresetIdCard
+    job: Bartender
+    name: Adolf 'Corporal' Shephard

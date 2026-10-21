@@ -1,0 +1,394 @@
+#region Posters
+- type: entity
+  parent: PaintingBase
+  id: PaintingBlackSquare
+  name: Black Square
+  description: The guy who drew this must've been a huge troll.
+  components:
+  - type: StaticPrice
+    price: 200000 #good luck selling this lmao
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: painting_square
+
+- type: entity
+  parent: PosterBase
+  id: PosterContrabandBehonk
+  name: You become what you Behonk
+  description: The big brother is watching. The big brother is honking.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_3084
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitEnlistMerc
+  name: Enlist
+  description: Enlist in the Nanotrasen Mercenary program today!
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_merc
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitShitlock
+  name: Shitlock Holmes
+  description: The greatest detective in the land.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_shitlock
+
+- type: entity
+  parent: PosterBase
+  id: PosterContrabandFrontalLobe
+  name: All Quiet on the Frontal Lobe
+  description: It is the third film adaptation of the book, stars Albrecht Shut, Daniel Bruh, Sebastian Honk and a kammerer.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_frontalLobe
+
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitHangInThere
+  name: "HANG IN THAERE :D"
+  description: A motivational poster of a cartoony cat hanging from a tree branch with the caption "HANG IN THAERE :D".
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_hanginthere
+
+- type: entity
+  parent: PosterBase
+  id: PosterContrabandHangYourself #too intense for random spawning
+  name: "Hang."
+  description: Something is wrong.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_hang
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitIWantToBelieve
+  name: "I WANT TO BELIEVE"
+  description: A photo of a UFO with the caption "I WANT TO BELIEVE".
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_iwanttobelieve
+
+- type: entity
+  parent: PosterBase
+  id: PosterContrabandIBelieve
+  name: "I BELIEVE"
+  description: A photo of a UFO with the caption "I WANT TO BELIEVE". The poster has been scribbled over in black marker, obscuring the words "WANT TO", and replacing the UFO with an arrowhead shape.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_ibelieve
+
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitCardPlease
+  name: card, please
+  description: Glory to NanoTrasen.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/posters.rsi
+    state: poster_cardplease
+
+#region Items
+- type: Tag
+  id: PosterLegal
+
+- type: Tag
+  id: PosterContra
+  
+- type: entity
+  id: PosterLegal
+  name: rolled up corporate poster
+  description: Perfect for putting on a wall.
+  parent: BaseItem
+  components:
+  - type: Item
+    size: Small
+    storedOffset: 3,0
+    storedRotation: 90
+  - type: Sprite
+    sprite: Structures/Wallmounts/posters.rsi
+    state: rolled_legit
+  - type: Tag
+    tags:
+    - PosterLegal
+  # - type: SpawnAfterInteract
+  #   prototype: RandomPosterLegitGS
+  #   doAfter: 1
+  #   removeOnInteract: true
+
+- type: entity
+  id: PosterContraband
+  name: rolled up questionable poster
+  description: A suspicious poster, perfect for covering something on a wall.
+  parent: BaseItem
+  components:
+  - type: Item
+    size: Small
+    storedOffset: 3,0
+    storedRotation: 90
+  - type: Sprite
+    sprite: Structures/Wallmounts/posters.rsi
+    state: rolled_contraband
+  - type: SpawnAfterInteract
+  - type: Tag
+    tags:
+    - PosterContra
+    # prototype: RandomPosterContrabandGS
+    # doAfter: 1
+    # removeOnInteract: true
+
+
+#region Construction
+
+- type: construction
+  id: PosterLegit
+  graph: Poster
+  startNode: start
+  targetNode: Legit
+  category: construction-category-misc
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  name: unroll corporate poster
+  description: You are not immune to propaganda
+
+- type: construction
+  id: PosterContraband
+  graph: Poster
+  startNode: start
+  targetNode: Contraband
+  category: construction-category-misc
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  name: unroll questionable poster
+  description: You are not immune to propaganda
+
+- type: constructionGraph
+  id: Poster
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: Legit
+          steps:
+            - tag: PosterLegal
+              name: rolled up corporate poster
+              icon:
+                sprite: Structures/Wallmounts/posters.rsi
+                state: rolled_legit
+              doAfter: 2
+        - to: Contraband
+          steps:
+            - tag: PosterContra
+              name: rolled up questionable poster
+              icon:
+                sprite: Structures/Wallmounts/posters.rsi
+                state: rolled_contraband
+              doAfter: 2
+
+    - node: Legit
+      entity: RandomPosterLegitGS
+
+    - node: Contraband
+      entity: RandomPosterContrabandGS
+
+
+#region Markers
+- type: entity
+  parent: MarkerBase
+  id: RandomPosterLegitGS
+  name: random legit poster spawner
+  suffix: Including GS Posters
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Wallmounts/posters.rsi
+        state: random_legit
+  - type: Construction
+    node: RandomPosterLegitGS
+    graph: Poster
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+      - PosterLegitHereForYourSafety
+      - PosterLegitNanotrasenLogo
+      - PosterLegitCleanliness
+      - PosterLegitHelpOthers
+      - PosterLegitBuild
+      - PosterLegitBlessThisSpess
+      - PosterLegitScience
+      - PosterLegitIan
+      - PosterLegitObey
+      - PosterLegitWalk
+      - PosterLegitStateLaws
+      - PosterLegitLoveIan
+      - PosterLegitSpaceCops
+      - PosterLegitUeNo
+      - PosterLegitGetYourLEGS
+      - PosterLegitDoNotQuestion
+      - PosterLegitWorkForAFuture
+      - PosterLegitSoftCapPopArt
+      - PosterLegitSafetyInternals
+      - PosterLegitSafetyEyeProtection
+      - PosterLegitSafetyReport
+      - PosterLegitReportCrimes
+      - PosterLegitIonRifle
+      - PosterLegitFoamForceAd
+      - PosterLegitCohibaRobustoAd
+      - PosterLegit50thAnniversaryVintageReprint
+      - PosterLegitFruitBowl
+      - PosterLegitPDAAd
+      - PosterLegitEnlist
+      - PosterLegitNanomichiAd
+      - PosterLegit12Gauge
+      - PosterLegitHighClassMartini
+      - PosterLegitTheOwl
+      - PosterLegitNoERP
+      - PosterLegitCarbonDioxide
+      - PosterLegitDickGumshue
+      - PosterLegitThereIsNoGasGiant
+      - PosterLegitJustAWeekAway
+      - PosterLegitSecWatch
+      - PosterLegitVacation
+      - PosterLegitRenault
+      - PosterLegitNTTGC
+      - PosterLegitSafetyMothDelam
+      - PosterLegitSafetyMothEpi
+      - PosterLegitSafetyMothPiping
+      - PosterLegitSafetyMothMeth
+      - PosterLegitSafetyMothHardhat
+      - PosterLegitSafetyMothSSD
+      - PosterLegitGoobWorkHard # Goobstation
+      - PosterLegitGoobMakeshift # Goobstation
+      - PosterLegitGoobCan # Goobstation
+      - PosterLegitGoobFaded # Goobstation
+      - PosterLegitGoobCandle # Goobstation
+      - PosterLegitGoobSuperMatter # Goobstation
+      - PosterLegitGoobWatching # Goobstation
+      - PosterLegitGoobSpaceAsshole # Goobstation
+      - PosterLegitGoobSmokeBreak # Goobstation
+      - PosterLegitGoobWallMeat # Goobstation
+      - PosterLegitGoobCoolS # Goobstation
+      - PosterLegitGoobBigBrotherAI # Goobstation
+      - PosterLegitGoobDurkPlush # Goobstation
+      - PosterLegitGoobWelderBomb # Goobstation
+      - PosterLegitGoobLokoAdvertisement # Goobstation
+      - PosterLegitGoobLouieVote # Goobstation
+      - PosterLegitGoobSlowDownClown # Goobstation
+      - PosterLegitGoobNTRAdvert # Goobstation
+      - PosterLegitOppenhopper
+      - PosterLegitTyrone
+      - PosterLegitHelio
+      - PosterLegitCardPlease #goose
+      - PosterLegitIWantToBelieve #goose
+      - PosterLegitHangInThere #goose
+      - PosterLegitShitlock #goose
+      - PosterLegitEnlistMerc #goose
+    chance: 1
+  # - type: EmitSoundOnSpawn
+  #   sound: 
+  #     path: /Audio/_Goobstation/Items/handling/paper_use.ogg
+
+- type: entity
+  parent: MarkerBase
+  id: RandomPosterContrabandGS
+  name: random contraband poster spawner
+  suffix: Including GS Posters
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Wallmounts/posters.rsi
+        state: random_contraband
+  - type: Construction
+    node: RandomPosterContrabandGS
+    graph: Poster
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+      - PosterContrabandFreeTonto
+      - PosterContrabandAtmosiaDeclarationIndependence
+      - PosterContrabandFunPolice
+      - PosterContrabandRealExomorph
+      - PosterContrabandSyndicateRecruitment
+      - PosterContrabandClown
+      - PosterContrabandSmoke
+      - PosterContrabandGreyTide
+      - PosterContrabandMissingGloves
+      - PosterContrabandHackingGuide
+      - PosterContrabandRIPBadger
+      - PosterContrabandAmbrosiaVulgaris
+      - PosterContrabandDonutCorp
+      - PosterContrabandEAT
+      - PosterContrabandTools
+      - PosterContrabandPower
+      - PosterContrabandSpaceCube
+      - PosterContrabandCommunistState
+      - PosterContrabandLamarr
+      - PosterContrabandBorgFancy
+      - PosterContrabandBorgFancyv2
+      - PosterContrabandKosmicheskayaStantsiya
+      - PosterContrabandRebelsUnite
+      - PosterContrabandC20r
+      - PosterContrabandHaveaPuff
+      - PosterContrabandRevolver
+      - PosterContrabandDDayPromo
+      - PosterContrabandSyndicatePistol
+      - PosterContrabandEnergySwords
+      - PosterContrabandRedRum
+      - PosterContrabandCC64KAd
+      - PosterContrabandPunchShit
+      - PosterContrabandTheGriffin
+      - PosterContrabandFreeDrone
+      - PosterContrabandRouny
+      - PosterContrabandRobustSoftdrinks
+      - PosterContrabandShamblersJuice
+      - PosterContrabandPwrGame
+      - PosterContrabandSunkist
+      - PosterContrabandSpaceCola
+      - PosterContrabandSpaceUp
+      - PosterContrabandKudzu
+      - PosterContrabandMaskedMen
+      - PosterContrabandUnreadableAnnouncement
+      - PosterContrabandFreeSyndicateEncryptionKey
+      - PosterContrabandBountyHunters
+      - PosterContrabandTheBigGasTruth
+      - PosterContrabandWehWatches
+      - PosterContrabandVoteWeh
+      - PosterContrabandBeachStarYamamoto
+      - PosterContrabandHighEffectEngineering
+      - PosterContrabandNuclearDeviceInformational
+      - PosterContrabandRevolt
+      - PosterContrabandRise
+      - PosterContrabandMoth
+      - PosterContrabandCybersun600
+      - PosterContrabandDonk
+      - PosterContrabandEnlistGorlex
+      - PosterContrabandInterdyne
+      - PosterContrabandWaffleCorp
+      - PosterContrabandMissingSpacepen
+      - PosterContrabandExoAcid
+      - PosterContrabandExoRun
+      - PosterContrabandExoChomp
+      - PosterContrabandGoobChuckler # Goobstation
+      - PosterContrabandGoobYakub # Goobstation
+      - PosterContrabandGoobRedFOSS # Goobstation
+      - PosterContrabandIBelieve #goose
+      - PosterContrabandFrontalLobe #goose
+      - PosterContrabandBehonk #goose
+    chance: 1

@@ -1,0 +1,179 @@
+- type: construction
+  id: SteelCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: SteelCatwalk
+  category: construction-category-structures
+  name: steel catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: /Textures/_GooseStation/Catwalks/catwalksolid.rsi
+    state: catwalk
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: WhiteCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: WhiteCatwalk
+  category: construction-category-structures
+  name: white catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: /Textures/_GooseStation/Catwalks/catwalksolid.rsi
+    state: catwalk_white
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: DarkCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: DarkCatwalk
+  category: construction-category-structures
+  name: dark catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: /Textures/_GooseStation/Catwalks/catwalksolid.rsi
+    state: catwalk_black
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkRed
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkRed
+  category: construction-category-structures
+  name: red catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: _GooseStation/Catwalks/catwalkred.rsi
+    state: catwalk_preview
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkPurple
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkPurple
+  category: construction-category-structures
+  name: purple catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: _GooseStation/Catwalks/catwalkpurple.rsi
+    state: catwalk_preview
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkCyan
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkCyan
+  category: construction-category-structures
+  name: cyan catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: _GooseStation/Catwalks/catwalkcyan.rsi
+    state: catwalk_preview
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkBrown
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkBrown
+  category: construction-category-structures
+  name: brown catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: _GooseStation/Catwalks/catwalkbrown.rsi
+    state: catwalk_preview
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkOrange
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkOrange
+  category: construction-category-structures
+  name: orange catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: _GooseStation/Catwalks/catwalkorange.rsi
+    state: catwalk_preview
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkGreen
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkGreen
+  category: construction-category-structures
+  name: green catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: _GooseStation/Catwalks/catwalkgreen.rsi
+    state: catwalk_preview
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkBlue
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkBlue
+  category: construction-category-structures
+  name: blue catwalk
+  description: A catwalk for easier EVA maneuvering and cable placement.
+  icon:
+    sprite: _GooseStation/Catwalks/catwalkblue.rsi
+    state: catwalk_preview
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false

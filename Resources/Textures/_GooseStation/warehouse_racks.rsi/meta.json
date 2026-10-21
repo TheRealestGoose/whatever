@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "license": "i dont care, nobody's getting my project files anyway",
+  "copyright": "Made by thegoose3375 (Discord) for GooseStation",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon",
+      "directions": 4
+    },
+    {
+      "name": "icon-wood",
+      "directions": 4
+    },
+    {
+      "name": "icon-steel",
+      "directions": 4
+    },
+    {
+      "name": "box-0",
+      "directions": 4
+    },
+    {
+      "name": "box-1",
+      "directions": 4
+    },
+    {
+      "name": "box-2",
+      "directions": 4
+    },
+    {
+      "name": "box-3",
+      "directions": 4
+    },
+    {
+      "name": "box-4",
+      "directions": 4
+    },
+    {
+      "name": "box-5",
+      "directions": 4
+    },
+    {
+      "name": "box-6",
+      "directions": 4
+    },
+    {
+      "name": "icon-single",
+      "directions": 4
+    },
+    {
+      "name": "icon-wood-single",
+      "directions": 4
+    },
+    {
+      "name": "icon-steel-single",
+      "directions": 4
+    },
+    {
+      "name": "box-single-0",
+      "directions": 4
+    },
+    {
+      "name": "box-single-1",
+      "directions": 4
+    },
+    {
+      "name": "box-single-2",
+      "directions": 4
+    },
+    {
+      "name": "box-single-3",
+      "directions": 4
+    },
+    {
+      "name": "icon-two",
+      "directions": 4
+    },
+    {
+      "name": "icon-wood-two",
+      "directions": 4
+    },
+    {
+      "name": "icon-steel-two",
+      "directions": 4
+    },
+    {
+      "name": "box-two-0",
+      "directions": 4
+    },
+    {
+      "name": "box-two-1",
+      "directions": 4
+    },
+    {
+      "name": "box-two-2",
+      "directions": 4
+    },
+    {
+      "name": "box-two-3",
+      "directions": 4
+    },
+    {
+      "name": "box-two-4",
+      "directions": 4
+    }
+  ]
+}

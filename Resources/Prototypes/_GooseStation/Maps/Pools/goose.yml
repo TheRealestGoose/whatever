@@ -1,0 +1,5 @@
+- type: gameMapPool
+  id: GooseMapPool
+  maps:
+  - Axioma
+  - Nox

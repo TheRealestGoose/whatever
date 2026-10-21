@@ -1,0 +1,58 @@
+- type: accent
+  id: BigshotAccent
+  wordReplacements:
+    accent-bigshot-words-1: accent-bigshot-words-replace-1
+    accent-bigshot-words-2: accent-bigshot-words-replace-2
+    accent-bigshot-words-3: accent-bigshot-words-replace-3
+    accent-bigshot-words-4: accent-bigshot-words-replace-4
+    accent-bigshot-words-5: accent-bigshot-words-replace-5
+    accent-bigshot-words-6: accent-bigshot-words-replace-6
+    accent-bigshot-words-7: accent-bigshot-words-replace-7
+    accent-bigshot-words-8: accent-bigshot-words-replace-8
+    accent-bigshot-words-9: accent-bigshot-words-replace-9
+    accent-bigshot-words-10: accent-bigshot-words-replace-10
+    accent-bigshot-words-11: accent-bigshot-words-replace-11
+    accent-bigshot-words-12: accent-bigshot-words-replace-12
+    accent-bigshot-words-13: accent-bigshot-words-replace-13
+    accent-bigshot-words-14: accent-bigshot-words-replace-14
+    accent-bigshot-words-15: accent-bigshot-words-replace-15
+    accent-bigshot-words-16: accent-bigshot-words-replace-16
+    accent-bigshot-words-17: accent-bigshot-words-replace-17
+    accent-bigshot-words-18: accent-bigshot-words-replace-18
+    accent-bigshot-words-19: accent-bigshot-words-replace-19
+    accent-bigshot-words-20: accent-bigshot-words-replace-20
+    accent-bigshot-words-21: accent-bigshot-words-replace-21
+    accent-bigshot-words-22: accent-bigshot-words-replace-22
+    accent-bigshot-words-23: accent-bigshot-words-replace-23
+    accent-bigshot-words-24: accent-bigshot-words-replace-24
+    accent-bigshot-words-25: accent-bigshot-words-replace-25
+    accent-bigshot-words-26: accent-bigshot-words-replace-26
+    accent-bigshot-words-27: accent-bigshot-words-replace-27
+    accent-bigshot-words-28: accent-bigshot-words-replace-28
+    accent-bigshot-words-29: accent-bigshot-words-replace-29
+    accent-bigshot-words-30: accent-bigshot-words-replace-30
+    accent-bigshot-words-31: accent-bigshot-words-replace-31
+    accent-bigshot-words-32: accent-bigshot-words-replace-32
+    accent-bigshot-words-33: accent-bigshot-words-replace-33
+    accent-bigshot-words-34: accent-bigshot-words-replace-34
+    accent-bigshot-words-35: accent-bigshot-words-replace-35
+    accent-bigshot-words-36: accent-bigshot-words-replace-36
+    accent-bigshot-words-37: accent-bigshot-words-replace-37
+    accent-bigshot-words-38: accent-bigshot-words-replace-38
+    accent-bigshot-words-39: accent-bigshot-words-replace-39
+    accent-bigshot-words-40: accent-bigshot-words-replace-40
+    accent-bigshot-words-41: accent-bigshot-words-replace-41
+    accent-bigshot-words-42: accent-bigshot-words-replace-42
+    accent-bigshot-words-43: accent-bigshot-words-replace-43
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesDealmaker
+  name: dealmaker glasses
+  description: A pair of glasses with uniquely colored lenses. Holding these makes you feel like a [[BIG SHOT]].
+  components:
+    - type: Sprite
+      sprite: _GooseStation/dealmaker.rsi
+    - type: AddAccentClothing
+      accent: ReplacementAccent
+      replacement: BigshotAccent

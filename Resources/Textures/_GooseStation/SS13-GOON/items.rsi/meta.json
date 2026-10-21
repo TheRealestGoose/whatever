@@ -1,0 +1,1002 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "taken from goonstation",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "c_tube"
+        },
+        {
+            "name": "c_sheet"
+        },
+        {
+            "name": "wrap_paper-r"
+        },
+        {
+            "name": "wrap_paper-rs"
+        },
+        {
+            "name": "wrap_paper-g"
+        },
+        {
+            "name": "wrap_paper-gs"
+        },
+        {
+            "name": "gift1-r"
+        },
+        {
+            "name": "gift1-rs"
+        },
+        {
+            "name": "gift1-g"
+        },
+        {
+            "name": "gift1-gs"
+        },
+        {
+            "name": "gift2-r"
+        },
+        {
+            "name": "gift2-rs"
+        },
+        {
+            "name": "gift2-g"
+        },
+        {
+            "name": "gift2-gs"
+        },
+        {
+            "name": "gift3-r"
+        },
+        {
+            "name": "gift3-rs"
+        },
+        {
+            "name": "gift3-g"
+        },
+        {
+            "name": "gift3-gs"
+        },
+        {
+            "name": "strange-r"
+        },
+        {
+            "name": "strange-rs"
+        },
+        {
+            "name": "strange-g"
+        },
+        {
+            "name": "strange-gs"
+        },
+        {
+            "name": "easter_egg"
+        },
+        {
+            "name": "ointment"
+        },
+        {
+            "name": "brutepack"
+        },
+        {
+            "name": "fire_extinguisher0"
+        },
+        {
+            "name": "fire_extinguisher1"
+        },
+        {
+            "name": "fire_extinguisher_shattered"
+        },
+        {
+            "name": "handcuff"
+        },
+        {
+            "name": "handcuff-silver"
+        },
+        {
+            "name": "buddycuff"
+        },
+        {
+            "name": "bedbin"
+        },
+        {
+            "name": "bedbin0"
+        },
+        {
+            "name": "stims"
+        },
+        {
+            "name": "stims0",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "cashgreen"
+        },
+        {
+            "name": "cashblue"
+        },
+        {
+            "name": "cashindi"
+        },
+        {
+            "name": "cashpurp"
+        },
+        {
+            "name": "cashred"
+        },
+        {
+            "name": "cashrbow",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "spacelipstick0"
+        },
+        {
+            "name": "spacelipstick1"
+        },
+        {
+            "name": "spacelipstick"
+        },
+        {
+            "name": "ducktape"
+        },
+        {
+            "name": "viking_shield"
+        },
+        {
+            "name": "bball"
+        },
+        {
+            "name": "bball_spin",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "plutonium",
+            "delays": [
+                [
+                    0.3,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.3
+                ]
+            ]
+        },
+        {
+            "name": "satchel"
+        },
+        {
+            "name": "hydrosatchel"
+        },
+        {
+            "name": "miningsatchel"
+        },
+        {
+            "name": "satcounter0"
+        },
+        {
+            "name": "satcounter1"
+        },
+        {
+            "name": "satcounter2"
+        },
+        {
+            "name": "satcounter3"
+        },
+        {
+            "name": "satcounter4"
+        },
+        {
+            "name": "satcounter5"
+        },
+        {
+            "name": "bottlewater"
+        },
+        {
+            "name": "bowling_ball"
+        },
+        {
+            "name": "bowling_ball_spin",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "bloodbowlball"
+        },
+        {
+            "name": "bloodbowlball_air",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "football"
+        },
+        {
+            "name": "football_air",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "poster"
+        },
+        {
+            "name": "spraycan"
+        },
+        {
+            "name": "spraycan_crushed"
+        },
+        {
+            "name": "yoyo"
+        },
+        {
+            "name": "stapler"
+        },
+        {
+            "name": "shovel"
+        },
+        {
+            "name": "bottlecl"
+        },
+        {
+            "name": "lens"
+        },
+        {
+            "name": "gears"
+        },
+        {
+            "name": "fuelpellet"
+        },
+        {
+            "name": "small_coil"
+        },
+        {
+            "name": "large_coil"
+        },
+        {
+            "name": "domino"
+        },
+        {
+            "name": "bracelet"
+        },
+        {
+            "name": "bracelet-gem"
+        },
+        {
+            "name": "cham_bomb"
+        },
+        {
+            "name": "scanner_thingy",
+            "delays": [
+                [
+                    0.05,
+                    0.05,
+                    0.05,
+                    0.05,
+                    0.05,
+                    0.05
+                ]
+            ]
+        },
+        {
+            "name": "cokebag"
+        },
+        {
+            "name": "lboard"
+        },
+        {
+            "name": "voicechanger",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "firework"
+        },
+        {
+            "name": "fts"
+        },
+        {
+            "name": "magtractor-active"
+        },
+        {
+            "name": "magtractor"
+        },
+        {
+            "name": "magtractor-field",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "magtractor-small"
+        },
+        {
+            "name": "rubber_duck"
+        },
+        {
+            "name": "rubber_duck_evil"
+        },
+        {
+            "name": "photo"
+        },
+        {
+            "name": "photo-beepsky1"
+        },
+        {
+            "name": "photo-beepsky2"
+        },
+        {
+            "name": "photo-heisenbee"
+        },
+        {
+            "name": "album"
+        },
+        {
+            "name": "tinyhammer"
+        },
+        {
+            "name": "stone1"
+        },
+        {
+            "name": "stone2"
+        },
+        {
+            "name": "robojumper-plus"
+        },
+        {
+            "name": "robojumper-minus"
+        },
+        {
+            "name": "garrote0"
+        },
+        {
+            "name": "garrote1"
+        },
+        {
+            "name": "garrote2"
+        },
+        {
+            "name": "garrote3",
+            "delays": [
+                [
+                    0.15,
+                    0.15
+                ]
+            ]
+        },
+        {
+            "name": "rddiploma"
+        },
+        {
+            "name": "mdlicense"
+        },
+        {
+            "name": "hopbill"
+        },
+        {
+            "name": "broken_egun"
+        },
+        {
+            "name": "blackbox"
+        },
+        {
+            "name": "strange-1"
+        },
+        {
+            "name": "gift1-1"
+        },
+        {
+            "name": "gift2-1"
+        },
+        {
+            "name": "gift3-1"
+        },
+        {
+            "name": "wrap_paper-1"
+        },
+        {
+            "name": "strange-2"
+        },
+        {
+            "name": "gift1-2"
+        },
+        {
+            "name": "gift2-2"
+        },
+        {
+            "name": "gift3-2"
+        },
+        {
+            "name": "wrap_paper-2"
+        },
+        {
+            "name": "strange-3"
+        },
+        {
+            "name": "gift1-3"
+        },
+        {
+            "name": "gift2-3"
+        },
+        {
+            "name": "gift3-3"
+        },
+        {
+            "name": "wrap_paper-3"
+        },
+        {
+            "name": "strange-4"
+        },
+        {
+            "name": "gift1-4"
+        },
+        {
+            "name": "gift2-4"
+        },
+        {
+            "name": "gift3-4"
+        },
+        {
+            "name": "wrap_paper-4"
+        },
+        {
+            "name": "strange-5"
+        },
+        {
+            "name": "gift1-5"
+        },
+        {
+            "name": "gift2-5"
+        },
+        {
+            "name": "gift3-5"
+        },
+        {
+            "name": "wrap_paper-5"
+        },
+        {
+            "name": "strange-6"
+        },
+        {
+            "name": "gift1-6"
+        },
+        {
+            "name": "gift2-6"
+        },
+        {
+            "name": "gift3-6"
+        },
+        {
+            "name": "wrap_paper-6"
+        },
+        {
+            "name": "strange-7"
+        },
+        {
+            "name": "gift1-7"
+        },
+        {
+            "name": "gift2-7"
+        },
+        {
+            "name": "gift3-7"
+        },
+        {
+            "name": "wrap_paper-7"
+        },
+        {
+            "name": "strange-8"
+        },
+        {
+            "name": "gift1-8"
+        },
+        {
+            "name": "gift2-8"
+        },
+        {
+            "name": "gift3-8"
+        },
+        {
+            "name": "wrap_paper-8"
+        },
+        {
+            "name": "d6_1"
+        },
+        {
+            "name": "d6_2"
+        },
+        {
+            "name": "d6_3"
+        },
+        {
+            "name": "d6_4"
+        },
+        {
+            "name": "d6_5"
+        },
+        {
+            "name": "d6_6"
+        },
+        {
+            "name": "d4"
+        },
+        {
+            "name": "d8"
+        },
+        {
+            "name": "d10"
+        },
+        {
+            "name": "d12"
+        },
+        {
+            "name": "d20"
+        },
+        {
+            "name": "d100"
+        },
+        {
+            "name": "coin-silver"
+        },
+        {
+            "name": "coin"
+        },
+        {
+            "name": "dicecup1"
+        },
+        {
+            "name": "dicecup2"
+        },
+        {
+            "name": "dicecup3"
+        },
+        {
+            "name": "dicecup4"
+        },
+        {
+            "name": "dicecup5"
+        },
+        {
+            "name": "diceboxt1"
+        },
+        {
+            "name": "diceboxt2"
+        },
+        {
+            "name": "diceboxt3"
+        },
+        {
+            "name": "diceboxt4"
+        },
+        {
+            "name": "diceboxt5"
+        },
+        {
+            "name": "dice"
+        },
+        {
+            "name": "d100red"
+        },
+        {
+            "name": "spacebux"
+        },
+        {
+            "name": "spacebux_gray"
+        },
+        {
+            "name": "figurinecase"
+        },
+        {
+            "name": "figurinecase-open"
+        },
+        {
+            "name": "dicebox"
+        },
+        {
+            "name": "diceboxe"
+        },
+        {
+            "name": "dicecup"
+        },
+        {
+            "name": "bottlefuel"
+        },
+        {
+            "name": "dicecupf"
+        },
+        {
+            "name": "moneybag"
+        },
+        {
+            "name": "8ball"
+        },
+        {
+            "name": "feather"
+        },
+        {
+            "name": "dicepouch"
+        },
+        {
+            "name": "go-board"
+        },
+        {
+            "name": "go-bowl-b"
+        },
+        {
+            "name": "go-bowl-w"
+        },
+        {
+            "name": "go-stone-b"
+        },
+        {
+            "name": "go-stone-w"
+        },
+        {
+            "name": "go-render-stone-black"
+        },
+        {
+            "name": "go-render-stone-white"
+        },
+        {
+            "name": "req-token",
+            "delays": [
+                [
+                    0.120000005,
+                    0.1,
+                    0.1,
+                    0.120000005,
+                    0.1,
+                    0.120000005,
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
+            "name": "req-token-sec"
+        },
+        {
+            "name": "req-token-secass"
+        },
+        {
+            "name": "shinaibag-closed"
+        },
+        {
+            "name": "shinaibag-0"
+        },
+        {
+            "name": "shinaibag-1"
+        },
+        {
+            "name": "shinaibag-2"
+        },
+        {
+            "name": "barricade"
+        },
+        {
+            "name": "rubber_chicken"
+        },
+        {
+            "name": "armadillo_ball"
+        },
+        {
+            "name": "armadillo_spin",
+            "delays": [
+                [
+                    0.1,
+                    0.15,
+                    0.1,
+                    0.15
+                ]
+            ]
+        },
+        {
+            "name": "pixel_pass"
+        },
+        {
+            "name": "golf_ball"
+        },
+        {
+            "name": "ornate-baton"
+        },
+        {
+            "name": "doubloon"
+        },
+        {
+            "name": "fish_common"
+        },
+        {
+            "name": "fish_uncommon"
+        },
+        {
+            "name": "fish_rare"
+        },
+        {
+            "name": "fish_epic"
+        },
+        {
+            "name": "fish_legendary"
+        },
+        {
+            "name": "catball",
+            "delays": [
+                [
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001,
+                    0.030000001
+                ]
+            ]
+        },
+        {
+            "name": "boarvessel"
+        },
+        {
+            "name": "mail-1"
+        },
+        {
+            "name": "mail-2"
+        },
+        {
+            "name": "mail-3"
+        },
+        {
+            "name": "card-1"
+        },
+        {
+            "name": "card-2"
+        },
+        {
+            "name": "card-3"
+        },
+        {
+            "name": "card-4"
+        },
+        {
+            "name": "card-5"
+        },
+        {
+            "name": "card-6"
+        },
+        {
+            "name": "power_pack"
+        },
+        {
+            "name": "power_pack_a"
+        },
+        {
+            "name": "mail-1-b"
+        },
+        {
+            "name": "mail-2-b"
+        },
+        {
+            "name": "mail-3-b"
+        },
+        {
+            "name": "spraycan_gang"
+        },
+        {
+            "name": "spraycan_crushed_gang"
+        },
+        {
+            "name": "satchel-large"
+        },
+        {
+            "name": "hydrosatchel-large"
+        },
+        {
+            "name": "hydrosatchel-compressed"
+        },
+        {
+            "name": "miningsatchel-large"
+        },
+        {
+            "name": "miningsatchel-compressed"
+        },
+        {
+            "name": "mailsatchel"
+        },
+        {
+            "name": "mailsatchel-large"
+        },
+        {
+            "name": "mailsatchel-compressed"
+        },
+        {
+            "name": "bow0"
+        },
+        {
+            "name": "bow1"
+        },
+        {
+            "name": "bow2"
+        },
+        {
+            "name": "bow0$$wood"
+        },
+        {
+            "name": "bow1$$wood"
+        },
+        {
+            "name": "bow2$$wood"
+        },
+        {
+            "name": "arrow_base"
+        },
+        {
+            "name": "arrow_head"
+        },
+        {
+            "name": "quiver-0"
+        },
+        {
+            "name": "quiver-1"
+        },
+        {
+            "name": "quiver-2"
+        },
+        {
+            "name": "quiver-3"
+        },
+        {
+            "name": "quiver-4"
+        },
+        {
+            "name": "arrow"
+        },
+        {
+            "name": "arrowhead"
+        },
+        {
+            "name": "barbed_wire"
+        },
+        {
+            "name": "ice_feather"
+        },
+        {
+            "name": "buttcoin"
+        },
+        {
+            "name": "makeup-brush"
+        },
+        {
+            "name": "inflatable_gorilla"
+        },
+        {
+            "name": "spaceglue0"
+        },
+        {
+            "name": "spaceglue1"
+        },
+        {
+            "name": "spaceglue"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by TheGoose3375 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "pc"
+    },
+    {
+      "name": "screen-1"
+    },
+    {
+      "name": "screen-2"
+    },
+    {
+      "name": "screen-3"
+    },
+    {
+      "name": "screen-4"
+    },
+    {
+      "name": "screen-5"
+    },
+    {
+      "name": "screen-6",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "toggle"
+    }
+  ]
+}

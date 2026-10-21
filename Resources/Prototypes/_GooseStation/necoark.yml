@@ -1,0 +1,397 @@
+- type: soundCollection
+  id: NegroArcSounds
+  files:
+  - /Audio/_GooseStation/Neco/neco (1).ogg
+  - /Audio/_GooseStation/Neco/neco (2).ogg
+  - /Audio/_GooseStation/Neco/neco (3).ogg
+  - /Audio/_GooseStation/Neco/neco (4).ogg
+  - /Audio/_GooseStation/Neco/neco (5).ogg
+  - /Audio/_GooseStation/Neco/neco (6).ogg
+  - /Audio/_GooseStation/Neco/neco (7).ogg
+
+- type: entity
+  parent: BaseGameRule
+  id: NecoArcSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/aliens.ogg
+    earliestStart: 0
+    minimumPlayers: 1
+    weight: 5
+    reoccurrenceDelay: 30
+    eventType: HostilesSpawn
+  - type: GameRule
+    chaosScore: 1
+  - type: VentCrittersRule
+    max: 25
+    min: 5
+    playerRatio: 5
+    table:
+      id: MobNegroArc
+
+- type: entity
+  name: base nigga arc
+  id: MobNegroArcBase
+  parent:
+  - BaseSimpleMob
+  - MobAtmosExposed
+  - MobCombat
+  - MobBloodstream
+  - MobFlammable
+  abstract: true
+  components:
+  - type: Body
+    bodyType: Simple
+    prototype: Animal
+  - type: NameIdentifier
+    group: GenericNumber
+
+- type: entity
+  name: neco arc 
+  id: MobNegroArc
+  parent: MobNegroArcBase
+  description: Everywhere I go, I see his face.
+  suffix: Split
+  components: 
+  - type: Tag
+    tags: []
+  - type: SpamEmitSound
+    sound:
+      collection: NegroArcSounds
+      params:
+            volume: -2
+            variation: 0.05
+            maxDistance: 10
+  - type: VentCrawler # goobstation - Ventcrawl
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+  - type: Sprite
+    sprite: _GooseStation/negro-arc.rsi/64x
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: negro-arc-move
+      scale: 0.5, 0.5
+  - type: Physics
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 6
+    baseSprintSpeed : 7
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 30
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+    allowedStates:
+      - Alive
+  #    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+#        damageType: Blunt
+        damage: 25
+      behaviors:
+      - !type:GibBehavior # Shitmed Change
+        gibContents: Skip
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MobNegroArcNosplit:
+            min: 0
+            max: 3
+  - type: Body
+    prototype: Skeleton
+    requiredLegs: 2
+  - type: MovementAlwaysTouching
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Bloodstream
+    bloodMaxVolume: 25 #чтобы лопались грязно
+  - type: CombatMode
+  - type: MeleeWeapon
+    soundHit: /Audio/Weapons/bladeslice.ogg
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 4
+        Piercing: 1
+  # - type: SolutionContainerManager
+  #   solutions:
+  #     melee:
+  #       reagents:
+  #       - ReagentId: Toxin
+  #         Quantity: 5
+  # - type: MeleeChemicalInjector
+  #   solution: melee
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: Speech
+    speechVerb: SmallMob
+  - type: ZombieImmune
+
+- type: entity
+  name: neco arc 
+  id: MobNegroArcNosplit
+  parent: MobNegroArcBase
+  description: Everywhere I go, I see his face.
+  suffix: Nosplit
+  components: 
+  - type: Tag
+    tags: []
+  - type: SpamEmitSound
+    sound:
+      collection: NegroArcSounds
+      params:
+            volume: -2
+            variation: 0.05
+            maxDistance: 10
+  - type: VentCrawler # goobstation - Ventcrawl
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: negro-arc-move
+      sprite: _GooseStation/negro-arc.rsi/64x
+      scale: 0.5, 0.5
+  - type: Physics
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 6
+    baseSprintSpeed : 7
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 30
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+    allowedStates:
+      - Alive
+  #    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+#        damageType: Blunt
+        damage: 25
+      behaviors:
+      - !type:GibBehavior # Shitmed Change
+        gibContents: Skip
+  - type: Body
+    prototype: Skeleton
+    requiredLegs: 2
+  - type: MovementAlwaysTouching
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Bloodstream
+    bloodMaxVolume: 25 #чтобы лопались грязно
+  - type: CombatMode
+  - type: MeleeWeapon
+    soundHit: /Audio/Weapons/bladeslice.ogg
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 3
+        Piercing: 1
+  # - type: SolutionContainerManager
+  #   solutions:
+  #     melee:
+  #       reagents:
+  #       - ReagentId: Toxin
+  #         Quantity: 5
+  # - type: MeleeChemicalInjector
+  #   solution: melee
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: Speech
+    speechVerb: SmallMob
+  - type: ZombieImmune
+
+- type: entity
+  name: sleeping neco arc 
+  id: MobNegroArcSleeping
+  parent: MobNegroArcBase
+  description: Hrrrh mimimimi.
+  suffix: Nosplit
+  components: 
+  - type: Tag
+    tags: []
+  # - type: SpamEmitSound #hrr mimir sounds later
+  #   sound:
+  #     collection: NegroArcSounds
+  #     params:
+  #           volume: -2
+  #           variation: 0.05
+  #           maxDistance: 10
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: negro-arc-sleeping
+      sprite: _GooseStation/negro-arc.rsi/48x
+      scale: 0.5, 0.5
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 30
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+    allowedStates:
+      - Alive
+  #    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+#        damageType: Blunt
+        damage: 25
+      behaviors:
+      - !type:GibBehavior # Shitmed Change
+        gibContents: Skip
+  - type: Body
+    prototype: Skeleton
+    requiredLegs: 2
+  - type: MovementAlwaysTouching
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Bloodstream
+    bloodMaxVolume: 25 #чтобы лопались грязно
+  - type: ZombieImmune
+
+- type: entity
+  name: dancing neco arc 
+  id: MobNegroArcDancing
+  parent: MobNegroArcBase
+  description: Everywhere I go, I see his groove.
+  suffix: Nosplit
+  components: 
+  - type: Tag
+    tags: []
+  # - type: SpamEmitSound #hrr mimir sounds later
+  #   sound:
+  #     collection: NegroArcSounds
+  #     params:
+  #           volume: -2
+  #           variation: 0.05
+  #           maxDistance: 10
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: negro-arc-dance
+      sprite: _GooseStation/negro-arc.rsi/64x
+      scale: 0.5, 0.5
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 30
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+    allowedStates:
+      - Alive
+  #    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+#        damageType: Blunt
+        damage: 25
+      behaviors:
+      - !type:GibBehavior # Shitmed Change
+        gibContents: Skip
+  - type: Body
+    prototype: Skeleton
+    requiredLegs: 2
+  - type: MovementAlwaysTouching
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Bloodstream
+    bloodMaxVolume: 25 #чтобы лопались грязно
+  - type: ZombieImmune
+  
+- type: entity
+  name: dancing neco arc 
+  id: MobNegroArcDancingFaster
+  parent: MobNegroArcDancing
+  description: Everywhere I go, I see his face.
+  suffix: Nosplit, Faster
+  components: 
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: negro-arc-dance-faster
+      sprite: _GooseStation/negro-arc.rsi/64x
+      scale: 0.5, 0.5

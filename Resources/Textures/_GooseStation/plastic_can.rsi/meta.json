@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by TheGoose3375 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "solution-1"
+    },
+    {
+      "name": "solution-2"
+    },
+    {
+      "name": "solution-3"
+    },
+    {
+      "name": "solution-4"
+    },
+    {
+      "name": "solution-5"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "made by TheGoose3375 (discord)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "ash"
+        },
+        {
+            "name": "ash_icon"
+        },
+        {
+            "name": "coal"
+        },
+        {
+            "name": "coal_icon"
+        },
+        {
+            "name": "electrical"
+        },
+        {
+            "name": "electrical_icon"
+        },
+        {
+            "name": "meat"
+        },
+        {
+            "name": "meat_icon"
+        },
+        {
+            "name": "metal"
+        },
+        {
+            "name": "metal_icon"
+        },
+        {
+            "name": "paper"
+        },
+        {
+            "name": "paper_icon"
+        },
+        {
+            "name": "plastic"
+        },
+        {
+            "name": "plastic_icon"
+        },
+        {
+            "name": "wood"
+        },
+        {
+            "name": "wood_icon"
+        }
+    ]
+}

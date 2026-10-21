@@ -1,0 +1,243 @@
+﻿- type: constructionGraph
+  id: Pallet
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:SpawnPrototype
+          prototype: MaterialWoodPlank1
+          amount: 4
+        - !type:DeleteEntity
+
+    - node: StoragePallet
+      entity: StoragePallet
+      edges:
+        - to: start
+          steps:
+            - tool: Prying
+              doAfter: 4
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank1
+              amount: 4
+            - !type:DeleteEntity {}
+
+    - node: StoragePalletCargoSteel
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 30
+
+    - node: StoragePalletCargoRodMetal
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: PartRodMetal1
+              amount: 30
+
+    - node: StoragePalletCargoPlasteel
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 30
+
+    - node: StoragePalletCargoPlastic
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlastic1
+              amount: 30
+
+    - node: StoragePalletCargoPlasma
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlasma1
+              amount: 30
+
+    - node: StoragePalletCargoUranium
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetUranium1
+              amount: 30
+
+    - node: StoragePalletCargoGlass
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetGlass1
+              amount: 30
+
+    - node: StoragePalletCargoRGlass
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRGlass1
+              amount: 30
+
+    - node: StoragePalletCargoPGlass
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPGlass1
+              amount: 30
+
+    - node: StoragePalletCargoRPGlass
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRPGlass1
+              amount: 30
+
+    - node: StoragePalletCargoUGlass
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetUGlass1
+              amount: 30
+
+    - node: StoragePalletCargoRUGlass
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetRUGlass1
+              amount: 30
+
+    - node: StoragePalletCargoCloth
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialCloth1
+              amount: 30
+
+    - node: StoragePalletCargoDurathread
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialDurathread1
+              amount: 30
+
+    - node: StoragePalletCargoWood
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank1
+              amount: 30
+
+    - node: StoragePalletCargoCardboard
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialCardboard1
+              amount: 30
+
+    - node: StoragePalletCargoBiomass
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialBiomass1
+              amount: 100
+
+    - node: StoragePalletCargoBrass
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetBrass1
+              amount: 30
+
+    - node: StoragePalletCargoSilver
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: IngotSilver1
+              amount: 100
+
+    - node: StoragePalletCargoGold
+      edges:
+        - to: StoragePallet
+          steps:
+            - tool: Prying
+              doAfter: 8
+          completed:
+            - !type:SpawnPrototype
+              prototype: IngotGold1
+              amount: 30
