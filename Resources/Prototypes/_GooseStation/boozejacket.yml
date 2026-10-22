@@ -134,6 +134,8 @@
        - !type:DoActsBehavior
         acts: [ "Destruction" ]
        - !type:SpillBehavior { }
+  - type: StaticPrice
+    price: 250
   - type: PhysicalComposition
     materialComposition:
       Plastic: 500

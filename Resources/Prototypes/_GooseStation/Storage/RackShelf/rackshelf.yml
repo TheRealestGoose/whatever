@@ -411,15 +411,10 @@
         - id: Multitool
           prob: 0.10
           orGroup: toolloot
-        - id: ClothingHandsGlovesColorYellow
-          prob: 0.05
         - id: ClothingHandsGlovesColorYellowBudget
           prob: 0.25
         - id: ClothingHeadHatWelding
           prob: 0.2
-        - id: ModularReceiver
-          prob: 0.1
-          orGroup: toolloot
         - id: CableApcStack10
           prob: 0.2
         - id: CableMVStack10

@@ -115,6 +115,7 @@ namespace Content.IntegrationTests.Tests
             // if upstreaming take ours here and edit manually.
             //"Amber", kill
             "Atlas",
+            "Axioma",
             "Bagel",
             "Barratry",
             "Box",            // Not in pool
@@ -138,6 +139,7 @@ namespace Content.IntegrationTests.Tests
             "Marathon",
             "Meta",
             "MeteorArena",    // Deathmatch
+            "Nox",
             "Oasis",
             "OasisHighPop",
             "Omega",
