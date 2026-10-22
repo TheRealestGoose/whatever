@@ -22,7 +22,7 @@
 
 - type: listing
   id: GooseShopLootbox
-  name: le epic box
+  name: le-epic-box
   productEntity: Lootbox
   cost:
     SpaceCash: 10000
@@ -31,7 +31,7 @@
 
 - type: listing
   id: GooseBoxCardboardTruthOrDare
-  description: This small box contains the entirety of the truth and dare game! Instructions included.
+  description: truth-or-dare
   productEntity: BoxCardboardTruthOrDare
   cost:
     SpaceCash: 5000
@@ -49,12 +49,12 @@
 
 - type: storeCategory
   id: GooseStationStore
-  name: "Le stuff!1!"
+  name: uplink-goose-main
   priority: 0
 
 - type: currency
   id: SpaceCash
-  displayName: spesos
+  displayName: currency-uplink-spesos
   cash:
     1: SpaceCash
   canWithdraw: true
@@ -548,7 +548,6 @@
   - type: BatteryDrinkerSource # Goobstation - Energycrit
     maxAmount: 100
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 10
   - type: Battery
     maxCharge: 500
@@ -580,9 +579,9 @@
                     Slash: 7
                     Heat: 5
                     Structural: 30 #30 is just enough for rocks #doesnt have to
-                woundSeverityMultipliers: # Goobstation
-                  Slash: 1.5
-                  Heat: 1.5
+                  woundSeverityMultipliers: # Goobstation
+                    Slash: 1.5
+                    Heat: 1.5
             soundStateActivate:
               collection: sparks
               params:
@@ -625,9 +624,9 @@
             Slash: 7
             Heat: 5
             Structural: 30 #30 is just enough for rocks #doesnt have to
-        woundSeverityMultipliers: # Goobstation
-          Slash: 1.5
-          Heat: 1.5
+          woundSeverityMultipliers: # Goobstation
+            Slash: 1.5
+            Heat: 1.5
       # - type: AmmoCounter
       - type: GunExecutionBlacklist # Goobstation
       - type: PacifismAllowedGun
@@ -667,9 +666,9 @@
                     Slash: 7
                     Heat: 5
                     Structural: 30 #30 is just enough for rocks #doesnt have to
-                woundSeverityMultipliers: # Goobstation
-                  Slash: 1.5
-                  Heat: 1.5
+                  woundSeverityMultipliers: # Goobstation
+                    Slash: 1.5
+                    Heat: 1.5
             soundStateActivate:
               collection: sparks
               params:

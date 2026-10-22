@@ -363,7 +363,7 @@
     layers:
     - tile: FloorChromite
       threshold: 0.6
-      invert: true
+      # invert: trues
       noise:
         seed: 0
         noiseType: Perlin
@@ -387,7 +387,7 @@
     layers:
     - tile: FloorChromite
       threshold: 0.7
-      invert: true
+      # invert: true
       noise:
         seed: 0
         noiseType: Perlin

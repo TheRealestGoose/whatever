@@ -699,14 +699,14 @@
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
   name: China-Lake bundle
-  description: "An old China-Lake grenade launcher bundled with 14 rounds of various honking capability."
+  description: "An old China-Lake grenade launcher bundled with 12 rounds of various honking capability."
   suffix: Toy, Bundle
   components:
   - type: StorageFill
     contents:
       - id: WeaponLauncherChinaLakeToy
       - id: GrenadeToy
-        amount: 20
+        amount: 12
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateAmmo

@@ -77,8 +77,7 @@
             - !type:SnapToGrid
           steps:
             - tag: BikeHorn
-              amount: 1
-              name: "a worthy sacrifice"
+              name: bike-horn-bad-to-the-bone-craft
               icon:
                 sprite: Objects/Fun/bikehorn.rsi
                 state: icon
@@ -278,7 +277,7 @@
       path: /Audio/Animals/goose_honk.ogg
   - type: Edible
     requiresSpecialDigestion: true
-    useSound:
+    sound:
       path: /Audio/Animals/goose_honk.ogg
   - type: MeleeWeapon
     soundHit:

@@ -128,7 +128,10 @@
       Dead:
         Base: dead
   - type: Bloodstream
-    bloodMaxVolume: 25 #чтобы лопались грязно
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 25
   - type: CombatMode
   - type: MeleeWeapon
     soundHit: /Audio/Weapons/bladeslice.ogg
@@ -226,7 +229,10 @@
       Dead:
         Base: dead
   - type: Bloodstream
-    bloodMaxVolume: 25 #чтобы лопались грязно
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 25
   - type: CombatMode
   - type: MeleeWeapon
     soundHit: /Audio/Weapons/bladeslice.ogg
@@ -312,7 +318,10 @@
       Dead:
         Base: dead
   - type: Bloodstream
-    bloodMaxVolume: 25 #чтобы лопались грязно
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 25
   - type: ZombieImmune
 
 - type: entity
@@ -378,7 +387,10 @@
       Dead:
         Base: dead
   - type: Bloodstream
-    bloodMaxVolume: 25 #чтобы лопались грязно
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 25
   - type: ZombieImmune
   
 - type: entity

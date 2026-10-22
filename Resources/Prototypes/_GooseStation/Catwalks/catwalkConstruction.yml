@@ -4,9 +4,6 @@
   startNode: start
   targetNode: SteelCatwalk
   category: construction-category-structures
-  icon:
-    sprite: /Textures/_GooseStation/Catwalks/catwalksolid.rsi
-    state: catwalk
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -20,9 +17,6 @@
   startNode: start
   targetNode: WhiteCatwalk
   category: construction-category-structures
-  icon:
-    sprite: /Textures/_GooseStation/Catwalks/catwalksolid.rsi
-    state: catwalk_white
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -36,9 +30,6 @@
   startNode: start
   targetNode: DarkCatwalk
   category: construction-category-structures
-  icon:
-    sprite: /Textures/_GooseStation/Catwalks/catwalksolid.rsi
-    state: catwalk_black
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -52,9 +43,6 @@
   startNode: start
   targetNode: CatwalkRed
   category: construction-category-structures
-  icon:
-    sprite: _GooseStation/Catwalks/catwalkred.rsi
-    state: catwalk_preview
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -68,9 +56,6 @@
   startNode: start
   targetNode: CatwalkPurple
   category: construction-category-structures
-  icon:
-    sprite: _GooseStation/Catwalks/catwalkpurple.rsi
-    state: catwalk_preview
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -84,9 +69,6 @@
   startNode: start
   targetNode: CatwalkCyan
   category: construction-category-structures
-  icon:
-    sprite: _GooseStation/Catwalks/catwalkcyan.rsi
-    state: catwalk_preview
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -100,9 +82,6 @@
   startNode: start
   targetNode: CatwalkBrown
   category: construction-category-structures
-  icon:
-    sprite: _GooseStation/Catwalks/catwalkbrown.rsi
-    state: catwalk_preview
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -116,9 +95,6 @@
   startNode: start
   targetNode: CatwalkOrange
   category: construction-category-structures
-  icon:
-    sprite: _GooseStation/Catwalks/catwalkorange.rsi
-    state: catwalk_preview
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -132,9 +108,6 @@
   startNode: start
   targetNode: CatwalkGreen
   category: construction-category-structures
-  icon:
-    sprite: _GooseStation/Catwalks/catwalkgreen.rsi
-    state: catwalk_preview
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
@@ -148,9 +121,6 @@
   startNode: start
   targetNode: CatwalkBlue
   category: construction-category-structures
-  icon:
-    sprite: _GooseStation/Catwalks/catwalkblue.rsi
-    state: catwalk_preview
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false

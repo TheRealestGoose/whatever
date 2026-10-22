@@ -239,7 +239,7 @@
     layers:
     - tile: FloorAsteroidSandBorderless
       threshold: 0.7
-      invert: true
+      # invert: true
       noise:
         seed: 0
         noiseType: Perlin

@@ -5,9 +5,6 @@
   targetNode: RackShelfSingle
   name: metal-rack-shelf
   description: you-can-attach-two-additional-shelves-to-it
-  icon:
-    sprite: _GooseStation/rack_shelf.rsi
-    state: icon
   category: construction-category-storage
   objectType: Structure
   placementMode: SnapgridCenter
@@ -22,9 +19,6 @@
   targetNode: RackShelfPlasticSingle
   name: plastic-rack-shelf
   description: you-can-attach-two-additional-shelves-to-it
-  icon:
-    sprite: _GooseStation/rack_shelf.rsi
-    state: icon
   category: construction-category-storage
   objectType: Structure
   placementMode: SnapgridCenter
@@ -39,9 +33,6 @@
   targetNode: RackShelfWoodSingle
   name: wood-rack-shelf
   description: you-can-attach-two-additional-shelves-to-it
-  icon:
-    sprite: _GooseStation/rack_shelf.rsi
-    state: icon
   category: construction-category-storage
   objectType: Structure
   placementMode: SnapgridCenter

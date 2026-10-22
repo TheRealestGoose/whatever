@@ -1,5 +1,12 @@
 uplink-clown-name = Honkmother's favors
 
+uplink-clown-main = Main
+uplink-clown-bonus = Bonus
+uplink-clown-trinkets = Trinkets
+uplink-clown-chemistry = Chemical Warfare
+
+currency-uplink-clown = banana peels
+
 food-pie-banana-cream-set-desc = The most dangerous weapon in the entire galaxy! DANGER 100%
 
 crayon-rainbow-desc = Another crayon! Go write something bad infront of security, you know you want to.
@@ -21,6 +28,7 @@ counterfeit-cash-10 = Looks real at a glance.
 clown-carpet-desc = Spread the influence.
 
 crapo-toxin-set-name = crapium
+crapo-toxin-label = chocolate milk
 crapo-toxin-set-desc = 30 units of crapotoxin, makes people fart. Foolish crewmember! I laced yo shit!
 
 laughter-set-name = funny juice

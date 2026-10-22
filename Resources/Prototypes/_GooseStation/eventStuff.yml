@@ -112,7 +112,6 @@
   - type: Icon
     sprite: Tiles/Planet/Chasms/basalt_chasm.rsi
     state: full
-    base: chasm
   - type: Physics
     bodyType: Static
   - type: Tag

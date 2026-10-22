@@ -64,7 +64,7 @@
   - type: ReagentTank #on cuz modes
     transferAmount: 5
   - type: ReactionMixer
-    mixOnInteract: false
+    mixerType: None
     reactionTypes:
     - Shake
 

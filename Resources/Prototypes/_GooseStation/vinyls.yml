@@ -115,7 +115,6 @@
   #   state: closed
   - type: Item
     sprite: _GooseStation/phonograph.rsi
-    state: closed
     size: Large
   - type: Sprite
     sprite: _GooseStation/phonograph.rsi

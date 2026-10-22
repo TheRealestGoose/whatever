@@ -126,7 +126,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: "chocolate milk"
+    currentLabel: crapo-toxin-label
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -141,7 +141,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: "funny juice"
+    currentLabel: laughter-set-name
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -433,22 +433,22 @@
 
 - type: storeCategory
   id: UplinkWearablesClown
-  name: "Main"
+  name: uplink-clown-main
   priority: 1
 
 - type: storeCategory
   id: AdditionalClown
-  name: "Bonus"
+  name: uplink-clown-bonus
   priority: 2
 
 - type: storeCategory
   id: TrinketsClown
-  name: "Trinkets"
+  name: uplink-clown-trinkets
   priority: 3
 
 - type: storeCategory
   id: ChemicalsClown
-  name: "Chemical Warfare"
+  name: uplink-clown-chemistry
   priority: 4
 
 - type: entity
@@ -513,7 +513,7 @@
 
 - type: currency
   id: TrashBananaPeel
-  displayName: banana peels
+  displayName: currency-uplink-clown
   cash:
     1: TrashBananaPeel
   canWithdraw: false
