@@ -128,6 +128,8 @@
   - type: EmitSoundOnTrigger
     sound:
       collection: ToySqueak
+  - type: StaticPrice
+    price: 10
   - type: SolutionContainerManager
     solutions:
       food:
@@ -221,7 +223,7 @@
     materialComposition:
       Cloth: 100
   - type: StaticPrice
-    price: 1 #cuz torn
+    price: 0 #cuz torn
   - type: SolutionContainerManager
     solutions:
       food:

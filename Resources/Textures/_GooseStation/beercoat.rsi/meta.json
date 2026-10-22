@@ -32,6 +32,54 @@
       "directions": 4
     },
     {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "equipped-suitstorage-fill-1",
+      "directions": 4
+    },
+    {
+      "name": "equipped-suitstorage-fill-2",
+      "directions": 4
+    },
+    {
+      "name": "equipped-suitstorage-fill-3",
+      "directions": 4
+    },
+    {
+      "name": "equipped-suitstorage-fill-4",
+      "directions": 4
+    },
+    {
+      "name": "equipped-suitstorage-fill-5",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-back-fill-1",
+      "directions": 4
+    },
+    {
+      "name": "equipped-back-fill-2",
+      "directions": 4
+    },
+    {
+      "name": "equipped-back-fill-3",
+      "directions": 4
+    },
+    {
+      "name": "equipped-back-fill-4",
+      "directions": 4
+    },
+    {
+      "name": "equipped-back-fill-5",
+      "directions": 4
+    },
+    {
       "name": "icon"
     },
     {
