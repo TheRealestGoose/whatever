@@ -6,7 +6,6 @@
   description: A candy, still in its wrapper.
   abstract: true
   components:
-  - type: Edible
   - type: Tag
     tags:
     - FoodSnack

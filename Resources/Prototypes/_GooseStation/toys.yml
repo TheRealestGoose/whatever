@@ -120,7 +120,7 @@
       collection: MaleScreams
   - type: Edible
     requiresSpecialDigestion: true
-    sound:
+    useSound:
       collection: MaleScreams #only screams if hurt
   - type: MeleeWeapon
     soundHit:
@@ -202,7 +202,7 @@
   - type: Edible
     requiresSpecialDigestion: true
     delay: 2
-    sound:
+    useSound:
       collection: MaleScreams
   - type: MeleeWeapon
     wideAnimationRotation: 180
@@ -234,22 +234,12 @@
     - Payload
     - ClothMade
 
-- type: entity
+- type: entity #should by all means be able to fly but whatever
   parent: BasePlushie
   id: PlushieGoose
   name: goose plushie
   description: This is a horrifying plush of a goose. You can feel it staring into your soul.
   components:
-  - type: Flight
-    isLayerAnimated: false
-    layer: "/Textures/_GooseStation/plushies/32x.rsi"
-    on: true
-    animationKey: "Flap"
-    staminaDrainRate: 0
-    flapSound:
-      path: /Audio/Animals/goose_honk.ogg
-      params:
-        volume: -100
   - type: Sprite
     sprite: _GooseStation/plushies/32x.rsi
     layers:
@@ -261,7 +251,7 @@
         reagents:
         - ReagentId: DemonsBlood
           Quantity: 5
-        - ReagentId: Lead #so moth die; this is actually 666 ticks of damage adding up to 400
+        - ReagentId: Lead #so moth die; this is actually 666 ticks of damage adding up to 400 in testing
           Quantity: 20
   - type: EmitSoundOnUse
     sound:
@@ -277,7 +267,7 @@
       path: /Audio/Animals/goose_honk.ogg
   - type: Edible
     requiresSpecialDigestion: true
-    sound:
+    useSound:
       path: /Audio/Animals/goose_honk.ogg
   - type: MeleeWeapon
     soundHit:

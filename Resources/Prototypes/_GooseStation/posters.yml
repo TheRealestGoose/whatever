@@ -220,7 +220,7 @@
       - sprite: Structures/Wallmounts/posters.rsi
         state: random_legit
   - type: Construction
-    node: RandomPosterLegitGS
+    node: Legit
     graph: Poster
   - type: RandomSpawner
     offset: 0
@@ -316,7 +316,7 @@
       - sprite: Structures/Wallmounts/posters.rsi
         state: random_contraband
   - type: Construction
-    node: RandomPosterContrabandGS
+    node: Contraband
     graph: Poster
   - type: RandomSpawner
     offset: 0

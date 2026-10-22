@@ -322,32 +322,32 @@
 - type: entity
   id: RackShelfFilledSingle
   suffix: Single, Filled, Random
-  parent: [RackShelfSingle, RackShelfFiller]
+  parent: [RackShelfSingle, RackShelfFillerLess]
 
 - type: entity
   id: RackShelfFilledPlasticSingle
   suffix: Single, Filled, Random
-  parent: [RackShelfPlasticSingle, RackShelfFiller]
+  parent: [RackShelfPlasticSingle, RackShelfFillerLess]
 
 - type: entity
   id: RackShelfFilledWoodSingle
   suffix: Single, Filled, Random
-  parent: [RackShelfWoodSingle, RackShelfFiller]
+  parent: [RackShelfWoodSingle, RackShelfFillerLess]
 
 - type: entity
   id: RackShelfFilledTwo
   suffix: Two, Filled, Random
-  parent: [RackShelfTwo, RackShelfFiller]
+  parent: [RackShelfTwo, RackShelfFillerLess]
 
 - type: entity
   id: RackShelfFilledPlasticTwo
   suffix: Two, Filled, Random
-  parent: [RackShelfPlasticTwo, RackShelfFiller]
+  parent: [RackShelfPlasticTwo, RackShelfFillerLess]
 
 - type: entity
   id: RackShelfFilledWoodTwo
   suffix: Two, Filled, Random
-  parent: [RackShelfWoodTwo, RackShelfFiller]
+  parent: [RackShelfWoodTwo, RackShelfFillerLess]
 
 - type: entity
   id: RackShelfFilled
@@ -363,6 +363,172 @@
   id: RackShelfFilledWood
   suffix: Filled, Random
   parent: [RackShelfWood, RackShelfFiller]
+
+- type: entity
+  id: RackShelfFillerLess
+  abstract: true
+  components:
+    - type: StorageFill
+      contents:
+        #goosestation additions
+        - id: CybersunFlippo
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: ClothingMaskGasVoiceChameleon
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: PlushieGoose
+          prob: 0.01
+        - id: ClothingNeckOldClothWrap
+          prob: 0.01
+        - id: Beartrap
+          prob: 0.025
+          orGroup: syndiemaintloot
+        - id: PlushieSpaniard
+          prob: 0.01
+        - id: MaterialCardboard10
+          prob: 0.25
+        - id: PosterLegal #posters
+          prob: 0.25
+        - id: PosterContraband
+          prob: 0.2
+        #ends here
+        - id: Lantern
+          prob: 0.33
+          orGroup: lightloot
+        - id: FlashlightLantern
+          prob: 0.33
+          orGroup: lightloot
+        - id: Wirecutter
+          prob: 0.33
+          orGroup: toolloot
+        - id: Screwdriver
+          prob: 0.33
+          orGroup: toolloot
+        - id: Wrench
+          prob: 0.33
+          orGroup: toolloot
+        - id: Crowbar
+          prob: 0.50
+          orGroup: toolloot
+        - id: Welder
+          prob: 0.33
+          orGroup: toolloot
+        - id: trayScanner
+          prob: 0.2
+          orGroup: toolloot
+        - id: GasAnalyzer
+          prob: 0.2
+          orGroup: toolloot
+        - id: GeigerCounter
+          prob: 0.2
+          orGroup: toolloot
+        - id: Multitool
+          prob: 0.10
+          orGroup: toolloot
+        - id: ClothingHandsGlovesColorYellow
+          prob: 0.05
+        - id: ClothingHandsGlovesFingerlessInsulated
+          prob: 0.07
+        - id: WeaponFlareGun
+          prob: 0.1
+          orGroup: toolloot
+        - id: ClothingHandsGlovesColorYellowBudget
+          prob: 0.25
+        - id: ClothingHeadHatWelding
+          prob: 0.2
+        - id: ModularReceiver
+          prob: 0.1
+          orGroup: toolloot
+        - id: DrinkSpaceGlue
+          prob: 0.20
+        - id: DrinkSpaceLube
+          prob: 0.20
+        - id: CableApcStack10
+          prob: 0.2
+        - id: CableMVStack10
+          prob: 0.2
+        - id: CableHVStack10
+          prob: 0.2
+        - id: Wristwatch
+          prob: 0.05
+        # hardhat loot
+        - id: null
+          prob: 0.3
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatWhite
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatYellow
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatRed
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatOrange
+          prob: 0.1
+          orGroup: hardhat
+        - id: ClothingHeadHatHardhatBlue
+          prob: 0.1
+          orGroup: hardhat
+        # battery loot
+        - id: PowerCellSmall
+          prob: 0.33
+          orGroup: battery
+        - id: PowerCellMedium
+          prob: 0.2
+          orGroup: battery
+        - id: PowerCellHigh
+          prob: 0.05
+          orGroup: battery
+        # plushie loot
+        - id: null
+          prob: 0.9
+          orGroup: shark
+        - id: PlushieSharkPink
+          prob: 0.05
+          orGroup: shark
+        - id: PlushieSharkGrey
+          prob: 0.05
+          orGroup: shark
+        - id: PlushieSharkBlue
+          prob: 0.05
+          orGroup: shark
+        # part loot
+        - id: null
+          prob: 0.60
+          orGroup: part
+        - id: MicroManipulatorStockPart
+          prob: 0.2
+          orGroup: part
+        - id: MicroManipulatorStockPart
+          prob: 0.2
+          orGroup: part
+        - id: MicroManipulatorStockPart
+          prob: 0.2
+          orGroup: part
+        # Syndicate loot
+        - id: null
+          prob: 0.95
+          orGroup: syndiemaintloot
+        - id: ClothingUniformJumpskirtOperative
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: ClothingUniformJumpsuitOperative
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: CyberPen
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: CigPackSyndicate
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: ClothingShoesBootsCombatFilled
+          prob: 0.005
+          orGroup: syndiemaintloot
+        - id: BalloonSyn
+          prob: 0.005
+          orGroup: syndiemaintloot
 
 - type: entity
   id: RackShelfFiller
