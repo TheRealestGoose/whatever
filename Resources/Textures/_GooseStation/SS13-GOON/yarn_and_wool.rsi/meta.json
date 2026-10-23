@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "taken from Goonstation",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "wool-white"
+        },
+        {
+            "name": "yarn-ball-white"
+        },
+        {
+            "name": "yarn-ball-white-rolling"
+        },
+        {
+            "name": "yarn-roll-white"
+        },
+        {
+            "name": "knit-white"
+        }
+    ]
+}

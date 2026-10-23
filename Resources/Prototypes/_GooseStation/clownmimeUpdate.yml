@@ -1,0 +1,577 @@
+- type: entity
+  name: cockptain rubber stamp
+  parent: [RubberStampBase]
+  id: RubberStampFakeCaptain
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: "Cockptain"
+    stampedColor: "#3681bb"
+    stampState: "paper_stamp-cap"
+  - type: Sprite
+    state: stamp-cap
+
+- type: entity
+  name: CentCum rubber stamp
+  parent: [RubberStampBase]
+  id: RubberStampFakeCentcom
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: "CentCum"
+    stampedColor: "#006600"
+    stampState: "paper_stamp-centcom"
+  - type: Sprite
+    state: stamp-centcom
+
+- type: entity
+  name: shit engineer's rubber stamp
+  parent: [RubberStampBase]
+  id: RubberStampFakeCE
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: "Shit Engineer"
+    stampedColor: "#c69b17"
+    stampState: "paper_stamp-ce"
+  - type: Sprite
+    state: stamp-ce
+
+- type: entity
+  name: shit medical officer's rubber stamp
+  parent: [RubberStampBase]
+  id: RubberStampFakeCMO
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: "Shit Medical Officer"
+    stampedColor: "#33ccff"
+    stampState: "paper_stamp-cmo"
+  - type: Sprite
+    state: stamp-cmo
+
+- type: entity
+  name: head of suckurity's rubber stamp
+  parent: [RubberStampBase]
+  id: RubberStampFakeHos
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: "Head of Suckurity"
+    stampedColor: "#cc0000"
+    stampState: "paper_stamp-hos"
+  - type: Sprite
+    state: stamp-hos
+
+- type: entity
+  name: syndiekek rubber stamp
+  parent: [RubberStampBase]
+  id: RubberStampFakeSyndicate
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: "Syndikek"
+    stampedColor: "#850000"
+    stampState: "paper_stamp-syndicate"
+  - type: Sprite
+    state: stamp-syndicate
+
+- type: entity
+  name: no blag rubber stamp
+  parent: [RubberStampBase]
+  id: RubberStampFakeApproved
+  description: Stamp of bananium, for affixing seals to unimportant documents.
+  components:
+  - type: Stamp
+    stampedName: "TRUSTED"
+    stampedColor: "#00be00"
+    stampState: "paper_stamp-ok"
+  - type: Sprite
+    state: stamp-ok
+
+- type: entity
+  parent: BaseItem
+  id: ClownStampBox
+  name: stamps box
+  description: Worn down box with something that might be a clown bomb.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Misc/ParcelWrap/wrapped_parcel.rsi
+    state: parcel-medium
+  - type: SpawnItemsOnUse
+    items:
+      - id: ParcelWrapTrash
+      - id: RubberStampFakeCaptain
+        orGroup: FakeStump
+      - id: RubberStampFakeCentcom
+        orGroup: FakeStump
+      - id: RubberStampFakeSyndicate
+        orGroup: FakeStump
+      - id: RubberStampFakeApproved
+        orGroup: FakeStump
+      - id: RubberStampFakeHos
+        orGroup: FakeStump
+      - id: RubberStampFakeCMO
+        orGroup: FakeStump
+      - id: RubberStampFakeCE
+        orGroup: FakeStump
+    sound:
+      path: /Audio/Items/bikehorn.ogg
+#stamps end
+- type: entity
+  id: ChemistryBottleCrapoToxin
+  suffix: crapotoxin
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: crapo-toxin-label
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: CrapoToxin
+          Quantity: 30
+
+- type: entity
+  id: ChemistryBottleLaughter
+  suffix: laughter
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: laughter-set-name
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Laughter
+          Quantity: 30
+
+#region uplink begin
+- type: entity
+  id: StorePresetUplinkClown
+  abstract: true
+  components:
+  - type: Store
+    name: uplink-clown-name
+    categories:
+    - UplinkWearablesClown
+    - AdditionalClown
+    - TrinketsClown
+    - ChemicalsClown
+    currencyWhitelist:
+    - TrashBananaPeel
+    balance:
+      TrashBananaPeel: 0
+
+- type: listing
+  id: FoodPieBananaCreamSet
+  description: food-pie-banana-cream-set-desc
+  productEntity: FoodPieBananaCream
+  cost:
+    TrashBananaPeel: 20
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: ClownStampBoxSet
+  productEntity: ClownStampBox
+  cost:
+    TrashBananaPeel: 50
+  categories:
+    - UplinkWearablesClown
+  restockTime: 300
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 300
+
+- type: listing
+  id: UplinkGlovesSet
+  productEntity: ClothingHandsGlovesColorYellow
+  cost:
+    TrashBananaPeel: 75
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: CrayonRainbow
+  description: crayon-rainbow-desc
+  productEntity: CrayonRainbow
+  cost:
+    TrashBananaPeel: 10
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: MagicPlushSet
+  productEntity: WhoopieCushion
+  cost:
+    TrashBananaPeel: 3
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: UplinkHonkImplanterSet
+  name: honk-implant-name
+  productEntity: BikeHornImplanter
+  cost:
+    TrashBananaPeel: 5
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: VehicleClowncarTraineeSet
+  description: behicle-clowncar-trainee-set-desc
+  productEntity: VehicleClowncarTrainee
+  cost:
+    TrashBananaPeel: 125
+  categories:
+    - UplinkWearablesClown
+  restockTime: 600
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 600
+
+- type: listing
+  id: MobHonkBotSet
+  name: mob-honk-bot-set-name
+  productEntity: MobHonkBot
+  cost:
+    TrashBananaPeel: 100
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: PresentRandomSet
+  productEntity: PresentRandom
+  cost:
+    TrashBananaPeel: 2
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ToyHammerSet
+  productEntity: ToyHammer
+  cost:
+    TrashBananaPeel: 2
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ClownMegaphoneSet
+  productEntity: ClownMegaphone
+  cost:
+    TrashBananaPeel: 60
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ClothingBackpackDuffelSyndicateCostumeClownSet
+  description: clown-costume-set
+  productEntity: ClothingBackpackDuffelSyndicateCostumeClown
+  cost:
+    TrashBananaPeel: 10
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: SoapSyndieSet
+  productEntity: SoapSyndie
+  cost:
+    TrashBananaPeel: 30
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: CigPackSyndicateSet
+  description: interdynes-cigs-set
+  productEntity: CigPackSyndicate
+  cost:
+    TrashBananaPeel: 10
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: SoapOmegaSet
+  description: omega-soap-iii
+  productEntity: SoapOmega
+  cost:
+    TrashBananaPeel: 110
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: ClothingHeadHatCatEarsSet
+  productEntity: ClothingHeadHatCatEars
+  cost:
+    TrashBananaPeel: 55
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: DrinkNukieCanSet
+  productEntity: DrinkNukieCan
+  cost:
+    TrashBananaPeel: 25
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: SnapPopBoxSex
+  productEntity: SnapPopBox
+  cost:
+    TrashBananaPeel: 5
+  categories:
+    - UplinkWearablesClown
+
+- type: listing
+  id: GoldenBikeHornSet
+  productEntity: GoldenBikeHorn
+  cost:
+    TrashBananaPeel: 25
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: ClothingShoesBlingSet
+  productEntity: ClothingShoesBling
+  cost:
+    TrashBananaPeel: 25
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: PlasticBananaSet
+  productEntity: PlasticBanana
+  cost:
+    TrashBananaPeel: 10
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: SpaceCashCounterfeit10Set
+  description: counterfeit-cash-10
+  productEntity: SpaceCashCounterfeit10
+  cost:
+    TrashBananaPeel: 10
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: FloorTileItemClownSet
+  productEntity: FloorTileItemClown
+  cost:
+    TrashBananaPeel: 1
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: FloorTileItemCarpetClown
+  description: clown-carpet-desc
+  productEntity: FloorTileItemCarpetClown
+  cost:
+    TrashBananaPeel: 1
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: VinylDiskForgotten
+  productEntity: VinylDiskForgotten
+  cost:
+    TrashBananaPeel: 30
+  categories:
+    - TrinketsClown
+
+- type: listing
+  id: ClothingMaskBigBossClown
+  productEntity: ClothingMaskBigBossClown
+  cost:
+    TrashBananaPeel: 49
+  categories:
+    - AdditionalClown
+  restockTime: 0
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: ClothingOuterHardsuitClownSet
+  productEntity: ClothingOuterHardsuitClown
+  cost:
+    TrashBananaPeel: 60
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ToySwordSet
+  productEntity: ToySword
+  cost:
+    TrashBananaPeel: 4
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ChemistryBottleCrapoToxinSet
+  name: crapo-toxin-set-name
+  description: crapo-toxin-set-desc
+  productEntity: ChemistryBottleCrapoToxin
+  cost:
+    TrashBananaPeel: 30
+  categories:
+    - ChemicalsClown
+
+- type: listing
+  id: ChemistryBottleLaughterSet
+  name: laughter-set-name
+  description: laughter-set-desc
+  productEntity: ChemistryBottleLaughter
+  cost:
+    TrashBananaPeel: 30
+  categories:
+    - ChemicalsClown
+
+- type: storeCategory
+  id: UplinkWearablesClown
+  name: uplink-clown-main
+  priority: 1
+
+- type: storeCategory
+  id: AdditionalClown
+  name: uplink-clown-bonus
+  priority: 2
+
+- type: storeCategory
+  id: TrinketsClown
+  name: uplink-clown-trinkets
+  priority: 3
+
+- type: storeCategory
+  id: ChemicalsClown
+  name: uplink-clown-chemistry
+  priority: 4
+
+- type: entity
+  parent: [BaseItem, StorePresetUplinkClown]
+  id: ClownUplink
+  name: banana phone
+  description: Direct connection with the Glorious Honkmother.
+  suffix: clown uplink
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Instruments/otherinstruments.rsi
+    state: banana_phone
+  - type: Item
+    sprite: Objects/Devices/communication.rsi
+    heldPrefix: old-radio
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: EmitSoundOnLand
+    sound:
+       path: /Audio/Items/bikehorn.ogg
+  - type: Slippery
+  - type: StepTrigger
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        hard: false
+        layer:
+        - SlipLayer
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.3,0.4,0.3"
+        density: 5
+        mask:
+        - ItemMask
+  - type: Prayable
+    sentMessage: prayer-popup-notify-honkmother-sent
+    notificationPrefix: prayer-chat-notify-honkmother
+    verb: prayer-verbs-call
+    verbImage: null
+  - type: Store
+    balance:
+      TrashBananaPeel: 0
+
+- type: entity
+  parent: ClownUplink
+  id: ClownUplinkDebug
+  suffix: DEBUG
+  components:
+  - type: Store
+    balance:
+      TrashBananaPeel: 42069
+
+- type: currency
+  id: TrashBananaPeel
+  displayName: currency-uplink-clown
+  cash:
+    1: TrashBananaPeel
+  canWithdraw: false
+#region uplink end
+# lockers
+- type: entityTable
+  id: LockerFillClown
+  table: !type:AllSelector
+    children:
+    - id: ClothingMaskClown
+    - id: ClothingShoesClown
+    - id: ClothingUniformJumpsuitClown
+    - id: BikeHorn
+    - id: ClothingBackpackSatchelClown
+    - id: ClothingBackpackClown
+    - id: ClothingBackpackDuffelClown
+    - id: CrayonRainbow
+    - id: ClownStampBox
+    - id: ClownUplink
+    - !type:NestedSelector
+      tableId: AllToyWeaponsBundleTable
+      prob: 0.25
+    - !type:NestedSelector
+      tableId: AllFakeSyndieHardsuitsTable
+      prob: 0.25
+
+- type: entity
+  id: LockerClownFilled
+  name: clown locker
+  description: "This is where the magic happens."
+  suffix: Filled
+  parent: LockerBaseSecure
+  components:
+  - type: Appearance
+  - type: AccessReader
+    access: [["Theatre"]]
+  - type: EntityStorageVisuals
+    stateBaseClosed: clown
+    stateDoorOpen: clown_open
+    stateDoorClosed: clown_door
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: LockerFillClown
+
+- type: entity
+  id: LockerMimeFilled
+  name: mime locker
+  description: ".... .. ..... ... ..... ....... ."
+  suffix: Filled
+  parent: LockerMime
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskMime
+    - id: ClothingBackpackDuffelMime
+    - id: ClothingBackpackMime
+    - id: ClothingUniformJumpsuitMime
+    - id: ClothingUniformJumpskirtMime
+    - id: CrayonMime
+    - id: ClownStampBox

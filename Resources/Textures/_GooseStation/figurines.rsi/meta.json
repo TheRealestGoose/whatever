@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "stevefigurine sprites made by frufru_01 (Discord), cassiefigurine made by TheGoose3375 (also Discord).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "figurine-cassie"
+    },
+    {
+      "name": "figurine-steve-1"
+    },
+    {
+      "name": "figurine-steve-2"
+    },
+    {
+      "name": "figurine-steve-3"
+    },
+    {
+      "name": "figurine-steve-4"
+    }
+  ]
+}

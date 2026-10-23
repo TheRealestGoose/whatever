@@ -1,0 +1,549 @@
+#region Jerrycans
+
+
+
+
+#region Bases
+- type: entity
+  name: jerrycan
+  parent: BaseItem
+  id: JerrycanBase
+  description: The universal container for "I hope this is what I think it is."
+  abstract: true
+  components:
+  - type: Openable
+    sound:
+      collection: bottleOpenSounds
+    closeable: true
+    closeSound:
+      collection: bottleCloseSounds
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 200 #200;400;800 for 10;20;40 liters
+  - type: Spillable
+    solution: tank
+  - type: RefillableSolution
+    solution: tank
+  - type: DrainableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank
+  - type: SolutionTransfer
+    maxTransferAmount: 50
+    canChangeTransferAmount: true
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: StaticPrice
+    price: 300
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 4
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 2
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 300
+
+#small
+- type: entity
+  name: small jerrycan
+  parent: JerrycanBase
+  id: JerrycanSmallBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _GooseStation/jerrycan.rsi
+    state: small
+  - type: Item
+    size: Normal
+    sprite: _GooseStation/jerrycan.rsi
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 200 #200;400;800 for 10;20;40 liters
+  - type: HeldSpeedModifier
+    walkModifier: 1 #1;0.9;0.8 for 10;20;40
+    sprintModifier: 1
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    attackRate: 0.9
+    damage:
+      types:
+        Blunt: 0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 1
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 200
+
+#medium
+- type: entity
+  name: medium jerrycan
+  parent: JerrycanBase
+  id: JerrycanMediumBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _GooseStation/jerrycan.rsi
+    state: medium
+  - type: Item
+    size: Large
+    sprite: _GooseStation/jerrycan.rsi
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 400 #200;400;800 for 10;20;40 liters
+  - type: HeldSpeedModifier
+    walkModifier: 0.9 #1;0.9;0.8 for 10;20;40
+    sprintModifier: 0.9
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    attackRate: 0.8
+    damage:
+      types:
+        Blunt: 0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 2
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 300
+
+#big
+- type: entity
+  name: big jerrycan
+  parent: JerrycanBase
+  id: JerrycanBigBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _GooseStation/jerrycan.rsi
+    state: big
+  - type: Item
+    size: Huge
+    sprite: _GooseStation/jerrycan.rsi
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 800 #200;400;800 for 10;20;40 liters
+  - type: HeldSpeedModifier
+    walkModifier: 0.8 #1;0.9;0.8 for 10;20;40
+    sprintModifier: 0.8
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    attackRate: 0.7
+    damage:
+      types:
+        Blunt: 0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior { }
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 3
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 400
+
+
+#region Jerrycan variations
+- type: entity
+  name: small jerrycan
+  parent: JerrycanSmallBase
+  id: JerrycanSmallEmpty
+  components:
+  - type: Sprite
+    sprite: _GooseStation/jerrycan.rsi
+    state: small
+    color: "#A0DE81"
+  - type: Item
+    size: Small
+    sprite: _GooseStation/jerrycan.rsi
+    inhandVisuals:
+      left:
+        - state: inhand-left
+          color: "#A0DE81"
+      right:
+        - state: inhand-right
+          color: "#A0DE81"
+
+- type: entity
+  name: medium jerrycan
+  parent: JerrycanMediumBase
+  id: JerrycanMediumEmpty
+  components:
+  - type: Sprite
+    sprite: _GooseStation/jerrycan.rsi
+    state: medium
+    color: "#A0DE81"
+  - type: Item
+    size: Large
+    sprite: _GooseStation/jerrycan.rsi
+    inhandVisuals:
+      left:
+        - state: inhand-left
+          color: "#A0DE81"
+      right:
+        - state: inhand-right
+          color: "#A0DE81"
+
+- type: entity
+  name: big jerrycan
+  parent: JerrycanBigBase
+  id: JerrycanBigEmpty
+  components:
+  - type: Sprite
+    sprite: _GooseStation/jerrycan.rsi
+    state: big
+    color: "#A0DE81"
+  - type: Item
+    size: Huge
+    sprite: _GooseStation/jerrycan.rsi
+    inhandVisuals:
+      left:
+        - state: inhand-left
+          color: "#A0DE81"
+      right:
+        - state: inhand-right
+          color: "#A0DE81"
+
+#welding fuel
+- type: entity
+  id: JerrycanSmallWeldingFuel
+  parent: JerrycanSmallEmpty
+  suffix: Small, WeldingFuel
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 200
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 200
+- type: entity
+  id: JerrycanMediumWeldingFuel
+  parent: JerrycanMediumEmpty
+  suffix: Medium, WeldingFuel
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 400
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 400
+- type: entity
+  id: JerrycanBigWeldingFuel
+  parent: JerrycanBigEmpty
+  suffix: Big, WeldingFuel
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 800
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 800
+
+- type: entity
+  id: JerrycanSmallWater
+  parent: JerrycanSmallEmpty
+  suffix: Small, Water
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 200
+        reagents:
+        - ReagentId: Water
+          Quantity: 200
+- type: entity
+  id: JerrycanMediumWater
+  parent: JerrycanMediumEmpty
+  suffix: Medium, Water
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 400
+        reagents:
+        - ReagentId: Water
+          Quantity: 400
+- type: entity
+  id: JerrycanBigWater
+  parent: JerrycanBigEmpty
+  suffix: Big, Water
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 800
+        reagents:
+        - ReagentId: Water
+          Quantity: 800
+
+- type: entity
+  id: JerrycanSmallPlasma
+  parent: JerrycanSmallEmpty
+  suffix: Small, Plasma
+  components:
+  # - type: Sprite
+  #   sprite: _GooseStation/jerrycan.rsi
+  #   state: small
+  #   color: "#7A00FF"
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 200
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 200
+- type: entity
+  id: JerrycanMediumPlasma
+  parent: JerrycanMediumEmpty
+  suffix: Medium, Plasma
+  components:
+  # - type: Sprite
+  #   sprite: _GooseStation/jerrycan.rsi
+  #   state: medium
+  #   color: "#7A00FF"
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 400
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 400
+- type: entity
+  id: JerrycanBigPlasma
+  parent: JerrycanBigEmpty
+  suffix: Big, Plasma
+  components:
+  # - type: Sprite
+  #   sprite: _GooseStation/jerrycan.rsi
+  #   state: big
+  #   color: "#7A00FF"
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 800
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 800
+
+
+#region Plastic cans
+- type: entity
+  name: plastic canister
+  parent: BaseItem
+  id: PlasticCanEmpty
+  suffix: Empty
+  description: The structural integrity of a soda bottle with the responsibilities of a fuel tank.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/plastic_can.rsi
+    layers:
+      - state: icon
+      - state: solution-1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    attackRate: 0.9
+    damage:
+      types:
+        Blunt: 0
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: solution-
+  - type: Item
+    size: Normal
+    sprite: _GooseStation/plastic_can.rsi
+  - type: Openable
+    sound:
+      collection: bottleOpenSounds
+    closeable: true
+    closeSound:
+      collection: bottleCloseSounds
+  - type: Spillable
+    solution: spray
+  - type: RefillableSolution
+    solution: spray
+  - type: DrainableSolution
+    solution: spray
+  - type: ExaminableSolution
+    solution: spray
+  - type: DrawableSolution
+    solution: spray
+  - type: SolutionTransfer
+    maxTransferAmount: 30
+    canChangeTransferAmount: true
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 100
+  - type: StaticPrice
+    price: 50
+
+- type: entity
+  id: PlasticCanWaterFull
+  parent: PlasticCanEmpty
+  suffix: Filled, Water
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: Water
+          Quantity: 300
+
+- type: entity
+  id: PlasticCanBleachFull
+  parent: PlasticCanEmpty
+  suffix: Filled, Bleach
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: Bleach
+          Quantity: 200
+
+- type: entity
+  id: PlasticCanSpaceCleanerFull
+  parent: PlasticCanEmpty
+  suffix: Filled, SpaceCleaner
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: SpaceCleaner
+          Quantity: 200
+
+- type: entity
+  id: PlasticCanSoapReagentFull
+  parent: PlasticCanEmpty
+  suffix: Filled, SoapReagent
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: SoapReagent
+          Quantity: 200
+
+- type: entity
+  id: PlasticCanSpaceLubeFull
+  parent: PlasticCanEmpty
+  suffix: Filled, SpaceLube
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: SpaceLube
+          Quantity: 200
+
+- type: entity
+  id: PlasticCanSpaceGlueFull
+  parent: PlasticCanEmpty
+  suffix: Filled, SpaceGlue
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 300
+        reagents:
+        - ReagentId: SpaceGlue
+          Quantity: 200

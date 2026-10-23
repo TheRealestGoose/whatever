@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites made by frufru_01 (Discord), poster_cardplease by TheGoose3375 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "painting_square"
+    },
+    {
+      "name": "poster_3084"
+    },
+    {
+      "name": "poster_cardplease"
+    },
+    {
+      "name": "poster_merc"
+    },
+    {
+      "name": "poster_frontalLobe"
+    },
+    {
+      "name": "poster_shitlock"
+    },
+    {
+      "name": "poster_hanginthere"
+    },
+    {
+      "name": "poster_hang"
+    },
+    {
+      "name": "poster_iwanttobelieve"
+    },
+    {
+      "name": "poster_ibelieve"
+    }
+  ]
+}

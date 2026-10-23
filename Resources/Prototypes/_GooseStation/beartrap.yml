@@ -1,0 +1,109 @@
+- type: entity
+  name: beartrap
+  parent: BaseItem
+  id: Beartrap
+  description: Useful for catching human-sized rodents sneaking into your kitchen.
+  components:
+    - type: Sprite
+      sprite: _GooseStation/beartrap.rsi
+      drawdepth: SmallMobs # if mice can hide under tables, so can mousetraps
+      layers:
+      - state: Beartrap
+        map: ["enum.ToggleableVisuals.Layer"]
+    - type: StepTrigger
+      intersectRatio: 0.2
+      requiredTriggeredSpeed: 2
+      triggerGroups: # Goobstation
+        types:
+        - Mousetrap
+    - type: Mousetrap
+    - type: ItemToggle
+      soundActivate: "/Audio/Items/Handcuffs/cuff_end.ogg"
+      soundDeactivate: "/Audio/Weapons/slash.ogg"
+      popupActivate: mousetrap-on-activate
+      popupDeactivate: mousetrap-on-deactivate
+    - type: UseDelay
+    - type: ItemToggleOnTrigger
+      canActivate: false
+      showPopup: false # only show the popup when arming/disarming the trap in your hand
+    - type: TriggerOnStepTrigger
+    - type: DamageOnTrigger #DamageUserOnTrigger
+      targetUser: true
+      damage:
+        types:
+          Blunt: 10 # base damage, scales based on mass
+          Slash: 30
+    # - type: StunOnTrigger
+    #   stunAmount: 3
+    #   refresh: false
+    - type: Item
+      size: Normal
+      sprite: _GooseStation/beartrap.rsi
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.ToggleableVisuals.Enabled:
+          enum.ToggleableVisuals.Layer:
+            True: {state: BeartrapArmed}
+            False: {state: Beartrap}
+    - type: Physics
+      bodyType: Dynamic
+    - type: CollisionWake
+      enabled: false
+    - type: Fixtures
+      fixtures:
+        slips:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          layer:
+            - LowImpassable
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          density: 30
+          mask:
+            - ItemMask
+    - type: PhysicalComposition #Goobstation - Recycle update
+      materialComposition:
+        Steel: 35
+
+- type: entity
+  name: beartrap
+  suffix: Armed
+  parent: Beartrap
+  id: BeartrapArmed
+  description: Useful for catching human-sized rodents sneaking into your kitchen.
+  components:
+  - type: Sprite
+    layers:
+    - state: BeartrapArmed
+      map: ["enum.ToggleableVisuals.Layer"]
+  - type: ItemToggle
+    activated: true
+
+- type: entity
+  id: BeartrapBoxGoose
+  parent: BoxBase
+  name: "Beartrap Box"
+  description: This box is filled with beartraps. Try to get a tider's hand stuck in one.
+  components:
+  - type: Sprite
+    layers:
+      - state: box
+      - state: writing
+  - type: Item
+    sprite: Objects/Storage/boxes.rsi
+    size: Large
+    shape:
+    - 0,0,3,1
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,3
+  - type: StorageFill
+    contents:
+      - id: Beartrap
+        amount: 4

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by TheGoose3375 (discord) and FruFru01 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "engineer-0"
+    },
+    {
+      "name": "engineer-1"
+    },
+    {
+      "name": "janitor-0"
+    },
+    {
+      "name": "janitor-1"
+    },
+    {
+      "name": "medical-0"
+    },
+    {
+      "name": "medical-1"
+    },
+    {
+      "name": "medical-2"
+    },
+    {
+      "name": "miner-0"
+    },
+    {
+      "name": "miner-1"
+    },
+    {
+      "name": "robot-0"
+    },
+    {
+      "name": "robot-1"
+    },
+    {
+      "name": "service-0"
+    },
+    {
+      "name": "service-1"
+    }
+  ]
+}
