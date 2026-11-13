@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "taken from https://github.com/ParadiseSS13/Paradise/blob/master/icons/turf/floors.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+        {
+            "name": "necro1"
+        },
+        {
+            "name": "necro2",
+            "delays": [
+                [
+                    1.5,
+                    2,
+                    0.5,
+                    1
+                ]
+            ]
+        },
+        {
+            "name": "necro3",
+            "delays": [
+                [
+                    1,
+                    0.5,
+                    1,
+                    2,
+                    1,
+                    0.5
+                ]
+            ]
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+- type: entity
+  parent: ClothingMaskClownBase
+  id: ClothingMaskBigBossClown
+  name: big boss clown wig and mask
+  description: Facial attire for the clown who sold the station.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/bigbossclownmask.rsi
+  - type: Clothing
+    sprite: _GooseStation/bigbossclownmask.rsi
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: Tag
+    tags:
+    - ClownMask
+    - WhitelistChameleon
+    - IPCMaskWearable # EE - IPCs
+    - Mask
+  - type: HideLayerClothing
+    slots:
+    - Snout
+  - type: Construction
+    graph: BananaClownMask
+    node: mask

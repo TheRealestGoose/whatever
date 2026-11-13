@@ -19,6 +19,7 @@
     - id: ClothingHandsKnuckleDustersQM # Goobstation - ROCK THAT MF!!
     - id: CargoMegaphone # goob - loudspeaker
     - id: SlotMachineHighRollerFlatPack # Goob - gambling
+    - id: SalvageExpeditionsComputerCircuitboard # goose
 
 - type: entity
   id: LockerQuarterMasterFilled

@@ -1,0 +1,44 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by TheGoose3375 (discord)",
+    "states": [
+        {
+            "name": "box"
+        },
+        {
+            "name": "lid-brown"
+        },
+        {
+            "name": "report"
+        },
+        {
+            "name": "disk-1"
+        },
+        {
+            "name": "disk-2"
+        },
+        {
+            "name": "disk-3"
+        },
+        {
+            "name": "disk-4"
+        },
+        {
+            "name": "disk-5"
+        },
+        {
+            "name": "disk-6"
+        },
+        {
+            "name": "disk-7"
+        },
+        {
+            "name": "disk-8"
+        }
+    ]
+}

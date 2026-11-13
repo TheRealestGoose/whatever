@@ -1,0 +1,182 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by FruFru01 (discord) out of scrap-pile.rsi by TheGoose3375 (discord)",
+    "size": {
+        "x": 32,
+        "y": 64
+    },
+    "states": [
+        {
+            "name": "gone"
+        },
+        {
+            "name": "scrap_bananium_clown"
+        },
+        {
+            "name": "scrap_bananium_clown_break1"
+        },
+        {
+            "name": "scrap_bananium_clown_break2"
+        },
+        {
+            "name": "scrap_bananium_clown_break3"
+        },
+        {
+            "name": "scrap_bananium_clown_anim1",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "name": "scrap_bananium_clown_anim2",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    1.5
+                ]
+            ]
+        },
+        {
+            "name": "scrap_bananium_clown_anim3",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    2
+                ]
+            ]
+        },
+        {
+            "name": "scrap_bananium_clown_anim4",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    2.5
+                ]
+            ]
+        },
+        {
+            "name": "scrap_venus_blue"
+        },
+        {
+            "name": "scrap_venus_blue_break1"
+        },
+        {
+            "name": "scrap_venus_blue_break2"
+        },
+        {
+            "name": "scrap_venus_blue_break3"
+        },
+        {
+            "name": "scrap_venus_blue_anim1",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "name": "scrap_venus_blue_anim2",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    1.5
+                ]
+            ]
+        },
+        {
+            "name": "scrap_venus_blue_anim3",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    2
+                ]
+            ]
+        },
+        {
+            "name": "scrap_venus_blue_anim4",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    2.5
+                ]
+            ]
+        },
+        {
+            "name": "scrap_venus_red"
+        },
+        {
+            "name": "scrap_venus_red_break1"
+        },
+        {
+            "name": "scrap_venus_red_break2"
+        },
+        {
+            "name": "scrap_venus_red_break3"
+        }, 
+        {
+            "name": "scrap_venus_red_anim1",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "name": "scrap_venus_red_anim2",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    1.5
+                ]
+            ]
+        },
+        {
+            "name": "scrap_venus_red_anim3",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    2
+                ]
+            ]
+        },
+        {
+            "name": "scrap_venus_red_anim4",
+            "delays": [
+                [
+                    10,
+                    0.3,
+                    1,
+                    2.5
+                ]
+            ]
+        }
+    ]
+}

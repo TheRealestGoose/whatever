@@ -1,0 +1,19 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by FruFru01",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "pussy-missile",
+            "directions": 4
+        },
+        {
+            "name": "floating-pussy-missile",
+            "directions": 4
+        }
+    ]
+}

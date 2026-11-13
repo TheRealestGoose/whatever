@@ -1,0 +1,116 @@
+- type: localizedDataset
+  id: FigurinesGMTruth
+  values:
+    prefix: figurines-truthdice-
+    count: 100
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurineGMTruth
+  name: "Game Master: TRUTH"
+  description: A holographic figurine with a built-in AI that asks you questions.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/guardian_info.rsi
+    state: guardian_info
+    color: "#6BFFFF"
+  - type: SpeakOnTrigger
+    pack: FigurinesGMTruth
+
+- type: localizedDataset
+  id: FigurinesGMDare
+  values:
+    prefix: figurines-daredice-
+    count: 100
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurineGMDare
+  name: "Game Master: DARE"
+  description: A holographic figurine with a built-in AI that dares you to do things.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/guardian_info.rsi
+    state: guardian_info
+    color: "#FF6BFF"
+  - type: SpeakOnTrigger
+    pack: FigurinesGMDare
+
+- type: entity
+  id: PaperTruthOrDareRules
+  name: Truth or Dare instructions
+#  categories: [ HideSpawnMenu ]
+#  suffix: "power tool ad, formatted"
+  parent: Paper
+  components:
+  - type: Paper
+    content: |2
+      Thank you for using the Truth or Dare game kit!
+
+      (V  You can play by your own!  V)
+      Standard Rules:
+      - Each player gets X (1 by default) amount of skips they can use. (X is same for every player). A skip can be used to skip your turn. You cannot get skips in any way.
+      - On your turn, you may activate both of the game masters ONCE. No rerolling. (Try to memorise the roll, as the GameMasters do not repeat themself.)
+      - You may pick whichever thing you want to do. Either TRUTH: answering a question; or DARE: doing the action the GameMaster states.
+      - Some of the options in TRUTH and DARE GameMasters are turn-fixated. "Do Y until it is the end of your next turn." Your turn is the next time you need to do a TRUTH or a DARE. So the next round. Before starting the game, you may choose to set the default value of turns for these (any number, or simply until the game ends).
+      - The game goes on until satisfaction (All players must vote on it ending).
+
+- type: entity
+  id: BoxCardboardTruthOrDare
+  parent: BoxBase
+  name: Truth or Dare!
+  components:
+  - type: Sprite
+    layers:
+      - state: box_of_doom
+      # - state: flare
+  - type: Item
+    sprite: Objects/Storage/boxes.rsi
+  - type: StorageFill
+    contents:
+      - id: ToyFigurineGMTruth
+        amount: 1
+      - id: ToyFigurineGMDare
+        amount: 1
+      - id: PaperTruthOrDareRules
+        amount: 1
+      - id: d6Dice
+        amount: 1
+
+
+- type: localizedDataset
+  id: FigurinesQMAlt
+  values:
+    prefix: figurines-cassie-
+    count: 13
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurineAltQuartermaster
+  name: familiar quartermaster figure
+  description: A figurine depicting the glorious head of the Cargo department.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/figurines.rsi
+    state: figurine-cassie
+  - type: SpeakOnTrigger
+    pack: FigurinesQMAlt
+
+
+- type: localizedDataset
+  id: FigurinesSalvageAlt
+  values:
+    prefix: figurines-steve-
+    count: 13
+
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurineAltSalvage
+  name: familiar salvage specialist figure
+  description: A figurine depicting a Salvage Specialist holding a survival knife.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/figurines.rsi
+    state: figurine-steve-2
+  - type: SpeakOnTrigger
+    pack: FigurinesSalvageAlt

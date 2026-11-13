@@ -1,0 +1,180 @@
+- type: entity
+  id: SmallFloorDrain
+  name: shower drain
+  description: Drains puddles around it.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      drawdepth: FloorObjects
+      sprite: _GooseStation/drain_shower.rsi
+      layers:
+      - state: showerdrain
+      - map: [ "enum.SolutionContainerLayers.Fill" ]
+        state: showerdrain-fill-1
+        visible: false
+    - type: InteractionOutline
+    - type: Clickable
+    - type: Transform
+      anchored: true
+    - type: Physics
+      bodyType: Static
+      canCollide: false
+    - type: AmbientSound
+      enabled: false
+      volume: -8
+      range: 8
+      sound:
+        path: /Audio/Ambience/Objects/drain.ogg
+    - type: Drain
+      range: 0.75
+    - type: DumpableSolution
+      solution: drainBuffer
+    - type: Appearance
+    - type: SolutionContainerVisuals
+      maxFillLevels: 1
+      fillBaseName: showerdrain-fill-
+      solutionName: drainBuffer
+    - type: SolutionContainerManager
+      solutions:
+        drainBuffer:
+          maxVol: 500
+    - type: DrainableSolution
+      solution: drainBuffer
+    - type: Damageable
+      damageContainer: StructuralInorganic
+      damageModifierSet: StructuralMetallic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 200
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+
+- type: entity
+  id: SpillWater
+  name: water drop
+  categories: [ HideSpawnMenu ]
+  description: Hey you not supposed to see this!!!
+  components:
+  - type: ReleaseGasOnTrigger
+    removeFraction: 1
+    air:
+      volume: 1
+      moles: # Target is 3117.84 mols total for filling 30 tiles (goal is 101.325 kPa @ 20C)
+      - 0 # oxygen
+      - 0 # nitrogen
+      - 0 # co2
+      - 0 # plasma
+      - 0 # trit
+      - 1
+      temperature: 300
+  # - type: Sprite
+  #   sprite: Clothing/Head/Misc/waterdroplet.rsi
+  #   state: icon
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 2
+        reagents:
+        - ReagentId: Water
+          Quantity: 2
+    # spillSound:
+    #   path: /Audio/Ambience/Objects/flowing_water_open.ogg
+    #   params:
+    #     volume: -100
+    #     maxDistance: 0
+  - type: Damageable
+    damage:
+      types:
+        Blunt: 1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1
+      behaviors:
+      # - !type:PlaySoundBehavior
+      #   sound:
+      #     collection: desecration
+      - !type:SpillBehavior
+        solution: drink
+      - !type:TriggerBehavior
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOverTime
+    interval: 0.1
+    damage:
+      types:
+        Blunt: 1
+                
+- type: entity
+  id: ShowerHead
+  name: shower head
+  description: Makes it rain water.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _GooseStation/shower.rsi
+    layers:
+      - state: shower
+        map: [ "enum.ItemToggleVisuals.Layer" ]
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+    #
+  - type: Appearance
+  - type: ItemToggleVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ItemToggleVisuals.State:
+        enum.ItemToggleVisuals.Layer:
+          True: { state: shower_on }
+          False: { state: shower }
+  - type: ItemToggle
+    onActivate: true
+    wieldToggle: false
+    soundActivate:
+      path: /Audio/Weapons/telescopicon.ogg
+    soundDeactivate:
+      path: /Audio/Weapons/telescopicoff.ogg
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Ambience/Objects/flowing_water_open.ogg
+      params:
+        volume: 20
+        maxDistance: 15
+  - type: ComponentToggler
+    components:
+      # - type: GasMiner
+      #   spawnTemperature: 350
+      #   # maxExternalAmount: 100
+      #   maxExternalPressure: 250
+      #   GasMinerState: Working
+      #   spawnAmount: 100000
+      #   spawnGas: WaterVapor
+      - type: TimedSpawner
+        intervalSeconds: 1
+        prototypes: 
+        - SpillWater
+      # - type: AmbientSound
+      #   volume: -2
+      #   range: 4
+      #   sound:
+      #     path: /Audio/Ambience/Objects/flowing_water_open.ogg

@@ -1,0 +1,652 @@
+#region Yarnball
+
+- type: entity
+  parent: BaseItem
+  id: YarnballBase
+  name: yarnball
+  description: A tangled mess of wool that promises hours of feline entertainment.
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.2
+          # position: "0,-0.2"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.5 # not bouncy
+        friction: 0.6
+  - type: Catchable
+    catchChance: 0.8
+    catchSuccessSound:
+      path: /Audio/Effects/Footsteps/bounce.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Effects/Footsteps/bounce.ogg
+  - type: Item
+    size: Tiny
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    # storedSprite: #did not work, stored sprite cannot be colored
+    #   sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    #   state: yarn-ball-white
+    #   scale: "1.5,1.5"
+    # storedOffset: "0,-4"
+  # - type: Trail
+  #   lifetime: 1
+  #   lerpTime: 0.1
+  #   frequency: 0.1
+  #   alphaLerpAmount: 0.5
+  #   renderedEntityRotationStrategy: Particle
+  #   scale: 0.05
+  - type: TileFrictionModifier
+    modifier: 0.1
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialCloth1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballBaseTrail
+  suffix: "Trail"
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+  - type: Item
+    size: Tiny
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    storedSprite:
+      sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+      state: yarn-ball-white
+      scale: "1.5,1.5"
+    storedOffset: "0,-4"
+  - type: Trail
+    lifetime: 1
+    lerpTime: 0.1
+    frequency: 0.1
+    alphaLerpAmount: 0.5
+    renderedEntityRotationStrategy: Particle
+    scale: 0.05
+
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballRed
+  suffix: Red
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+    color: "#9C3333"
+  # - type: Item
+  #   size: Tiny
+  #   sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+  #   storedSprite:
+  #     sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+  #     state: yarn-ball-white
+  #     scale: "1.5,1.5"
+    # storedOffset: "0,-4"
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballBlue
+  suffix: Blue
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+    color: "#335A9C"
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballGreen
+  suffix: Green
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+    color: "#339C3D"
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballYellow
+  suffix: Yellow
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+    color: "#EBEB00"
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballPurple
+  suffix: Purple
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+    color: "#9C3395"
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballBlack
+  suffix: Black
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+    color: "#333333"
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballSpecial
+  name: yarnball
+  description: A tangled mess of wool that promises hours of feline entertainment. This one seems special, somehow.
+  suffix: LightCoral
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-ball-white-rolling
+    color: "#D4857F"
+
+- type: entity
+  parent: YarnballBase
+  id: YarnballCat
+  name: catball
+  description: Cat. Cat ball. Kitty go kitty go kitty.
+  suffix: Cat
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: catball
+
+
+#region Yarn roll
+
+- type: entity
+  parent: BaseItem
+  id: YarnRollBase
+  name: yarn roll
+  description: A neat cylindrical bundle of wool, ready to be unspooled for a truly epic knitting project or just a very long game of string-the-dots. This one seems to have been partially started.
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-roll-white
+    scale: "0.8,0.8"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.2
+        density: 30
+        mask:
+        - ItemMask
+  - type: Item
+    size: Tiny
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    storedOffset: "3,0"
+
+
+- type: entity
+  parent: YarnRollBase
+  id: YarnRollRed
+  suffix: Red
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-roll-white
+    color: "#9C3333"
+  # - type: Item
+  #   size: Tiny
+  #   sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+  #   storedSprite:
+  #     sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+  #     state: yarn-ball-white
+  #     scale: "1.5,1.5"
+    # storedOffset: "0,-4"
+
+- type: entity
+  parent: YarnRollBase
+  id: YarnRollBlue
+  suffix: Blue
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-roll-white
+    color: "#335A9C"
+
+- type: entity
+  parent: YarnRollBase
+  id: YarnRollGreen
+  suffix: Green
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-roll-white
+    color: "#339C3D"
+
+- type: entity
+  parent: YarnRollBase
+  id: YarnRollYellow
+  suffix: Yellow
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-roll-white
+    color: "#EBEB00"
+
+- type: entity
+  parent: YarnRollBase
+  id: YarnRollPurple
+  suffix: Purple
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-roll-white
+    color: "#9C3395"
+
+- type: entity
+  parent: YarnRollBase
+  id: YarnRollBlack
+  suffix: Black
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/yarn_and_wool.rsi
+    state: yarn-roll-white
+    color: "#333333"
+
+
+#region thingies
+- type: entity
+  parent: BaseItem
+  id: TrinketDuctTape
+  name: duct tape
+  description: A harmless strip of adhesive potential that has long since given up on fixing anything.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: ducktape
+    color: "#969696"
+
+- type: entity
+  parent: BaseItem
+  id: TrinketInsulatingTape
+  name: insulating tape
+  description: A harmless strip of adhesive potential that has long since given up on fixing anything.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: ducktape
+    color: "#6074DB"
+
+- type: entity
+  parent: BaseItem
+  id: TrinketScotchTape
+  name: scotch tape
+  description: A harmless strip of adhesive potential that has long since given up on fixing anything.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: ducktape
+
+- type: entity
+  parent: BaseItem
+  id: TrinketFlexTape
+  name: flextape
+  description: This impossibly strong sealant is ironically useless for anything you actually need to fix.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: ducktape
+    color: "#303030"
+
+- type: entity
+  parent: BaseItem
+  id: TrinketGoldenTicket
+  name: golden ticket
+  description: A golden ticket for... something important, surely.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: fish_legendary
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketFeather
+  name: feather
+  description: A feather from a white bird.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: feather
+  - type: Item
+    storedRotation: 90
+
+- type: entity
+  parent: BaseItem
+  id: TrinketFeatherIce
+  name: ice feather
+  description: A feather from an icy bird.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: ice_feather
+  - type: Item
+    storedRotation: 90
+
+- type: entity
+  parent: BaseItem
+  id: TrinketCokeBag
+  name: coke bag
+  description: Often used by security to frame someone. Upon closer inspection, it's actually just flour.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: cokebag
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketWeedBag
+  name: weed bag
+  description: Often used by security to frame someone. Upon closer inspection, it's actually just catnip.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: cokebag
+    color: "#1ABD27"
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketSprayCan
+  name: spray can
+  description: All the life has already been drained out of it. Really, this one is more of a spray can't.
+  suffix: basic
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: spraycan
+
+- type: entity
+  parent: BaseItem
+  id: TrinketSprayCanGang
+  name: spray can
+  description: All the crime has already been drained out of it. Really, this one is more of a spray can't.
+  suffix: gang
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: spraycan_gang
+
+- type: entity
+  parent: BaseItem
+  id: TrinketSmallCoil
+  name: small coil
+  description: If it fell out on it's own, it's probably unimportant, right?
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/items.rsi
+    state: small_coil
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketKey
+  name: someone's key
+  description: A key to one's heart. Or just some random lock.
+  suffix: basic
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/keys.rsi
+    state: key
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketKeyIron
+  name: someone's key
+  suffix: iron
+  description: A key to one's heart. Or just some random lock. Smells of iron.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/keys.rsi
+    state: key_iron
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketKeyPlastic
+  name: someone's key
+  suffix: plastic
+  description: A key to one's heart. Or just some random lock.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/keys.rsi
+    state: pkey0
+    scale: "0.8,0.8"
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketKeyHot
+  name: hot key
+  suffix: hot
+  description: A key to one's heart. Or just some random lock. Burns to touch.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/keys.rsi
+    state: key_hot
+  # - type: DamageOnHolding
+  #   damage:
+  #     types:
+  #       Heat: 5
+  #   interval: 0.5
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 5
+    popupText: powered-light-component-burn-hand
+  # - type: Lubed
+  #   slipsLeft: 999999
+  #   slipStrenght: 7
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketKeyGnome
+  name: chompskey
+  suffix: gnome
+  description: A key to one's heart. Or just some random lock. Yearns to be picked up.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/keys.rsi
+    state: chompskey
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: BaseItem
+  id: TrinketStressBall
+  name: stress ball
+  description: Squeeze twice when stressed.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/SS13-GOON/plushies.rsi
+    state: stress_ball
+  - type: EmitSoundOnUse
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Effects/drop.ogg 
+  - type: EmitSoundOnActivate
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: ToySqueak
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: UseDelay
+    delay: 0.85
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+
+- type: entity
+  parent: BaseItem
+  id: LicenseBase
+  name: license
+  description: "Despite being considered a form of ID card, does not actually allow you to open locked airlocks.\n\nThis credential is perfectly formatted for a desk drawer, mostly because nobody really checks these anyways."
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _GooseStation/license.rsi
+    state: card
+  # - type: Item
+  #   size: Tiny
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/card_pickup.ogg
+      params:
+        volume: -5
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/card_drop.ogg
+      params:
+        volume: -5
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/card_drop.ogg
+      params:
+        volume: -5
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+  # - type: IdCard
+  #   canMicrowave: false
+  # - type: PresetIdCard
+  #   jobName: "license"
+  # - type: Access
+  #   enabled: false
+  # - type: StationRecordKeyStorage
+
+- type: entity
+  parent: LicenseBase
+  id: LicenseBlank
+  name: blank license card
+  description: "Blank license card.\nDespite being considered a form of ID card, does not actually allow you to open locked airlocks.\n\nThis credential is perfectly formatted for a desk drawer, mostly because nobody really checks these anyways."
+  suffix: Blank
+  components:
+  - type: Sprite
+    sprite: _GooseStation/license.rsi
+    layers:
+      - state: card
+
+- type: entity
+  parent: LicenseBase
+  id: LicenseShuttleCivilian
+  name: shuttle pilot license
+  description: "Shuttle class: Civilian.\nDespite being considered a form of ID card, does not actually allow you to open locked airlocks.\n\nThis credential is perfectly formatted for a desk drawer, mostly because nobody really checks these anyways."
+  suffix: Civilian
+  components:
+  - type: Sprite
+    sprite: _GooseStation/license.rsi
+    layers:
+      - state: card
+      - state: shuttle_civ
+
+- type: entity
+  parent: LicenseBase
+  id: LicenseShuttleIndustrial
+  name: shuttle pilot license
+  description: "Shuttle class: Industrial.\nDespite being considered a form of ID card, does not actually allow you to open locked airlocks.\n\nThis credential is perfectly formatted for a desk drawer, mostly because nobody really checks these anyways."
+  suffix: Industrial
+  components:
+  - type: Sprite
+    sprite: _GooseStation/license.rsi
+    layers:
+      - state: card
+      - state: shuttle_indust
+
+- type: entity
+  parent: LicenseBase
+  id: LicenseShuttleArmed
+  name: shuttle pilot license
+  description: "Shuttle class: Armed.\nDespite being considered a form of ID card, does not actually allow you to open locked airlocks.\n\nThis credential is perfectly formatted for a desk drawer, mostly because nobody really checks these anyways."
+  suffix: Armed
+  components:
+  - type: Sprite
+    sprite: _GooseStation/license.rsi
+    layers:
+      - state: card
+      - state: shuttle_armed
+
+- type: entity
+  parent: LicenseBase
+  id: LicenseShuttleFunny
+  name: shuttle pilot license
+  description: "Shuttle class: Funny.\nDespite being considered a form of ID card, does not actually allow you to open locked airlocks.\n\nThis credential is perfectly formatted for a desk drawer, mostly because nobody really checks these anyways."
+  suffix: Funny
+  components:
+  - type: Sprite
+    sprite: _GooseStation/license.rsi
+    layers:
+      - state: card
+      - state: shuttle_funny
+
+- type: entity
+  parent: LicenseBase
+  id: LicensePermitWeapon
+  name: firearm license
+  description: "A license that proves you to be sane and trained in using the provided firearm.. You wouldn't fake this, right?\nDespite being considered a form of ID card, does not actually allow you to open locked airlocks.\n\nThis credential is perfectly formatted for a desk drawer, mostly because nobody really checks these anyways."
+  suffix: Weapons
+  components:
+  - type: Sprite
+    sprite: _GooseStation/license.rsi
+    layers:
+      - state: card
+      - state: permit_weapon

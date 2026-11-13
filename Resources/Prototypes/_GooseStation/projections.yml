@@ -1,0 +1,37 @@
+- type: entity
+  id: HolosignAdminBarrier
+  name: admin barrier
+  description: A godly barrier of raw holy light that blocks movement. You can't crawl under this one.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Tag # Goobstation
+    tags:
+      - Holosign
+  - type: Sprite
+    sprite: _GooseStation/adminbarrier.rsi
+    layers:
+      - shader: unshaded
+        state: icon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  # - type: PointLight
+  #   enabled: true
+  #   radius: 3
+  #   color: red
+  - type: Clickable

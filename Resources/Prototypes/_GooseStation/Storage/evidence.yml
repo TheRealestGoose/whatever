@@ -1,0 +1,70 @@
+- type: entity
+  id: EvidenceBoard
+  name: evidence board
+  description: A past investigation, conspiracy theory, or just a collection of paper trash? It will take a long time to understand.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: WallMount
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _GooseStation/evidence_board.rsi
+    layers:
+      - state: board
+      - state: fill-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: StorageFillVisualizer
+    maxFillLevels: 6
+    fillBaseName: fill
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Transform
+    anchored: true
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Storage
+    grid:
+    # - 0,0,7,5
+    - 0,0,1,1
+    # - 2,0,2,1
+    - 4,0,5,1
+    - 0,3,1,4
+    # - 2,3,2,4
+    - 4,3,5,4
+    maxItemSize: Small
+    whitelist:
+      tags:
+        # - Folder
+        - Document
+        - Write
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: Tag
+    tags:
+    - Wooden
+  # - type: Construction
+  #   graph: NoticeBoard
+  #   node: noticeBoard

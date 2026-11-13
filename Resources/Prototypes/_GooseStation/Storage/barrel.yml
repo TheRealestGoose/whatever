@@ -1,0 +1,26 @@
+#idea: make it store the liquid in  bloodstream and make it drip it when it is damaged, also add show durability
+#variation with a tap?
+
+- type: entity
+  id: WoodenBarrel
+  parent: StorageTank
+  name: barrel
+  description: Barrel for storing reagents and drinks.
+  suffix: Empty
+  components:
+    - type: Sprite
+      sprite: _GooseStation/barrel.rsi
+      state: barrel
+
+- type: entity
+  parent: WoodenBarrel
+  id: WoodenBarrelBeerFull
+  description: This barrel is full of beer! Just don't tell the dwarves...
+  suffix: Filled, Beer
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        tank:
+          reagents:
+            - ReagentId: Beer
+              Quantity: 1500

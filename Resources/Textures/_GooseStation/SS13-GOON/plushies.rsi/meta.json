@@ -1,0 +1,160 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "taken from goonstation",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "claw"
+        },
+        {
+            "name": "claw_playing",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.3,
+                    0.1,
+                    0.1,
+                    0.2,
+                    0.1,
+                    0.3,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.2,
+                    0.8
+                ]
+            ]
+        },
+        {
+            "name": "claw_broken"
+        },
+        {
+            "name": "claw_action"
+        },
+        {
+            "name": "bear"
+        },
+        {
+            "name": "bee"
+        },
+        {
+            "name": "bee-eyes"
+        },
+        {
+            "name": "bee_cute"
+        },
+        {
+            "name": "buddy"
+        },
+        {
+            "name": "buddy-eyes"
+        },
+        {
+            "name": "buddy_future"
+        },
+        {
+            "name": "kitten"
+        },
+        {
+            "name": "kitten-eyes"
+        },
+        {
+            "name": "kitten_wizard"
+        },
+        {
+            "name": "monkey"
+        },
+        {
+            "name": "monkey-eyes"
+        },
+        {
+            "name": "monkey_assistant"
+        },
+        {
+            "name": "monkey_george"
+        },
+        {
+            "name": "possum"
+        },
+        {
+            "name": "possum-eyes"
+        },
+        {
+            "name": "brullbar"
+        },
+        {
+            "name": "brullbar-eyes"
+        },
+        {
+            "name": "bunny"
+        },
+        {
+            "name": "bunny-eyes"
+        },
+        {
+            "name": "bunny_mask"
+        },
+        {
+            "name": "penguin"
+        },
+        {
+            "name": "penguin-eyes"
+        },
+        {
+            "name": "penguin_cool",
+            "delays": [
+                [
+                    0.4,
+                    0.4,
+                    0.4,
+                    0.4,
+                    0.4,
+                    0.4,
+                    0.4
+                ]
+            ]
+        },
+        {
+            "name": "orca"
+        },
+        {
+            "name": "beeil"
+        },
+        {
+            "name": "tuba"
+        },
+        {
+            "name": "chris"
+        },
+        {
+            "name": "fancyflippers"
+        },
+        {
+            "name": "billy"
+        },
+        {
+            "name": "arthur"
+        },
+        {
+            "name": "santa_helper"
+        },
+        {
+            "name": "stress_ball"
+        },
+        {
+            "name": "deneb"
+        },
+        {
+            "name": "singuloose"
+        },
+        {
+            "name": "shelterfrog"
+        }
+    ]
+}

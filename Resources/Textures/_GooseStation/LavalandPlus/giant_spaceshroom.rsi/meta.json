@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "Created by @UbaserB (GitHub), shittily resized by goose",
+    "size": {
+        "x": 96,
+        "y": 96
+    },
+    "states": [
+        {
+            "name": "tree01"
+        },
+        {
+            "name": "tree02"
+        }
+    ]
+}

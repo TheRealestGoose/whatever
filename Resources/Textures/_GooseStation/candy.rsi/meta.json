@@ -1,0 +1,53 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "made by FruFru01 (discord)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "wrapper"
+        },
+        {
+            "name": "wrapper_middle"
+        },
+        {
+            "name": "wrapper_outer"
+        },
+        {
+            "name": "candy"
+        },
+        {
+            "name": "banana"
+        },
+        {
+            "name": "banana_wrapped"
+        },
+        {
+            "name": "lemon"
+        },
+        {
+            "name": "lemon_wrapped"
+        },
+        {
+            "name": "mint"
+        },
+        {
+            "name": "mint_wrapped"
+        },
+        {
+            "name": "orange"
+        },
+        {
+            "name": "orange_wrapped"
+        },
+        {
+            "name": "strawberry"
+        },
+        {
+            "name": "strawberry_wrapped"
+        }
+    ]
+}

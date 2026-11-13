@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://spritedatabase.net/file/12974",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "negro-arc-dance",
+      "delays": [
+        [
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2
+    ]
+      ]
+    },
+    {
+      "name": "negro-arc-dance-faster",
+      "delays": [
+        [
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1
+    ]
+      ]
+    },
+    {
+      "name": "negro-arc-move",
+      "delays": [
+        [
+      0.1,
+      0.1,
+      0.1,
+      0.1
+    ]
+      ]
+    }
+  ]
+}
+

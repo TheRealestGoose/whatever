@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by TheGoose3375 (discord)",
+    "states": [
+        {
+            "name": "red"
+        },
+        {
+            "name": "blue"
+        },
+        {
+            "name": "green"
+        },
+        {
+            "name": "weed"
+        },
+        {
+            "name": "weed-unshaded"
+        }
+    ]
+}

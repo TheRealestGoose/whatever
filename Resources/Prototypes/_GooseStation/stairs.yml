@@ -1,0 +1,122 @@
+- type: entity
+  id: StairLeft
+  parent: Stairs
+  suffix: Steel, left
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/steel.rsi
+    state: left
+    drawdepth: FloorTiles
+
+- type: entity
+  id: StairMiddle
+  parent: Stairs
+  suffix: Steel, middle
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/steel.rsi
+    state: middle
+    drawdepth: FloorTiles
+
+- type: entity
+  id: StairRight
+  parent: Stairs
+  suffix: Steel, right
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/steel.rsi
+    state: right
+    drawdepth: FloorTiles
+
+
+- type: entity
+  id: StairDarkLeft
+  parent: Stairs
+  suffix: Dark, left
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/dark_steel.rsi
+    state: left
+    drawdepth: FloorTiles
+
+- type: entity
+  id: StairDarkMiddle
+  parent: Stairs
+  suffix: Dark, middle
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/dark_steel.rsi
+    state: middle
+    drawdepth: FloorTiles
+
+- type: entity
+  id: StairDarkRight
+  parent: Stairs
+  suffix: Dark, right
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/dark_steel.rsi
+    state: right
+    drawdepth: FloorTiles
+
+
+- type: entity
+  id: StairWhiteLeft
+  parent: Stairs
+  suffix: White, left
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/white_steel.rsi
+    state: left
+    drawdepth: FloorTiles
+
+- type: entity
+  id: StairWhiteMiddle
+  parent: Stairs
+  suffix: White, middle
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/white_steel.rsi
+    state: middle
+    drawdepth: FloorTiles
+
+- type: entity
+  id: StairWhiteRight
+  parent: Stairs
+  suffix: White, right
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/white_steel.rsi
+    state: right
+    drawdepth: FloorTiles
+
+
+- type: entity
+  id: StairWoodLeft
+  parent: Stairs
+  suffix: Wood, left
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/wood.rsi
+    state: left
+    drawdepth: FloorTiles
+
+- type: entity
+  id: StairWoodMiddle
+  parent: Stairs
+  suffix: Wood, middle
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/wood.rsi
+    state: middle
+    drawdepth: FloorTiles
+
+- type: entity
+  id: StairWoodRight
+  parent: Stairs
+  suffix: Wood, right
+  components:
+  - type: Sprite
+    sprite: _GooseStation/Stairs/wood.rsi
+    state: right
+    drawdepth: FloorTiles

@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "made by TheGoose3375 (discord)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "old-spaniard"
+        },
+        {
+            "name": "old-goose"
+        },
+        {
+            "name": "goose"
+        },
+        {
+            "name": "spaniard"
+        },
+        {
+            "name": "spaniard-torn"
+        }
+    ]
+}

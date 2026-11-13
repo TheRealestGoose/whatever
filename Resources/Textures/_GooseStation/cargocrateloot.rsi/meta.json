@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "made by TheGoose3375 (discord)",
+    "size": {
+        "x": 48,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "cargo_crate_large"
+        }
+    ]
+}
