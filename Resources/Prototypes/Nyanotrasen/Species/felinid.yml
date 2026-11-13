@@ -3,7 +3,7 @@
 - type: species
   id: Felinid
   name: species-name-felinid
-  roundStart: true # no fuck off
+  roundStart: false # Goobstation change
   prototype: MobFelinid
   sprites: MobHumanSprites
   markingLimits: MobFelinidMarkingLimits
