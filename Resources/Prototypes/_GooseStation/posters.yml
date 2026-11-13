@@ -92,7 +92,6 @@
     sprite: _GooseStation/posters.rsi
     state: poster_ibelieve
 
-
 - type: entity
   parent: PosterBase
   id: PosterLegitCardPlease
@@ -102,6 +101,26 @@
   - type: Sprite
     sprite: _GooseStation/posters.rsi
     state: poster_cardplease
+
+- type: entity
+  parent: PosterBase
+  id: PosterContrabandShootingStars
+  name: stupid fucking poster
+  description: Can we pretend that airplanes in the night sky are like shooting stars?
+  components:
+  - type: Sprite
+    sprite: _GooseStation/poster-stupid.rsi
+    state: shootingstars
+
+- type: entity
+  parent: PosterBase
+  id: PosterContrabandWishRightNow
+  name: stupid fucking poster
+  description: I could really use a wish right now, wish right now, wish right now.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/poster-stupid.rsi
+    state: wishrightnow
 
 #region Items
 - type: Tag

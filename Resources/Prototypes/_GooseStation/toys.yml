@@ -395,6 +395,110 @@
         layer:
         - MobLayer
 
+
+#luna
+- type: entity
+  parent: BasePlushie
+  id: PlushieLunala
+  name: tiefling plushie
+  description: Coming straight from the hit tabletop game Cosmos and Carps (C&C), this plushie depicts a member of the tiefling race. It looks like somebody's edgy original character.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/plushies/lunala.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnActivate
+    sound:
+      collection: ToySqueak
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Voice/Human/wilhelm_scream.ogg
+      params:
+        variation: 0.1
+  - type: Edible
+    requiresSpecialDigestion: true
+    useSound:
+      path: /Audio/Voice/Human/wilhelm_scream.ogg #only screams if hurt
+      params:
+        variation: 0.1
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Voice/Human/wilhelm_scream.ogg
+      params:
+        variation: 0.1
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: ToySqueak
+  - type: StaticPrice
+    price: 2715
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Blood
+          Quantity: 25
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Voice/Human/wilhelm_scream.ogg
+          params:
+            variation: 0.1
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          BioSynthEyes:
+            min: 1
+            max: 1
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpawnEntitiesBehavior
+        offset: 0.2
+        spawn:
+          MaterialCotton1:
+            min: 1
+            max: 2
+      - !type:SpillBehavior
+        solution: food
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
 # - type: entity
 #   parent: PlushieSpaniard
 #   id: PlushieSpaniardVoodoo #DONT WORK DONT CARE

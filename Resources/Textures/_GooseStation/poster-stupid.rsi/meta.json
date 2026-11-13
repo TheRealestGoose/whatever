@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by frufru_01 (Discord)",
+  "size": {
+    "x": 64,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "shootingstars",
+      "directions": 1
+    },
+    {
+      "name": "wishrightnow",
+      "directions": 1
+    }
+  ]
+}
