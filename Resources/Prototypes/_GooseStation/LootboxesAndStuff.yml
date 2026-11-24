@@ -216,13 +216,13 @@
     arc: 175
 
 
-- type: entity
-  id: SpawnPodLootbox
-  name: Drop Lootbox
-  parent: SpawnSupplyEmpty
-  components:
-  - type: SpawnOnDespawn
-    prototype: Lootbox
+# - type: entity
+#   id: SpawnPodLootbox
+#   name: Drop Lootbox
+#   parent: SpawnSupplyEmpty
+#   components:
+#   - type: SpawnOnDespawn
+#     prototype: Lootbox
 
 - type: entity
   id: Lootbox
