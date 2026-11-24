@@ -612,3 +612,153 @@
     whitelist:
       tags:
       - FoodSnack
+
+
+#region Lifesavers
+
+- type: stack
+  id: GooseTokensFake
+  name: goose tokens
+  icon: { sprite: /Textures/goose-tokens.rsi, state: saver }
+  spawn: GooseTokensFake1
+  maxCount: 15
+
+- type: entity
+  name: store tokens
+  parent: BaseItem
+  id: GooseTokensFake
+  suffix: 15 GTFake
+  description: A special currency used by the Wallmount Store Interface. These are awarded by Central Command to members of crew for demonstrating initiative, or simply as a form of encouragement. Upon closer expection, it looks like a breathmint.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/goose-tokens.rsi
+    layers:
+    - state: saver_3
+      map: ["base"]
+  - type: Appearance
+  - type: Item
+    sprite: _GooseStation/goose-tokens.rsi
+    size: Tiny
+  - type: Stack
+    stackType: GooseTokensFake
+    count: 15
+    maxCount: 15
+    baseLayer: base
+    layerStates:
+    - saver
+    - saver_2
+    - saver_3
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 5
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: FlavorProfile
+    flavors:
+    - minty
+  - type: Edible
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: Extractable
+    grindableSolutionName: food
+    juiceSolution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+
+- type: entity
+  parent: GooseTokensFake
+  id: GooseTokensFake5
+  suffix: 5 GTFake
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: GooseTokensFake
+  id: GooseTokensFake10
+  suffix: 10 GTFake
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: GooseTokensFake
+  id: GooseTokensFake1
+  suffix: 1 GTFake
+  components:
+  - type: Stack
+    count: 1
+
+
+- type: stack
+  id: Lifesavers
+  name: lifesavers
+  icon: { sprite: /Textures/goose-tokens.rsi, state: saver }
+  spawn: Lifesavers1
+  maxCount: 15
+
+- type: entity
+  name: life savers
+  parent: BaseItem
+  id: Lifesavers
+  suffix: 15 LS
+  description: A breathmint, saves the lives of everybody around you.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/goose-tokens.rsi
+    layers:
+    - state: saver_3
+      map: ["base"]
+  - type: Appearance
+  - type: Item
+    sprite: _GooseStation/goose-tokens.rsi
+    size: Tiny
+  - type: Stack
+    stackType: Lifesavers
+    count: 15
+    maxCount: 15
+    baseLayer: base
+    layerStates:
+    - saver
+    - saver_2
+    - saver_3
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 5
+  - type: Tag
+    tags:
+    - FoodSnack
+  - type: FlavorProfile
+    flavors:
+    - minty
+  - type: Edible
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: Extractable
+    grindableSolutionName: food
+    juiceSolution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 5
+
+- type: entity
+  parent: Lifesavers
+  id: Lifesavers1
+  suffix: 1 LS
+  components:
+  - type: Stack
+    count: 1
