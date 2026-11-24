@@ -88,8 +88,8 @@
 
 - type: stack
   id: GooseTokens
-  name: goose tokens
-  icon: { sprite: /Textures/goose-tokens.rsi, state: token }
+  name: currency-goosetokens
+  icon: { sprite: /Textures/_GooseStation/goose-tokens.rsi, state: token }
   spawn: GooseTokens1
   maxCount: 15
 

@@ -11,3 +11,5 @@ gt-to-spesos-desc = Got spare tokens? Exchange 1 token for 500 spesos, help out 
 truth-or-dare = This small box contains the entirety of the truth or dare game! Instructions included.
 
 currency-uplink-goosetokens = tokens
+currency-goosetokens = goose tokens
+candy-lifesavers = life savers

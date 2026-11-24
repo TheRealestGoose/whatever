@@ -618,8 +618,8 @@
 
 - type: stack
   id: GooseTokensFake
-  name: goose tokens
-  icon: { sprite: /Textures/goose-tokens.rsi, state: saver }
+  name: currency-goosetokens
+  icon: { sprite: /Textures/_GooseStation/goose-tokens.rsi, state: saver }
   spawn: GooseTokensFake1
   maxCount: 15
 
@@ -700,8 +700,8 @@
 
 - type: stack
   id: Lifesavers
-  name: lifesavers
-  icon: { sprite: /Textures/goose-tokens.rsi, state: saver }
+  name: candy-lifesavers
+  icon: { sprite: /Textures/_GooseStation/goose-tokens.rsi, state: saver }
   spawn: Lifesavers1
   maxCount: 15
 
