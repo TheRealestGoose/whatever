@@ -91,7 +91,7 @@
   name: currency-goosetokens
   icon: { sprite: /Textures/_GooseStation/goose-tokens.rsi, state: token }
   spawn: GooseTokens1
-  maxCountOverride: 15
+  maxCount: 15
 
 - type: entity
   name: store tokens
