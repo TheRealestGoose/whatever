@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken form https://www.spriters-resource.com/pc_computer/deltarune/asset/162192/",
+  "size": {
+    "x": 71,
+    "y": 100
+  },
+  "states": [
+    {
+      "name": "boom",
+      "delays": [
+          [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+      ]
+    },
+    {
+      "name": "boomfast",
+      "delays": [
+          [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+      ]
+    }
+  ]
+}

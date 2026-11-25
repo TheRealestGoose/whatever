@@ -1,0 +1,23 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckGamblersMedal
+  name: gambler's medal
+  description: Awarded to NanoTrasen's best gamblers. 99.8% of gamblers quit before they get the gambler's medal.
+  components:
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/accessory_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/accessory_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/accessory_drop.ogg
+  - type: Sprite
+    sprite: _GooseStation/Medals/gambler.rsi
+  - type: Clothing
+    sprite: _GooseStation/Medals/gambler.rsi
+  - type: Tag
+    tags:
+      - Medal
+      - WhitelistChameleon

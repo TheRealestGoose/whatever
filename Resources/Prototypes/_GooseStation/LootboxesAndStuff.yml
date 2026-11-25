@@ -20,12 +20,23 @@
 #       state: book_icon
   # - type: NotekeeperCartridge #not needed?
 
+#region Listings
+
 - type: listing
   id: GooseShopLootbox
   name: le-epic-box
   productEntity: Lootbox
   cost:
-    SpaceCash: 10000
+    GooseTokens: 5
+  categories:
+  - GooseStationStore
+
+- type: listing
+  id: GooseShopLootboxHolo
+  name: holopunk-set
+  productEntity: LootboxHolo
+  cost:
+    GooseTokens: 7
   categories:
   - GooseStationStore
 
@@ -34,16 +45,28 @@
   description: truth-or-dare
   productEntity: BoxCardboardTruthOrDare
   cost:
-    SpaceCash: 5000
+    GooseTokens: 1
   categories:
   - GooseStationStore
+
+- type: listing
+  id: ExchangeGTtoSpesos
+  name: gt-to-spesos-name
+  description: gt-to-spesos-desc
+  productEntity: SpaceCash500
+  cost:
+    GooseTokens: 1
+  categories:
+  - GooseStationStore
+
+#region Listings end
 
 # - type: listing
 #   id: GooseShopLootbox
 #   name: casa de goose
 #   productEntity: Lootbox
 #   cost:
-#     SpaceCash: 1
+#     GooseTokens: 1
 #   categories:
 #   - GooseStationStore
 
@@ -52,12 +75,84 @@
   name: uplink-goose-main
   priority: 0
 
+#region GooseTokens
 - type: currency
-  id: SpaceCash
-  displayName: currency-uplink-spesos
+  id: GooseTokens
+  displayName: currency-uplink-goosetokens
   cash:
-    1: SpaceCash
+    1: GooseTokens
   canWithdraw: true
+
+- type: Tag
+  id: GooseToken
+
+- type: stack
+  id: GooseTokens
+  name: currency-goosetokens
+  icon: { sprite: /Textures/_GooseStation/goose-tokens.rsi, state: token }
+  spawn: GooseTokens1
+  maxCount: 15
+
+- type: entity
+  name: store tokens
+  parent: BaseItem
+  id: GooseTokens
+  suffix: 15 GT
+  description: A special currency used by the Wallmount Store Interface. These are awarded by Central Command to members of crew for demonstrating initiative, or simply as a form of encouragement.
+  components:
+  - type: Sprite
+    sprite: _GooseStation/goose-tokens.rsi
+    layers:
+    - state: token_3
+      map: ["base"]
+  - type: Appearance
+  - type: Item
+    sprite: _GooseStation/goose-tokens.rsi
+    size: Tiny
+  - type: Stack
+    stackType: GooseTokens
+    count: 15
+    baseLayer: base
+    layerStates:
+    - token
+    - token_2
+    - token_3
+  - type: StaticPrice
+    price: 0
+  - type: StackPrice
+    price: 500
+  - type: Currency
+    price:
+      GooseTokens: 1
+  - type: Tag
+    tags:
+    - GooseToken
+
+- type: entity
+  parent: GooseTokens
+  id: GooseTokens5
+  suffix: 5 GT
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: GooseTokens
+  id: GooseTokens10
+  suffix: 10 GT
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: GooseTokens
+  id: GooseTokens1
+  suffix: 1 GT
+  components:
+  - type: Stack
+    count: 1
+
+#region GooseTokens end
 
 - type: entity
   id: StorePresetGooseShop
@@ -68,9 +163,9 @@
     categories:
     - GooseStationStore
     currencyWhitelist:
-    - SpaceCash
+    - GooseTokens
     balance:
-      SpaceCash: 0
+      GooseTokens: 0
     # sales: # WD EDIT
     #   enabled: true
     #   minMultiplier: 0.2
@@ -82,7 +177,7 @@
 - type: entity
   id: GooseUplinkWallmount
   parent: StorePresetGooseShop
-  name: Store Interface
+  name: Wallmount Store Interface
   description: Gives you access to a store page for buying things. Powered by the corporate greed.
   suffix: directional
   placement:
@@ -115,18 +210,18 @@
     key: enum.StoreUiKey.Key
   - type: Store
     balance:
-      SpaceCash: 0
+      GooseTokens: 0
   - type: WallMount
     arc: 175
 
 
-- type: entity
-  id: SpawnPodLootbox
-  name: Drop Lootbox
-  parent: SpawnSupplyEmpty
-  components:
-  - type: SpawnOnDespawn
-    prototype: Lootbox
+# - type: entity
+#   id: SpawnPodLootbox
+#   name: Drop Lootbox
+#   parent: SpawnSupplyEmpty
+#   components:
+#   - type: SpawnOnDespawn
+#     prototype: Lootbox
 
 - type: entity
   id: Lootbox
@@ -177,9 +272,42 @@
       # - id: DrinkJarWhat
       #   orGroup: GiftUtil
     # extra
+      - id: null
+        orGroup: GiftExtraSecret
+        prob: 0.9
       - id: BoxFolderSpacesteinFiles
-        onGroup: GiftExtra
+        onGroup: GiftExtraSecret
         prob: 0.1
+      - id: null
+        orGroup: GiftExtraMedal
+        prob: 0.9
+      - id: ClothingNeckGamblersMedal
+        onGroup: GiftExtraMedal
+        prob: 0.1
+
+- type: entity
+  id: LootboxHolo
+  name: lootbox
+  description: A lootbox that contains a base set of holopunk clothes! Guaranteed to have rocket boots, a tactical neck gaiter, holographic gloves and a pair of glowing armbands or a glowing cloak.
+  parent: [PresentBase, BaseItem]
+  suffix: Holopunk
+  components:
+  - type: Sprite
+    sprite: _GooseStation/lootbox.rsi
+    layers:
+      - state: loot
+  - type: SpawnItemsOnUse
+    sound:
+      path: /Audio/Items/toolbox_open.ogg
+    items:
+    # clothing
+      - id: ClothingNeckGlowingCloak
+        orGroup: GiftCloak
+      - id: ClothingNeckGlowingArmbands
+        orGroup: GiftCloak
+      - id: ClothingShoesRocketBoots
+      - id: ClothingMaskTacticalNeckGaiter
+      - id: ClothingHandsHoloGloves
 
 
 # funn clothes>:::
@@ -555,61 +683,6 @@
   - type: ExaminableBattery
   - type: ComponentToggler
     removeComponents:
-      - type: ItemSwitch
-        showLabel: true
-        state: claws
-        states:
-          claws: !type:ItemSwitchState
-            verb: claws
-            sprite:
-              sprite: _GooseStation/holo-gloves.rsi
-              state: icon
-            components:
-              - type: MeleeWeapon
-                animationRotation: -45 # WWDP      # from esword, kept just in case
-                heavyStaminaCost: 2.5 # goob edit  # doesnt actually do anything
-                wideAnimationRotation: -135        # cuz i turned wideswing off
-                mustBeEquippedToUse: true #IMPORTANT BRUH
-                canWideSwing: false
-                attackRate: 1.2
-                soundHit:
-                  path: /Audio/Weapons/bladeslice.ogg
-                damage:
-                  types:
-                    Slash: 7
-                    Heat: 5
-                    Structural: 30 #30 is just enough for rocks #doesnt have to
-                  woundSeverityMultipliers: # Goobstation
-                    Slash: 1.5
-                    Heat: 1.5
-            soundStateActivate:
-              collection: sparks
-              params:
-                variation: 0.125
-          disabler: !type:ItemSwitchState
-            verb: disabler
-            sprite:
-              sprite: _GooseStation/holo-gloves.rsi
-              state: icon
-            components:
-              # - type: AmmoCounter #so doesnt pam red squares
-              - type: GunExecutionBlacklist # Goobstation
-              - type: PacifismAllowedGun
-              - type: Gun
-                fireRate: 2
-                selectedMode: SemiAuto
-                clumsyProof: true
-                availableModes:
-                - SemiAuto
-                soundGunshot:
-                  path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-              - type: BatteryAmmoProvider
-                proto: BulletDisabler
-                fireCost: 100 #more than disabler cuz smaller
-            soundStateActivate:
-              collection: sparks
-              params:
-                variation: 0.125
       - type: MeleeWeapon
         animationRotation: -45 # WWDP      # from esword, kept just in case
         heavyStaminaCost: 2.5 # goob edit  # doesnt actually do anything
@@ -621,83 +694,30 @@
           path: /Audio/Weapons/bladeslice.ogg
         damage:
           types:
-            Slash: 7
+            Slash: 5
             Heat: 5
             Structural: 30 #30 is just enough for rocks #doesnt have to
           woundSeverityMultipliers: # Goobstation
-            Slash: 1.5
-            Heat: 1.5
-      # - type: AmmoCounter
-      - type: GunExecutionBlacklist # Goobstation
-      - type: PacifismAllowedGun
-      - type: Gun
-        fireRate: 2
-        selectedMode: SemiAuto
-        clumsyProof: true
-        availableModes:
-        - SemiAuto
-        soundGunshot:
-          path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-      - type: BatteryAmmoProvider
-        proto: BulletDisabler
-        fireCost: 100 #more than disabler, because small
+            Slash: 1.25
+            Heat: 1.25
     components:
-      - type: ItemSwitch
-        showLabel: true
-        state: claws
-        states:
-          claws: !type:ItemSwitchState
-            verb: claws
-            sprite:
-              sprite: _GooseStation/holo-gloves.rsi
-              state: icon
-            components:
-              - type: MeleeWeapon
-                animationRotation: -45 # WWDP      # from esword, kept just in case
-                heavyStaminaCost: 2.5 # goob edit  # doesnt actually do anything
-                wideAnimationRotation: -135        # cuz i turned wideswing off
-                mustBeEquippedToUse: true #IMPORTANT BRUH
-                canWideSwing: false
-                attackRate: 1.2
-                soundHit:
-                  path: /Audio/Weapons/bladeslice.ogg
-                damage:
-                  types:
-                    Slash: 7
-                    Heat: 5
-                    Structural: 30 #30 is just enough for rocks #doesnt have to
-                  woundSeverityMultipliers: # Goobstation
-                    Slash: 1.5
-                    Heat: 1.5
-            soundStateActivate:
-              collection: sparks
-              params:
-                variation: 0.125
-
-          disabler: !type:ItemSwitchState
-            verb: disabler
-            sprite:
-              sprite: _GooseStation/holo-gloves.rsi
-              state: icon
-            components:
-              # - type: AmmoCounter #so doesnt pam red squares
-              - type: GunExecutionBlacklist # Goobstation
-              - type: PacifismAllowedGun
-              - type: Gun
-                fireRate: 2
-                selectedMode: SemiAuto
-                clumsyProof: true
-                availableModes:
-                - SemiAuto
-                soundGunshot:
-                  path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-              - type: BatteryAmmoProvider
-                proto: BulletDisabler
-                fireCost: 100 #more than disabler cuz smaller
-            soundStateActivate:
-              collection: sparks
-              params:
-                variation: 0.125
+      - type: MeleeWeapon
+        animationRotation: -45 # WWDP      # from esword, kept just in case
+        heavyStaminaCost: 2.5 # goob edit  # doesnt actually do anything
+        wideAnimationRotation: -135        # cuz i turned wideswing off
+        mustBeEquippedToUse: true #IMPORTANT BRUH
+        canWideSwing: false
+        attackRate: 1.2
+        soundHit:
+          path: /Audio/Weapons/bladeslice.ogg
+        damage:
+          types:
+            Slash: 5
+            Heat: 5
+            Structural: 30 #30 is just enough for rocks #doesnt have to
+          woundSeverityMultipliers: # Goobstation
+            Slash: 1.25
+            Heat: 1.25
   - type: Tag
     tags:
     - WhitelistChameleon
