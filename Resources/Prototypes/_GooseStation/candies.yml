@@ -621,7 +621,7 @@
   name: currency-goosetokens
   icon: { sprite: /Textures/_GooseStation/goose-tokens.rsi, state: saver }
   spawn: GooseTokensFake1
-  MaxCountOverrideOverride: 15
+  maxCount: 15
 
 - type: entity
   name: store tokens
@@ -642,7 +642,6 @@
   - type: Stack
     stackType: GooseTokensFake
     count: 15
-    MaxCountOverride: 15
     baseLayer: base
     layerStates:
     - saver
@@ -703,7 +702,7 @@
   name: candy-lifesavers
   icon: { sprite: /Textures/_GooseStation/goose-tokens.rsi, state: saver }
   spawn: Lifesavers1
-  MaxCountOverride: 15
+  maxCount: 15
 
 - type: entity
   name: life savers
@@ -724,7 +723,6 @@
   - type: Stack
     stackType: Lifesavers
     count: 15
-    MaxCountOverride: 15
     baseLayer: base
     layerStates:
     - saver
