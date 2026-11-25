@@ -49,6 +49,43 @@
     group: GenericNumber
 
 - type: entity
+  name: bad explosion
+  id: BadExplosionEffect
+  components:
+  - type: TimedDespawn
+    lifetime: 1.7
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_GooseStation/badexplosion.ogg
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/badexplosion.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: boom
+      scale: 0.5, 0.5
+
+- type: entity
+  name: bad explosion fast
+  id: BadExplosionEffectFast
+  components:
+  - type: TimedDespawn
+    lifetime: 0.85
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_GooseStation/badexplosion.ogg
+      params:
+            pitch: 1.5
+  - type: Sprite
+    noRot: true
+    sprite: _GooseStation/badexplosion.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: boomfast
+      scale: 0.5, 0.5
+
+
+- type: entity
   name: neco arc 
   id: MobNegroArc
   parent: MobNegroArcBase
@@ -98,7 +135,7 @@
   - type: MobState
     allowedStates:
       - Alive
-  #    - Dead
+      - Dead
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -113,6 +150,12 @@
       - !type:GibBehavior # Shitmed Change
         gibContents: Skip
       - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BadExplosionEffectFast:
+            min: 1
+            max: 1
+      - !type:SpawnEntitiesBehavior
         spawn:
           MobNegroArcNosplit:
             min: 0
@@ -121,12 +164,6 @@
     prototype: Skeleton
     requiredLegs: 2
   - type: MovementAlwaysTouching
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Dead:
-        Base: dead
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -204,7 +241,7 @@
   - type: MobState
     allowedStates:
       - Alive
-  #    - Dead
+      - Dead
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -218,16 +255,16 @@
       behaviors:
       - !type:GibBehavior # Shitmed Change
         gibContents: Skip
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BadExplosionEffectFast:
+            min: 1
+            max: 1
   - type: Body
     prototype: Skeleton
     requiredLegs: 2
   - type: MovementAlwaysTouching
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Dead:
-        Base: dead
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -293,7 +330,7 @@
   - type: MobState
     allowedStates:
       - Alive
-  #    - Dead
+      - Dead
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -307,16 +344,16 @@
       behaviors:
       - !type:GibBehavior # Shitmed Change
         gibContents: Skip
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BadExplosionEffectFast:
+            min: 1
+            max: 1
   - type: Body
     prototype: Skeleton
     requiredLegs: 2
   - type: MovementAlwaysTouching
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Dead:
-        Base: dead
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -362,7 +399,7 @@
   - type: MobState
     allowedStates:
       - Alive
-  #    - Dead
+      - Dead
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -376,16 +413,16 @@
       behaviors:
       - !type:GibBehavior # Shitmed Change
         gibContents: Skip
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          BadExplosionEffectFast:
+            min: 1
+            max: 1
   - type: Body
     prototype: Skeleton
     requiredLegs: 2
   - type: MovementAlwaysTouching
-  - type: DamageStateVisuals
-    states:
-      Alive:
-        Base: alive
-      Dead:
-        Base: dead
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
